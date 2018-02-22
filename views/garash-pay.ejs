@@ -1,0 +1,53 @@
+<html>
+<head>
+<style>
+body{
+  background: url('/public/bg.jpg');
+  background-size: cover;
+}
+.box{
+  font-family: monospace;
+
+  padding: 15px;
+text-align: center;
+margin-top: 40vh;
+background: #fffffff2;
+width: 50%;
+margin-left: 25%;
+border-radius: 10px;
+}
+</style>
+<title>
+  Garash | Software House
+</title>
+</head>
+<body>
+  <div class="box">
+<img src="/public/logo.png" width="50" height="50" style="display:inline-block;vertical-align: middle;" />
+<h1 style="display:inline-block;color:#0a1d39;">paying for Garash Software House</h1>
+
+<form  action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+  <!-- Identify your business so that you can collect the payments. -->
+  <input type="hidden" name="business" value="amr2010mohamd2010@gmail.com">
+
+  <!-- Specify a Buy Now button. -->
+  <input type="hidden" name="cmd" value="_xclick">
+
+  <!-- Specify details about the item that buyers will purchase. -->
+  <input type="hidden" name="item_name" value="50% of project like otlop">
+  <input type="hidden" name="amount" value="675">
+  <input type="hidden" name="currency_code" value="USD">
+
+  <!-- Display the payment button. -->
+  <input type="image" name="submit" border="0"
+  src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_buynow_107x26.png"
+  alt="Buy Now">
+  <img alt="" border="0" width="1" height="1"
+  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
+
+</form>
+</body>
+
+
+</htm>

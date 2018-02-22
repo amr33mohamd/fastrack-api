@@ -1,0 +1,67 @@
+<%- include('parts/header', {page: 'books'}); %>
+
+<html>
+<style>
+
+
+</style>
+  <head>
+    <script src="http://www.paypalobjects.com/js/external/paypal-button.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+    	<table id="cart" class="table table-hover table-condensed">
+        				<thead>
+    						<tr>
+                  <th style="width:25%">الصوره</th>
+    							<th style="width:50%">الوصف</th>
+    							<th style="width:25%">السعر</th>
+
+    						</tr>
+    					</thead>
+    					<tbody>
+    						<tr>
+    							<td data-th="Product">
+    								<div class="row">
+    									<div class="col-sm-2 "><img src="<%= book.image %>" alt="..." class="img-responsive"/></div>
+    									<div class="col-sm-10">
+
+    									</div>
+    								</div>
+    							</td>
+    							<td data-th="Price"><%= book.descc %></td>
+                  <td> ريال سعودي <%= book.price %></td>
+
+
+    						</tr>
+    					</tbody>
+    					<tfoot>
+
+    						<tr>
+
+    							<td><form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" class="">
+                    <!-- Identify your business so that you can collect the payments. -->
+                    <input type="hidden" name="business" value="<%= admin_email %>">
+                    <!-- Specify a Buy Now button. -->
+                    <input type="hidden" name="cmd" value="_xclick">
+                    <!-- Specify details about the item that buyers will purchase. -->
+                    <input type="hidden" name="item_name" value="Hot Sauce-12oz. Bottle">
+                    <input type="hidden" name="amount" value="<%= price %>">
+                    <input type="hidden" name="currency_code" value="USD">
+                    <input type="hidden" name="return" value="http://<%= domain %>/buy-second?book_id=<%= book.id %>&user_id=<%= user.id%>&method=<%= method %>">
+                    <!-- Display the payment button. -->
+                    <input class="btn btn-success btn-block"  type="submit" name="submit" border="0"
+                    value="Check Out >"
+                    alt="Buy Now">
+                    <img alt="" border="0" width="1" height="1"
+                    src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
+                  </form>
+
+    						</tr>
+    					</tfoot>
+    				</table>
+    </div>
+
+
+  </body>
+</html>

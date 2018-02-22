@@ -1,0 +1,31 @@
+Pages with description :
+1- book desc:
+https://github.com/HossamSamir/ibn-aljawzi-app/blob/master/screens/Book.js
+it shows the book data
+
+
+2-category:
+https://github.com/HossamSamir/ibn-aljawzi-app/blob/master/screens/Category.js
+shows all sub categories with some of its books
+
+
+3- home screen:
+https://github.com/HossamSamir/ibn-aljawzi-app/blob/master/screens/HomeScreen.js
+some categories + some categories with their posts
+
+
+4- my library:
+https://github.com/HossamSamir/ibn-aljawzi-app/blob/master/screens/MyLibrary.js
+shows user bought books
+
+5-sub category :
+https://github.com/HossamSamir/ibn-aljawzi-app/blob/master/screens/subCategory.js
+shows sub category posts
+
+6- payment page :
+the web view page with paypal to buy book.
+
+
+7- categories:
+https://github.com/HossamSamir/ibn-aljawzi-app/blob/master/screens/Categories.js
+show all availbe categories

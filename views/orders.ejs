@@ -1,0 +1,289 @@
+<%- include('parts/header', {page: 'books'}); %>
+<%- include('parts/slide_bar'); %>
+<style type="text/css">
+ .edit:hover {
+   cursor: pointer;
+}
+.animated:hover {
+   cursor: pointer;
+}
+</style>
+<div class="container">
+<script type="text/javascript">
+
+
+
+ $(document).ready(function(){
+
+     $(".select_order_status").change(function (){
+         if(confirm("هل حقاً تريد تعديل حالة هذا الطلب؟"))
+         {
+            var caller = $(this);
+             var id = caller.attr('id');
+             var status = parseInt(caller.find("option:checked").val());
+
+             $.get("/change-order-status", { id, status })
+              .done(function(data) {
+                  var newOrderClass = "";
+                  switch(status)
+                  {
+                      case 0:
+                          newOrderClass = "order-pending";
+                          break;
+                      case 1:
+                          newOrderClass = "order-approved";
+                          break;
+                      case 2:
+                          newOrderClass = "order-delivered";
+                          break;
+                  }
+                 caller.parent().parent().removeClass().addClass(newOrderClass);
+              });
+          }
+     });
+
+     $(".filter_orders").change(function (){
+         var filter = parseInt($(this).find("option:checked").val());
+         var table_body = $(".orders_table").find("tbody");
+         switch (filter) {
+             case 0:
+                table_body.find("tr").not(".order-pending").hide();
+                table_body.find(".order-pending").show();
+                break;
+            case 1:
+               table_body.find("tr").not(".order-approved").hide();
+               table_body.find(".order-approved").show();
+               break;
+            case 2:
+                table_body.find("tr").not(".order-delivered").hide();
+                table_body.find(".order-delivered").show();
+                break;
+            case 3:
+               table_body.find("tr").show("");
+               break;
+         }
+     });
+
+var table = $('#datatable-buttons').DataTable( /*{
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    }*/);
+
+   $(".paid-users").click(function(){
+    table.search('نعم').draw();
+   })
+   $(".all-users").click(function(){
+     table.search('').draw();
+   })
+   $(".normal-users").click(function(){
+     table.search('لا').draw();
+   })
+
+$(".edit").click(function(){
+ var id = $(this).attr('id');
+ var new_name = prompt('تريد تغيره الى ماذا ؟');
+ var what = $(this).attr('what');
+ if(new_name != null){
+   $.get('/change',{
+       id,
+       new_name,
+       what
+     },function(data){
+       window.location = '/users';
+     })
+ }
+})
+
+   $(".pay").click(function(){
+     var months = prompt('ما عدد الاشهر التى تريد اضافتها ؟');
+     var user_id = $(this).attr('user');
+     $.get('/pay-per-month',{
+       user_id,
+       months
+     },function(data){
+       window.location = '/users';
+     })
+   });
+
+
+
+   $("#admin").click(function(){
+     var user_id = $(this).attr('user');
+     $.get('/make-admin',{
+       user_id
+     },function(data){
+       window.location = '/users';
+     })
+   })
+
+
+
+     $("#pay2").click(function(){
+     var months = prompt('ما عدد الاشهر التى تريد حذفها ؟');
+     var user_id = $(this).attr('user');
+     $.get('/pay-per-month',{
+       user_id,
+       months: -months
+     },function(data){
+       window.location = '/users';
+     })
+   });
+
+  })
+
+</script>
+<!-- Table -->
+<!-- page content -->
+
+
+<div class="col-md-10 col-sm-9 col-xs-9">
+
+         <div style="margin-top:20px;" class="">
+           <div class="row top_tiles">
+             <div class="animated flipInY all-users col-lg-12 col-md-12 col-sm-12 col-xs-12">
+               <div class="tile-stats text-center">
+                 <div class="icon"><i style="padding-top:20px;"  class="fa fa-book"></i></div>
+                 <div class="count"> <%= orders.length %></div>
+                 <h3>عدد الطلبات</h3>
+               </div>
+             </div>
+
+
+
+
+              <div class="x_panel">
+                <div class="x_title text-center">
+                  <h2>ابن الجوزي | <small>الكتب</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <p class="text-muted font-13 m-b-30">
+
+                  </p>
+
+                  <div class="filter_orders_wrapper" style="font-size: 150%;">
+                      <label>تصفية المعروض</label>
+                      <select class="filter_orders">
+                          <option value="0">قيد الانتظار فقط</option>
+                          <option value="1">الذى تم قبولهم فقط</option>
+                          <option value="2">الذى تم تسليمهم فقط</option>
+                          <option value="3" selected>عرض الكل</option>
+                      </select>
+                  </div>
+
+                  <table id="datatable-buttons" class="orders_table table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th colspan="5">المُشترى</th>
+                        <th colspan="3">الكتاب المطلوب</th>
+                        <th rowspan="2">اسلوب الشراء</th>
+                        <th rowspan="2">حالة الطلب</th>
+                      </tr>
+                    </thead>
+
+                    <thead>
+                      <tr>
+                        <th>الاسم</th>
+                        <th>البريد الالكترونى</th>
+                        <th>البلد</th>
+                        <th>العنوان</th>
+                        <th>العُملة</th>
+
+                        <th>الاسم</th>
+                        <th>الرابط</th>
+                        <th>السعر</th>
+                      </tr>
+                    </thead>
+
+
+                    <tbody>
+                        <%
+                            orders.forEach(function(order){
+
+                            let methodStr = "استلام من الفرع"; // if method = 1
+                            if(order.method == 0)
+                                methodStr = "شحن";
+
+                            let rowClass = "";
+                            switch(order.status)
+                            {
+                                case 0:
+                                    rowClass = "order-pending";
+                                    break;
+                                case 1:
+                                    rowClass = "order-approved";
+                                    break;
+                                case 2:
+                                    rowClass = "order-delivered";
+                                    break;
+                            }
+                        %>
+                        <tr class="<%= rowClass %>">
+                            <td><%= order.user.name %></td>
+                            <td><%= order.user.email %></td>
+                            <td><%= order.user.country %></td>
+                            <td><%= order.user.address %></td>
+                            <td><%= (order.user.currency === 0) ? ("دولار امريكى"):("ريال سعودى") %></td>
+
+                            <td><%= order.book.name %></td>
+                            <td><a href="<%= order.book.link %>" target="_blank">رابط الى الكتاب</a></td>
+                            <td><%= order.book.price %></td>
+
+                            <td><%= methodStr %></td>
+                            <td>
+                                <select class="form-control" id="<%= order.id %>" class="select_order_status">
+                                  <%
+                                    let statusStr = ["قيد الانتظار", "تم القبول", "تم التسليم"];
+                                    for(let i = 0; i != 3; ++ i) {
+                                            if(order.status == i) {%>
+                                        <option value="<%= i %>" selected><%= statusStr[i] %></option>
+                                            <% } else {%>
+                                        <option value="<%= i %>"><%= statusStr[i] %></option>
+                                  <% }} %>
+                                </select>
+                            </td>
+                        </tr>
+                         <% }); %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+
+                  </div>
+
+
+
+
+</div>
+
+
+
+
+
+                  </div>
+
+
+
+
+
+
+<%- include('parts/footer'); %>

@@ -1,0 +1,160 @@
+
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDqL4q3ZnKORiiM9HY8GcX8NBZ3DZr0k-M",
+    authDomain: "library-f0ef5.firebaseapp.com",
+    databaseURL: "https://library-f0ef5.firebaseio.com",
+    projectId: "library-f0ef5",
+    storageBucket: "",
+    messagingSenderId: "604212192169"
+  };
+  firebase.initializeApp(config);
+</script>
+<%- include('parts/header', {page: 'Users'}); %>
+<%- include('parts/slide_bar'); %>
+<style type="text/css">
+ .edit:hover {
+   cursor: pointer;
+}
+.animated:hover {
+   cursor: pointer;
+}
+</style>
+<div class="container">
+<script type="text/javascript">
+
+
+
+ $(document).ready(function(){
+
+var table = $('#datatable-buttons').DataTable();
+
+   $(".paid-users").click(function(){
+    table.search('نعم').draw();
+   })
+   $(".all-users").click(function(){
+     table.search('').draw();
+   })
+   $(".normal-users").click(function(){
+     table.search('لا').draw();
+   })
+
+$(".edit").click(function(){
+ var id = $(this).attr('id');
+ var new_name = prompt('تريد تغيره الى ماذا ؟');
+ var what = $(this).attr('what');
+ if(new_name != null){
+   $.get('/change',{
+       id,
+       new_name,
+       what
+     },function(data){
+       window.location = '/users';
+     })
+ }
+})
+
+   $(".pay").click(function(){
+     var months = prompt('ما عدد الاشهر التى تريد اضافتها ؟');
+     var user_id = $(this).attr('user');
+     $.get('/pay-per-month',{
+       user_id,
+       months
+     },function(data){
+       window.location = '/users';
+     })
+   });
+
+
+
+   $("#admin").click(function(){
+     var user_id = $(this).attr('user');
+     $.get('/make-admin',{
+       user_id
+     },function(data){
+       window.location = '/users';
+     })
+   })
+
+
+
+     $("#pay2").click(function(){
+     var months = prompt('ما عدد الاشهر التى تريد حذفها ؟');
+     var user_id = $(this).attr('user');
+     $.get('/pay-per-month',{
+       user_id,
+       months: -months
+     },function(data){
+       window.location = '/users';
+     })
+   });
+
+  })
+
+</script>
+<!-- Table -->
+<!-- page content -->
+
+
+<div class="col-md-10 col-sm-9 col-xs-9">
+
+         <div style="margin-top:20px;" class="">
+           <div class="row top_tiles">
+             <div class="animated flipInY all-users col-lg-12 col-md-12 col-sm-12 col-xs-12">
+               <div class="tile-stats text-center">
+                 <div class="icon"><i style="padding-top:20px;"  class="fa fa-tasks"></i></div>
+                 <div class="count"> <%= categories.length %></div>
+                 <h3>عدد الاقسام</h3>
+               </div>
+             </div>
+
+
+
+
+
+<div class="col-md-12 col-sm-9 col-xs-12">
+                           <div class="x_panel">
+                             <div class="x_title">
+                               <h2>اضف | <small>قسم</small></h2>
+                               <ul class="nav navbar-right panel_toolbox">
+
+                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                 </li>
+                               </ul>
+                               <div class="clearfix"></div>
+                             </div>
+                             <div class="x_content">
+
+
+                               <form encType="multipart/form-data" method="post" action="/add_category" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+                     <div class="form-group">
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">اسم القسم <span class="required">*</span>
+                       </label>
+                       <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
+                       </div>
+                     </div>
+
+                     <div class="ln_solid"></div>
+                     <div class="form-group">
+                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+
+                         <button type="submit" class="btn center-block btn-success">اضف</button>
+                       </div>
+                     </div>
+
+                   </form>
+
+                             </div>
+                           </div>
+                         </div>
+
+
+
+
+                  </div>
+
+<%- include('parts/footer'); %>
