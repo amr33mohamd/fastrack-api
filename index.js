@@ -5,3 +5,4 @@ require('./routes/web');
 
 require('./routes/api/universities');
 require('./routes/api/subjects');
+require('./routes/api/notes');
