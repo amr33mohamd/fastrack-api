@@ -13,9 +13,9 @@
     	<table id="cart" class="table table-hover table-condensed">
         				<thead>
     						<tr>
-                  <th style="width:25%">الصوره</th>
-    							<th style="width:50%">الوصف</th>
-    							<th style="width:25%">السعر</th>
+                  <th style="width:25%">Image</th>
+    							<th style="width:50%">Name</th>
+    							<th style="width:25%">Price</th>
 
     						</tr>
     					</thead>
@@ -29,8 +29,8 @@
     									</div>
     								</div>
     							</td>
-    							<td data-th="Price"><%= book.descc %></td>
-                  <td> ريال سعودي <%= book.price %></td>
+    							<td data-th="Price"><%= book.name %></td>
+                  <td><%= book.price %> Kuwaiti dinar = <%= price %> Dollar</td>
 
 
     						</tr>
@@ -48,7 +48,7 @@
                     <input type="hidden" name="item_name" value="Hot Sauce-12oz. Bottle">
                     <input type="hidden" name="amount" value="<%= price %>">
                     <input type="hidden" name="currency_code" value="USD">
-                    <input type="hidden" name="return" value="http://<%= domain %>/buy-second?book_id=<%= book.id %>&user_id=<%= user.id%>&method=<%= method %>">
+                    <input type="hidden" name="return" value="http://<%= domain %>/buy-second?id=<%= book.id %>">
                     <!-- Display the payment button. -->
                     <input class="btn btn-success btn-block"  type="submit" name="submit" border="0"
                     value="Check Out >"

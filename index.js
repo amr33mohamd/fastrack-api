@@ -7,3 +7,5 @@ require('./routes/api/universities');
 require('./routes/api/subjects');
 require('./routes/api/notes');
 require('./routes/api/images');
+require('./routes/buy/buy-first');
+require('./routes/buy/buy-second');

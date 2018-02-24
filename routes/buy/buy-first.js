@@ -1,33 +1,22 @@
 app.get('/buy-first',function(req,res){
-  var book_id = req.param('book_id');
-  var user_id = req.param('user_id');
-  var method = req.param('method');
-  sql.select('books','id',book_id,function(book){
-    sql.select('users','id',user_id,function(user){
-      sql.select('admin_meta','name','paypal_email',function(admin_email){
-        if(user === null || book === null){
-          res.send('check your data');
-        }
-        else{
-          const converter = require('google-currency');
-          converter({
-              from: "SAR",
-              to: "USD",
-              amount: (book[0]['fake_price'] > 0) ? book[0]['fake_price'] : book[0]['price']
-          }).then(value => {
+  var note_id = req.param('id');
 
+  sql.select('notes','id',note_id,function(note){
+    const converter = require('google-currency');
+          converter({
+              from: "KWD",
+              to: "USD",
+              amount: note[0].price
+          }).then(value => {
+            console.log(value);
               res.render('buy-first',{
-                book:book[0],
-                user:user[0],
-                admin_email: admin_email[0].value,
+                book:note[0],
                 domain: req.headers.host,
-                method,
+                admin_email :'amr2010mohamd2010@gmail.com',
                 price:value.converted
               });
           })
+        })
 
-        }
-      })
-    })
-  })
+
 })
