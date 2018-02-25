@@ -1,17 +1,5 @@
 
-<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDqL4q3ZnKORiiM9HY8GcX8NBZ3DZr0k-M",
-    authDomain: "library-f0ef5.firebaseapp.com",
-    databaseURL: "https://library-f0ef5.firebaseio.com",
-    projectId: "library-f0ef5",
-    storageBucket: "",
-    messagingSenderId: "604212192169"
-  };
-  firebase.initializeApp(config);
-</script>
+
 <%- include('parts/header', {page: 'Users'}); %>
 <%- include('parts/slide_bar'); %>
 <style type="text/css">
@@ -100,18 +88,18 @@ $(".edit").click(function(){
 
 <div class="col-md-10 col-sm-9 col-xs-9">
 
-         <div style="margin-top:20px;" class="">
+        <a href="/books"> <div style="margin-top:20px;" class="">
            <div class="row top_tiles">
              <div class="animated flipInY all-users col-lg-12 col-md-12 col-sm-12 col-xs-12">
                <div class="tile-stats text-center">
                  <div class="icon"><i style="padding-top:20px;"  class="fa fa-book"></i></div>
                  <div class="count"> <%= data.length %></div>
-                 <h3>عدد الكتب</h3>
+                 <h3>عدد الملازم</h3>
                  <p>
-                   الكتب جميعا</p>
+                  الملازم جميعا</p>
                </div>
              </div>
-
+           </a>
 
 
 
@@ -119,7 +107,7 @@ $(".edit").click(function(){
 <div class="col-md-12 col-sm-9 col-xs-12">
                            <div class="x_panel">
                              <div class="x_title">
-                               <h2>اضف | <small>كتاب</small></h2>
+                               <h2>اضف | <small>ملزمه</small></h2>
                                <ul class="nav navbar-right panel_toolbox">
 
                                  <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -141,78 +129,26 @@ $(".edit").click(function(){
                      </div>
 
                      <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">السعر ب الريال السعودي <span class="required">*</span>
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">السعر بالدينار الكويتى <span class="required">*</span>
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="number" id="name" name="price" required="required" class="form-control col-md-7 col-xs-12">
                        </div>
                      </div>
 
-                     <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">السعر قبل الخصم ان وجد
-                       </label>
-                       <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input type="number" id="name" name="fakeprice"  class="form-control col-md-7 col-xs-12">
-                       </div>
-                     </div>
 
 
-                     <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">الوصف</span>
-                       </label>
-                       <div class="col-md-6 col-sm-6 col-xs-12">
-                         <textarea  id="name" name="desc"  class="form-control col-md-7 col-xs-12"></textarea>
-                       </div>
-                     </div>
 
-                     <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">اسم الكاتب</span>
-                       </label>
-                       <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input type="text" id="name" name="authorname" required="required" class="form-control col-md-7 col-xs-12">
-                       </div>
-                     </div>
 
-                     <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">الارتفاع</span>
-                       </label>
-                       <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input type="number" id="name" name="height"  class="form-control col-md-7 col-xs-12">
-                       </div>
-                     </div>
-
-                     <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">العرض</span>
-                       </label>
-                       <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input type="number" id="name" name="width" class="form-control col-md-7 col-xs-12">
-                       </div>
-                     </div>
-
-                     <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">عدد الصفح</span>
-                       </label>
-                       <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input type="number" id="name" name="pagesnum"  class="form-control col-md-7 col-xs-12">
-                       </div>
-                     </div>
-
-                     <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">الغلاف</span>
-                       </label>
-                       <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input type="text" id="name" name="binding"  class="form-control col-md-7 col-xs-12">
-                       </div>
-                     </div>
 
 
                    <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">التصنيف الاساسي <span class="required">*</span>
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">التصنيف <span class="required">*</span>
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
-                         <select id="category" class="form-control col-md-7 col-xs-12" name="category">
-                           <%  categories.forEach(function(category){ %>
-                           <option value="<%= category['id'] %>"><%= category['name'] %></option>
+                         <select id="category" class="form-control col-md-7 col-xs-12" name="subject_id">
+                           <%  sub_categories.forEach(function(subcategories){ %>
+                           <option value="<%= subcategories['id'] %>"><%= subcategories['name'] %>--><%= categories[subcategories['university_id']-1].name %></option>
                            <% }) %>
                          </select>
                      </div>
@@ -220,17 +156,7 @@ $(".edit").click(function(){
 
 
 
-                     <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">التصنيف الفرعي<span class="required">*</span>
-                       </label>
-                       <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control col-md-7 col-xs-12" id="sub" name="sub_category">
-                            <%  sub_categories.forEach(function(sub_category){ %>
-                            <option value="<%= sub_category['id'] %>"><%= sub_category['name'] %></option>
-                            <% }) %>
-                          </select>
-                       </div>
-                     </div>
+
 <script>
 
 $(document).ready(function(){
@@ -250,7 +176,7 @@ $(document).ready(function(){
 </script>
 
                      <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">صوره للكتاب *<span class="required">*</span>
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> صوره للملزمه *<span class="required">*</span>
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="file" name="image" value="">
@@ -259,7 +185,7 @@ $(document).ready(function(){
 
 
                      <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">صوره للكتاب من الداخل <span class="required">*</span>
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">صوره للملزمه من الداخل <span class="required">*</span>
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="file" name="shot1" value="">
@@ -268,7 +194,7 @@ $(document).ready(function(){
 
 
                      <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">صوره للكتاب من الداخل <span class="required">*</span>
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> صوره للملزمه من الداخل <span class="required">*</span>
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="file" name="shot2" value="">
@@ -276,7 +202,7 @@ $(document).ready(function(){
                      </div>
 
                      <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">صوره للكتاب من الداخل <span class="required">*</span>
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">صوره للملزمه من الداخل<span class="required">*</span>
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="file" name="shot3" value="">
@@ -285,7 +211,7 @@ $(document).ready(function(){
 
 
                      <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">صوره للكتاب من الداخل <span class="required">*</span>
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">صوره للملزمه من الداخل <span class="required">*</span>
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="file" name="shot4" value="">
@@ -293,7 +219,7 @@ $(document).ready(function(){
                      </div>
 
                      <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">اذا كان الكتاب للتحميل قم برفعه هنا <span class="required">*</span>
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">ارفع ملف الملزمه هنا <span class="required">*</span>
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="file" name="pdf" value="">

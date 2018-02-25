@@ -28,10 +28,27 @@ var table = $('#datatable-buttons').DataTable();
    })
 
 $(".edit").click(function(){
-console.log('aaaa');
  var id = $(this).attr('id');
  var new_name = prompt('تريد تغيره الى ماذا ؟');
  var what = $(this).attr('what');
+ if(new_name != null){
+   $.get('/change-book',{
+       id,
+       new_name,
+       what
+     },function(data){
+       window.location = '/books';
+     })
+ }
+})
+
+
+$("select").on('change',function(){
+
+ var id = $(this).attr('noteId');
+ var new_name = $(this).val();
+ var what = $(this).attr('what');
+
  if(new_name != null){
    $.get('/change-book',{
        id,
@@ -93,8 +110,8 @@ console.log('aaaa');
                <div class="tile-stats text-center">
                  <div class="icon"><i style="padding-top:20px;"  class="fa fa-book"></i></div>
                  <div class="count"> <%= users.length %></div>
-                 <h3> عدد الكتب</h3>
-                 <p>الكتب جميعا</p>
+                 <h3>عدد الملازم</h3>
+                 <p>الملازم جميعها</p>
                </div>
              </div>
 
@@ -103,7 +120,7 @@ console.log('aaaa');
 
               <div class="x_panel">
                 <div class="x_title text-center">
-                  <h2>ابن الجوزي | <small>الكتب</small></h2>
+                  <h2>Fastrack | <small>الملازم</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -129,28 +146,27 @@ console.log('aaaa');
                     <thead>
                       <tr>
                         <th>الاسم</th>
-                        <th>الوصف</th>
-                        <th> السعر بالريال</th>
-                        <th> السعر قبل الخصم</th>
-                        <th>عدد الصفحات </th>
-                        <th>غلاف الكتاب</th>
-                        <th>العرض</th>
-                        <th>الارتفاع</th>
+                        <th> السعر ب الدينار الكويتى</th>
+                        <th>القسم - الجامعه</th>
                         <th>حذف</th>
-                        <th>تعديل الصور</th>
+                        <th>تعديل الصور و الملزمه</th>
                       </tr>
                     </thead>
                     <tbody>
                       <% users.forEach(function(user){ %>
                         <tr>
                           <td><%= user['name']  %> <i id="<%= user['id']  %>" class="fa edit fa-pencil-square-o" aria-hidden="true" what="name"></i></td>
-                          <td><%= user['descc'] %> <i id="<%= user['id']  %>"  what="descc" class="fa edit fa-pencil-square-o" aria-hidden="true"></i></td>
                           <td><%= user['price'] %> <i id="<%= user['id']  %>"  what="price" class="fa edit fa-pencil-square-o" aria-hidden="true"></i></td>
-                          <td><%= user['fake_price'] %> <i id="<%= user['id']  %>"  what="fake_price" class="fa edit fa-pencil-square-o" aria-hidden="true"></i></td>
-                          <td><%= user['pagesnum'] %> <i id="<%= user['id']  %>"  what="pagesnum" class="fa edit fa-pencil-square-o" aria-hidden="true"></i></td>
-                          <td><%= user['binding'] %> <i id="<%= user['id']  %>"  what="binding" class="fa edit fa-pencil-square-o" aria-hidden="true"></i></td>
-                          <td><%= user['width'] %> <i id="<%= user['id']  %>"  what="width" class="fa edit fa-pencil-square-o" aria-hidden="true"></i></td>
-                          <td><%= user['height'] %> <i id="<%= user['id']  %>"  what="height" class="fa edit fa-pencil-square-o" aria-hidden="true"></i></td>
+                          <td>
+                            <select class="form-control"  what="subject_id" id="university" noteId="<%= user['id'] %>" class="select_parent_category">
+                              <%  categories.forEach(function(cat) {
+                                        if(user['subject_id'] == cat['id']) {%>
+                                    <option value="<%= cat['id'] %>" selected><%= cat['name'] %>--><%= universities[cat['university_id']-1].name %></option>
+                                        <% } else {%>
+                                    <option value="<%= cat['id'] %>"><%= cat['name'] %>--><%= universities[cat['university_id']-1].name %></option>
+                              <% }}) %>
+                            </select>
+                          </td>
                           <td><a style="color:red" href="/delete-book?id=<%= user['id'] %>" onclick="return confirm('هل تريد حذف هذا الكتاب حقا !');">X</a></td>
                           <td><a href="/edit-book-images?id=<%= user['id'] %>"><i  class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                            </tr>

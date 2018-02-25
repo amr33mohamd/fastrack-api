@@ -1,4 +1,4 @@
-<%- include('parts/header', {page: 'categories'}); %>
+<%- include('parts/header', {page: 'books'}); %>
 <%- include('parts/slide_bar'); %>
 <style type="text/css">
  .edit:hover {
@@ -32,12 +32,30 @@ $(".edit").click(function(){
  var new_name = prompt('تريد تغيره الى ماذا ؟');
  var what = $(this).attr('what');
  if(new_name != null){
-   $.get('/change-category',{
+   $.get('/change-book',{
        id,
        new_name,
        what
      },function(data){
-       window.location = '/categories';
+       window.location = '/books';
+     })
+ }
+})
+
+
+$("select").on('change',function(){
+
+ var id = $(this).attr('noteId');
+ var new_name = $(this).val();
+ var what = $(this).attr('what');
+
+ if(new_name != null){
+   $.get('/change-book',{
+       id,
+       new_name,
+       what
+     },function(data){
+       window.location = '/books';
      })
  }
 })
@@ -92,13 +110,17 @@ $(".edit").click(function(){
                <div class="tile-stats text-center">
                  <div class="icon"><i style="padding-top:20px;"  class="fa fa-book"></i></div>
                  <div class="count"> <%= categories.length %></div>
-                 <h3>عدد الاقسام الرئيسية</h3>
+                 <h3>عدد الجامعات</h3>
+                 <p>الجامعات جميعها</p>
                </div>
              </div>
 
+
+
+
               <div class="x_panel">
                 <div class="x_title text-center">
-                  <h2>ابن الجوزي | <small>الاقسام الرئيسية</small></h2>
+                  <h2>Fastrack | <small>الملازم</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -123,24 +145,20 @@ $(".edit").click(function(){
                   <table id="datatable-buttons" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                        <th>اسم القسم</th>
+                        <th>الصوره</th>
+                        <th>الاسم</th>
                         <th>حذف</th>
-
+                        <th>تعديل الصور</th>
                       </tr>
                     </thead>
-
-
                     <tbody>
-
-                      <% categories.forEach(function(cat){ %>
+                      <% categories.forEach(function(user){ %>
                         <tr>
-                          <td><%= cat['name']  %> <i id="<%= cat['id']  %>" class="fa edit fa-pencil-square-o" aria-hidden="true" what="name"></i></td>
+                          <td><img height="50" width="50" src="<%= user['image'] %>"></td>
+                          <td><%= user['name'] %> <i id="<%= user['id']  %>"  what="name" class="fa edit fa-pencil-square-o" aria-hidden="true"></i></td>
 
-                          <td><a style="color:red" href="/delete-category?id=<%= cat['id'] %>" onclick="return confirm('هل تريد حذف هذا القسم حقا !');">X</a></td>
-
-
-
-
+                          <td><a style="color:red" href="/delete-university?id=<%= user['id'] %>" onclick="return confirm('هل تريد حذف هذا الكتاب حقا !');">X</a></td>
+                          <td><a href="/edit-university-images?id=<%= user['id'] %>"><i  class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                            </tr>
                      <% }); %>
 
@@ -153,7 +171,20 @@ $(".edit").click(function(){
 
                   </div>
 
+
+
+
 </div>
+
+
+
+
+
                   </div>
+
+
+
+
+
 
 <%- include('parts/footer'); %>

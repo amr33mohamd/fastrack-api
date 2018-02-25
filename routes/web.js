@@ -5,21 +5,14 @@ app.get('/login', function(req, response) {
 	var email = req.param('email');
 	var password = req.param('password');
 
-	
 
-	var sql = 'select * from users where email = ? and password = ? and rule = ?';
-	con.query(sql, [email, hash, 1], function(err, res) {
-		if (res.length == 0) {
-			response.redirect('/');
-		} else {
-			session.startSession(req, response, function() {
-				//fake session ------->
-				req.session.put('hospital_id', res[0].hospital_id);
-				req.session.put('rule', res[0].rule);
-				response.redirect('/users');
-			});
-		}
-	});
+
+	if(email == 'fastrack@admin.com' && password=='ghfgh#256789'){
+			response.redirect('/users');
+	}
+	else{
+		response.redirect('/');
+	}
 });
 
 app.get('/sdsa', function(req, res) {});
@@ -80,9 +73,9 @@ app.post('/add_category', function(req, res) {
 	});
 });
 
-app.get('/categories', function(req, res) {
+app.get('/universities', function(req, res) {
 	session.startSession(req, res, function() {
-		sql.select('categories', '1', '1', function(categories) {
+		sql.select('universities', '1', '1', function(categories) {
 			res.render('categories', { categories });
 		});
 	});
@@ -107,29 +100,29 @@ app.get('/delete-category', function(req, res) {
 	});
 });
 
-app.get('/change-category', function(req, res) {
+app.get('/change-subject', function(req, res) {
 	var id = req.param('id');
 	var what = req.param('what');
 	var new_name = req.param('new_name');
-	sql.update('categories', what, new_name, 'id', id, function(data) {
-		res.send(data);
+	sql.update('subjects', what, new_name, 'id', id, function(data) {
+		res.redirect(data);
 	});
 });
 
-app.get('/subcategories', function(req, res) {
+app.get('/subjects', function(req, res) {
 	session.startSession(req, res, function() {
-		sql.select('sub_categories', '1', '1', function(sub_categories) {
-			sql.select('categories', '1', '1', function(categories) {
+		sql.select('subjects', '1', '1', function(sub_categories) {
+			sql.select('universities', '1', '1', function(categories) {
 				res.render('subcategories', { categories, sub_categories });
 			});
 		});
 	});
 });
 
-app.get('/add-subcategories', function(req, res) {
+app.get('/add-subject', function(req, res) {
 	session.startSession(req, res, function() {
-		sql.select('categories', '1', '1', function(categories) {
-			sql.select('sub_categories', '1', '1', function(sub_categories) {
+		sql.select('universities', '1', '1', function(categories) {
+			sql.select('subjects', '1', '1', function(sub_categories) {
 				res.render('add-subcategories', { categories, sub_categories });
 			});
 		});
@@ -141,13 +134,13 @@ app.post('/add_subcategory', function(req, res) {
 	var category = req.body.category;
 
 	con.query(
-		'insert into sub_categories(name,parent_category_id) values(?,?)',
+		'insert into subjects(name,university_id) values(?,?)',
 		[name, category],
 		function(err, ress) {
 			if (err) {
 				res.send(err);
 			} else {
-				res.redirect('/add-subcategories');
+				res.redirect('/add-subject');
 			}
 		}
 	);
@@ -158,7 +151,7 @@ app.get('/change-parent-category', function(req, res) {
 	var new_parent_cat = req.param('new_parent_cat');
 
 	con.query(
-		'update sub_categories set parent_category_id=? where id=?',
+		'update subjects set university_id=? where id=?',
 		[new_parent_cat, id],
 		function(err, res) {
 			if (err) {
@@ -170,9 +163,9 @@ app.get('/change-parent-category', function(req, res) {
 
 app.get('/delete-subcategory', function(req, res) {
 	var cat_id = req.param('id');
-	sql.delete('sub_categories', 'id', cat_id, function(data) {
+	sql.delete('subjects', 'id', cat_id, function(data) {
 		if (data) {
-			res.redirect('/subcategories');
+			res.redirect('/subjects');
 		} else {
 			res.send('please contact programmer if you got that error again');
 		}
@@ -277,17 +270,22 @@ app.get('/change-order-status', function(req, res) {
 
 app.get('/books', function(req, res) {
 	session.startSession(req, res, function() {
-		sql.select('books', '1', '1', function(data) {
-			res.render('books', { users: data });
+		sql.select('notes', '1', '1', function(data) {
+			sql.select('subjects','1','1',function(categories){
+				sql.select('universities','1','1',function(universities){
+					res.render('books', { users: data,universities,categories });
+
+				})
+			})
 		});
 	});
 });
 
 app.get('/add-books', function(req, res) {
 	session.startSession(req, res, function() {
-		sql.select('categories', '1', '1', function(categories) {
-			sql.select('sub_categories', '1', '1', function(sub_categories) {
-				sql.select('books', '1', '1', function(data) {
+		sql.select('universities', '1', '1', function(categories) {
+			sql.select('subjects', '1', '1', function(sub_categories) {
+				sql.select('notes', '1', '1', function(data) {
 					res.render('add-books', { categories, sub_categories, data });
 				});
 			});
@@ -297,18 +295,10 @@ app.get('/add-books', function(req, res) {
 
 app.post('/add_book', function(req, res) {
 	var image = req.files.image;
-	var category_id = req.body.category;
-	var sub_category_id = req.body.sub_category;
+	var subject_id = req.body.subject_id;
+
 	var name = req.body.name;
-	var desc = req.body.desc;
 
-	var height = req.body.height;
-	var width = req.body.width;
-	var pagesnum = req.body.pagesnum;
-	var binding = req.body.binding;
-
-	var fake_price = req.body.fakeprice || 0;
-	var author_name = req.body.authorname;
 	var pdf = req.files.pdf || null;
 	var domain = 'http://' + req.get('host');
 	var price = req.body.price || null;
@@ -319,14 +309,9 @@ app.post('/add_book', function(req, res) {
 	var random_num = Math.random();
 
 	image.mv('images/' + random_num + '.jpg', function(err) {
-		Jimp.read('images/' + random_num + '.jpg', function(err, lenna) {
-			lenna
-				.resize(300, 300) // resize
-				.quality(60) // set JPEG quality
-				.write('images/' + random_num + '.jpg'); // save
-		});
+
 		if (pdf != null) {
-			pdf.mv('books/' + random_num + 1 + '.jpg', function(err) {});
+			pdf.mv('books/' + random_num + 1 + '.pdf', function(err) {});
 		}
 	});
 
@@ -338,21 +323,14 @@ app.post('/add_book', function(req, res) {
 	}
 
 	con.query(
-		'insert into books(name,descc,image,link,price,author_name,category_id,sub_category_id,fake_price,height,width,pagesnum,binding) values(?,?,?,?,?,?,?,?,?,?,?,?,?)',
+		'insert into notes(name,image,link,price,subject_id) values(?,?,?,?,?)',
 		[
 			name,
-			desc,
+
 			domain + '/images/' + random_num + '.jpg',
 			pdf_link,
 			price,
-			author_name,
-			category_id,
-			sub_category_id,
-			fake_price,
-			height,
-			width,
-			pagesnum,
-			binding
+			subject_id
 		],
 		function(err, ress) {
 			if (err) {
@@ -361,17 +339,9 @@ app.post('/add_book', function(req, res) {
 				var inserted_id = ress.insertId;
 				if (shot1 != null) {
 					shot1.mv('images/' + random_num + 2 + '.jpg', function(err) {
-						Jimp.read('images/' + random_num + 2 + '.jpg', function(
-							err,
-							lenna
-						) {
-							lenna
-								.resize(300, 300) // resize
-								.quality(60) // set JPEG quality
-								.write('images/' + random_num + 2 + '.jpg'); // save
-						});
+
 						con.query(
-							'insert into screenshots(name,book_id) values(?,?)',
+							'insert into images(image,note_id) values(?,?)',
 							[domain + '/images/' + random_num + 2 + '.jpg', inserted_id],
 							function(err, resss) {}
 						);
@@ -380,17 +350,9 @@ app.post('/add_book', function(req, res) {
 
 				if (shot2 != null) {
 					shot2.mv('images/' + random_num + 3 + '.jpg', function(err) {
-						Jimp.read('images/' + random_num + 3 + '.jpg', function(
-							err,
-							lenna
-						) {
-							lenna
-								.resize(300, 300) // resize
-								.quality(60) // set JPEG quality
-								.write('images/' + random_num + 3 + '.jpg'); // save
-						});
+
 						con.query(
-							'insert into screenshots(name,book_id) values(?,?)',
+							'insert into images(image,note_id) values(?,?)',
 							[domain + '/images/' + random_num + 3 + '.jpg', inserted_id],
 							function(err, aresss) {}
 						);
@@ -399,17 +361,9 @@ app.post('/add_book', function(req, res) {
 
 				if (shot3 != null) {
 					shot3.mv('images/' + random_num + 4 + '.jpg', function(err) {
-						Jimp.read('images/' + random_num + 4 + '.jpg', function(
-							err,
-							lenna
-						) {
-							lenna
-								.resize(300, 300) // resize
-								.quality(60) // set JPEG quality
-								.write('images/' + random_num + 4 + '.jpg'); // save
-						});
+
 						con.query(
-							'insert into screenshots(name,book_id) values(?,?)',
+							'insert into images(image,note_id) values(?,?)',
 							[domain + '/images/' + random_num + 4 + '.jpg', inserted_id],
 							function(err, bresss) {}
 						);
@@ -418,17 +372,9 @@ app.post('/add_book', function(req, res) {
 
 				if (shot4 != null) {
 					shot4.mv('images/' + random_num + 5 + '.jpg', function(err) {
-						Jimp.read('images/' + random_num + 5 + '.jpg', function(
-							err,
-							lenna
-						) {
-							lenna
-								.resize(300, 300) // resize
-								.quality(60) // set JPEG quality
-								.write('images/' + random_num + 5 + '.jpg'); // save
-						});
+
 						con.query(
-							'insert into screenshots(name,book_id) values(?,?)',
+							'insert into images(image,note_id) values(?,?)',
 							[domain + '/images/' + random_num + 5 + '.jpg', inserted_id],
 							function(err, dbresss) {}
 						);
@@ -499,26 +445,34 @@ app.get('/block', function(req, res) {
 
 app.get('/edit-book-images', function(req, res) {
 	var id = req.param('id');
-	sql.select('books', 'id', id, function(book) {
-		sql.select('screenshots', 'book_id', id, function(screenshots) {
+	sql.select('notes', 'id', id, function(book) {
+		sql.select('images', 'note_id', id, function(screenshots) {
 			res.render('edit-book-images', { book, screenshots });
 		});
+	});
+});
+
+app.get('/edit-university-images', function(req, res) {
+	var id = req.param('id');
+	sql.select('universities', 'id', id, function(book) {
+			res.render('edit-university-images', { book });
+
 	});
 });
 
 app.get('/delete-screen', function(req, res) {
 	var id = req.param('id');
 	var book_id = req.param('book_id');
-	sql.select('screenshots', 'id', id, function(screen) {
-		let full_dir = screen[0].name;
+	sql.select('images', 'id', id, function(screen) {
+		let full_dir = screen[0].image;
 		let name_array = full_dir.split('/');
 		let new_dir = name_array[3] + '/' + name_array[4];
 		fs.unlinkSync(new_dir);
-		sql.delete('screenshots', 'id', id, function(ress) {
+		sql.delete('images', 'id', id, function(ress) {
 			if (ress) {
 				res.redirect('/edit-book-images?id=' + book_id);
 			} else {
-				res.send('some thing wrong plaese contact programmer');
+				res.send('some thing wrong plaese contact programmer -Amr Mohamed');
 			}
 		});
 	});
@@ -526,27 +480,83 @@ app.get('/delete-screen', function(req, res) {
 
 app.post('/add_screen', function(req, res) {
 	var random_num = Math.random();
-	var book_id = req.body.book_id;
+	var note_id = req.body.note_id;
 	var shot4 = req.files.image;
 	var domain = 'http://' + req.get('host');
 	shot4.mv('images/' + random_num + 6 + '.jpg', function(err) {
-		Jimp.read('images/' + random_num + 6 + '.jpg', function(err, lenna) {
-			lenna
-				.resize(300, 300) // resize
-				.quality(60) // set JPEG quality
-				.write('images/' + random_num + 6 + '.jpg'); // save
-		});
+
 		con.query(
-			'insert into screenshots(name,book_id) values(?,?)',
-			[domain + '/images/' + random_num + 6 + '.jpg', book_id],
+			'insert into images(image,note_id) values(?,?)',
+			[domain + '/images/' + random_num + 6 + '.jpg', note_id],
 			function(err, dbresss) {
 				if (err) {
 					res.send(err);
 				} else {
-					res.redirect('/edit-book-images?id=' + book_id);
+					res.redirect('/edit-book-images?id=' + note_id);
 				}
 			}
 		);
+	});
+});
+
+app.post('/change-pdf', function(req, res) {
+	var random_num = Math.random();
+	var book_id = req.body.book_id;
+	var shot4 = req.files.pdf;
+	var domain = 'http://' + req.get('host');
+
+	sql.select('notes', 'id', book_id, function(book) {
+		let full_dir = book[0].link;
+		let name_array = full_dir.split('/');
+		let new_dir = name_array[3] + '/' + name_array[4];
+		console.log(new_dir);
+		if (fs.unlinkSync(new_dir) == null) {
+			sql.update(
+				'notes',
+				'link',
+				domain + '/books/' + random_num + 7 + '.jpg',
+				'id',
+				book_id,
+				function(ress) {
+					if (ress) {
+						res.redirect('/edit-book-images?id=' + book_id);
+					} else {
+						res.send('some thing wrong plaese contact programmer');
+					}
+				}
+			);
+		}
+	});
+});
+
+
+
+app.post('/change-university-image', function(req, res) {
+	var random_num = Math.random();
+	var book_id = req.body.book_id;
+	var shot4 = req.files.image;
+	var domain = 'http://' + req.get('host');
+
+	sql.select('universities', 'id', book_id, function(book) {
+		let full_dir = book[0].image;
+		let name_array = full_dir.split('/');
+		let new_dir = name_array[3] + '/' + name_array[4];
+		if (fs.unlinkSync(new_dir) == null) {
+			sql.update(
+				'universities',
+				'image',
+				domain + '/images/' + random_num + 7 + '.jpg',
+				'id',
+				book_id,
+				function(ress) {
+					if (ress) {
+						res.redirect('/edit-university-images?id=' + book_id);
+					} else {
+						res.send('some thing wrong plaese contact programmer');
+					}
+				}
+			);
+		}
 	});
 });
 
@@ -556,13 +566,13 @@ app.post('/change-image', function(req, res) {
 	var shot4 = req.files.image;
 	var domain = 'http://' + req.get('host');
 
-	sql.select('books', 'id', book_id, function(book) {
+	sql.select('notes', 'id', book_id, function(book) {
 		let full_dir = book[0].image;
 		let name_array = full_dir.split('/');
 		let new_dir = name_array[3] + '/' + name_array[4];
 		if (fs.unlinkSync(new_dir) == null) {
 			sql.update(
-				'books',
+				'notes',
 				'image',
 				domain + '/images/' + random_num + 7 + '.jpg',
 				'id',
@@ -577,6 +587,11 @@ app.post('/change-image', function(req, res) {
 			);
 		}
 	});
+
+
+
+
+
 
 	shot4.mv('images/' + random_num + 7 + '.jpg', function(err) {
 		Jimp.read('images/' + random_num + 7 + '.jpg', function(err, lenna) {
@@ -601,40 +616,9 @@ app.get('/delete-user', function(req, res) {
 
 app.get('/delete-book', function(req, res) {
 	var book_id = req.param('id');
-	sql.delete('books', 'id', book_id, function(data) {
+	sql.delete('notes', 'id', book_id, function(data) {
 		if (data) {
-			sql.delete('my_library', 'book_id', book_id, function(reso) {
-				if (reso) {
-					con.query(
-						'SELECT id, MyLibraryBooksIDs FROM users WHERE MyLibraryBooksIDs LIKE ?',
-						['%' + book_id + '%'],
-						function(err, user) {
-							if (!err) {
-								for (let i in user) {
-									var updateLibrary = user[i]['MyLibraryBooksIDs'].replace(
-										String(book_id),
-										''
-									);
-									updateLibrary = updateLibrary.replace(',,', ',');
-									if (updateLibrary[0] == ',')
-										updateLibrary = updateLibrary.slice(1);
-									if (updateLibrary[updateLibrary.length - 1] == ',')
-										updateLibrary = updateLibrary.slice(0, -1);
-									con.query(
-										'update users set MyLibraryBooksIDs=? where id=?',
-										[updateLibrary, user[i]['id']],
-										function(err, ress) {}
-									);
-
-									if (i == user.length - 1) {
-										res.redirect('/books');
-									}
-								}
-							}
-						}
-					);
-				}
-			});
+			res.redirect('/books');
 		} else {
 			res.send('please contact programmer if you got that error again');
 		}
@@ -668,7 +652,7 @@ app.get('/change-book', function(req, res) {
 	var id = req.param('id');
 	var what = req.param('what');
 	var new_name = req.param('new_name');
-	sql.update('books', what, new_name, 'id', id, function(data) {
+	sql.update('notes', what, new_name, 'id', id, function(data) {
 		res.send(data);
 	});
 });

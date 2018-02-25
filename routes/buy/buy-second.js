@@ -9,7 +9,7 @@ app.get('/buy-second',function(req,res){
         }
         else{
           console.log(book);
-          res.download(book[0].link);
+          res.redirect(book[0].link);
         }
       })
   })
