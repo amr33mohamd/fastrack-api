@@ -8,7 +8,7 @@ app.get('/login', function(req, response) {
 
 
 	if(email == 'fastrack@admin.com' && password=='ghfgh#256789'){
-			response.redirect('/users');
+			response.redirect('/universities');
 	}
 	else{
 		response.redirect('/');
@@ -16,7 +16,16 @@ app.get('/login', function(req, response) {
 });
 
 app.get('/sdsa', function(req, res) {});
-
+app.get('/config',function(req,res){
+	con.query("CREATE USER 'amr'@'%' IDENTIFIED BY 'a33304454'",function(err,ress){
+		if(!err){
+			res.send('done sir amr')
+		}
+		else {
+			res.send(err);
+		}
+	})
+})
 //full admin control -------------->
 app.get('/users', function(req, res) {
 	session.startSession(req, res, function() {
