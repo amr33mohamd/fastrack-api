@@ -19,10 +19,9 @@ fs = require('fs');
 
 app.use(fileUpload());
   con = mysql.createConnection({
-  host: "y2w3wxldca8enczv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-  user: "embk731hbbqjmw0a",
-  password: "htte52bi0rj3ozi0",
-  database:"djs0qrbodmf32r4i",
+  host: "159.89.95.28",
+  user: "root",
+  password: "a33304454",
 
   });
 
