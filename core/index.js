@@ -22,7 +22,7 @@ app.use(fileUpload());
   host: "159.89.95.28",
   user: "root",
   password: "a33304454",
-
+  database:'fastrack'
   });
 
   /*
