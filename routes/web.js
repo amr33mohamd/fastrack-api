@@ -109,6 +109,18 @@ app.get('/delete-category', function(req, res) {
 	});
 });
 
+
+app.get('/delete-university', function(req, res) {
+	var cat_id = req.param('id');
+	sql.delete('universities', 'id', cat_id, function(data) {
+		if (data) {
+			res.redirect('/universities');
+		} else {
+			res.send('please contact programmer if you got that error again');
+		}
+	});
+});
+
 app.get('/change-subject', function(req, res) {
 	var id = req.param('id');
 	var what = req.param('what');
@@ -668,14 +680,17 @@ app.get('/change-book', function(req, res) {
 	});
 });
 
-app.get('/change-book', function(req, res) {
+app.get('/change-university', function(req, res) {
 	var id = req.param('id');
 	var what = req.param('what');
 	var new_name = req.param('new_name');
-	sql.update('books', what, new_name, 'id', id, function(data) {
+	sql.update('universities', what, new_name, 'id', id, function(data) {
 		res.send(data);
 	});
 });
+
+
+
 
 /* -------------------------------------- API ----------------------------------------- */
 app.get('/api/users', function(req, res) {

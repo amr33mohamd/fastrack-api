@@ -32,12 +32,12 @@ $(".edit").click(function(){
  var new_name = prompt('تريد تغيره الى ماذا ؟');
  var what = $(this).attr('what');
  if(new_name != null){
-   $.get('/change-book',{
+   $.get('/change-university',{
        id,
        new_name,
        what
      },function(data){
-       window.location = '/books';
+       window.location = '/universities';
      })
  }
 })
