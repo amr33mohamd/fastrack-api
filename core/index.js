@@ -9,7 +9,7 @@ Jimp = require("jimp");
 moment().format('L');
   app.set('view engine', 'ejs');
   app.use('/public', express.static('public'));
-  app.use('/images', express.static('images'));
+  app.use('/images', express.static('public/imagess'));
   app.use('/books', express.static('books'));
    fileUpload = require('express-fileupload');
    var bodyParser=  require("body-parser");
