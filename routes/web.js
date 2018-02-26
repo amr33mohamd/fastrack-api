@@ -520,6 +520,9 @@ app.post('/change-pdf', function(req, res) {
 		let new_dir = name_array[3] + '/' + name_array[4];
 		console.log(new_dir);
 		if (fs.unlinkSync(new_dir) == null) {
+			shot4.mv('books/' + random_num + 7 + '.jpg', function(err) {
+
+			});
 			sql.update(
 				'notes',
 				'link',
@@ -551,6 +554,9 @@ app.post('/change-university-image', function(req, res) {
 		let name_array = full_dir.split('/');
 		let new_dir = name_array[3] + '/' + name_array[4];
 		if (fs.unlinkSync(new_dir) == null) {
+			shot4.mv('images/' + random_num + 7 + '.jpg', function(err) {
+
+			});
 			sql.update(
 				'universities',
 				'image',
@@ -580,6 +586,9 @@ app.post('/change-image', function(req, res) {
 		let name_array = full_dir.split('/');
 		let new_dir = name_array[3] + '/' + name_array[4];
 		if (fs.unlinkSync(new_dir) == null) {
+			shot4.mv('images/' + random_num + 7 + '.jpg', function(err) {
+
+			});
 			sql.update(
 				'notes',
 				'image',
@@ -596,21 +605,14 @@ app.post('/change-image', function(req, res) {
 			);
 		}
 	});
-
-
-
-
-
-
-	shot4.mv('images/' + random_num + 7 + '.jpg', function(err) {
-		Jimp.read('images/' + random_num + 7 + '.jpg', function(err, lenna) {
-			lenna
-				.resize(300, 300) // resize
-				.quality(60) // set JPEG quality
-				.write('images/' + random_num + 7 + '.jpg'); // save
-		});
-	});
 });
+
+
+
+
+
+
+
 
 app.get('/delete-user', function(req, res) {
 	var user_id = req.param('id');
