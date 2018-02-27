@@ -319,6 +319,7 @@ app.post('/add_book', function(req, res) {
 	var subject_id = req.body.subject_id;
 
 	var name = req.body.name;
+	var descc = req.body.descc;
 
 	var pdf = req.files.pdf || null;
 	var domain = 'http://' + req.get('host');
@@ -344,11 +345,12 @@ app.post('/add_book', function(req, res) {
 	}
 
 	con.query(
-		'insert into notes(name,image,link,price,subject_id) values(?,?,?,?,?)',
+		'insert into notes(name,image,descc,link,price,subject_id) values(?,?,?,?,?)',
 		[
 			name,
 
 			domain + '/images/' + random_num + '.jpg',
+			descc,
 			pdf_link,
 			price,
 			subject_id
