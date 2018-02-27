@@ -345,7 +345,7 @@ app.post('/add_book', function(req, res) {
 	}
 
 	con.query(
-		'insert into notes(name,image,descc,link,price,subject_id) values(?,?,?,?,?)',
+		'insert into notes(name,image,descc,link,price,subject_id) values(?,?,?,?,?,?)',
 		[
 			name,
 
