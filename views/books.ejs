@@ -148,6 +148,7 @@ $("select").on('change',function(){
                         <th>الاسم</th>
                         <th> السعر ب الدينار الكويتى</th>
                         <th>القسم - الجامعه</th>
+                        <th>التحميلات</th>
                         <th>حذف</th>
                         <th>تعديل الصور و الملزمه</th>
                       </tr>
@@ -167,6 +168,7 @@ $("select").on('change',function(){
                               <% }}) %>
                             </select>
                           </td>
+                          <td><%= user['downloads']  %></td>
                           <td><a style="color:red" href="/delete-book?id=<%= user['id'] %>" onclick="return confirm('هل تريد حذف هذا الكتاب حقا !');">X</a></td>
                           <td><a href="/edit-book-images?id=<%= user['id'] %>"><i  class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                            </tr>

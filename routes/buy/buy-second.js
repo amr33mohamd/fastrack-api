@@ -3,7 +3,7 @@ app.get('/buy-second',function(req,res){
 
 
   sql.select('notes','id',id,function(book) {
-      con.query("INSERT INTO `orders`(`note_id`) VALUES (?)",[id],function(err,ress){
+      con.query("UPDATE notes SET downloads = downloads + 1 WHERE id = ?",[id],function(err,ress){
         if(err){
           res.send(err);
         }
