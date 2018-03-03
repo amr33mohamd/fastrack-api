@@ -19,8 +19,13 @@
     "jimp": "^0.2.28",
     "moment": "^2.18.1",
     "mysql": "^2.14.1",
+    "node-fetch": "^2.0.0",
     "node-session": "^1.2.1",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "soap": "^0.23.0",
+    "strong-soap": "^1.5.0",
+    "xml2js": "^0.4.19",
+    "xmlhttp-request": "^0.4.1"
   },
   "devDependencies": {},
   "keywords": [

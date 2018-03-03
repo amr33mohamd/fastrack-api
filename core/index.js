@@ -3,7 +3,6 @@
    app = express();
   var mysql = require('mysql');
    port = process.env.PORT || 5050;
-Jimp = require("jimp");
      addSubtractDate = require("add-subtract-date");
     moment = require('moment');
 moment().format('L');

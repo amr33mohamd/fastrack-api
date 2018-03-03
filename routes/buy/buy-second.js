@@ -1,5 +1,5 @@
 app.get('/buy-second',function(req,res){
-  var id = req.param('id');
+  var id = req.param('note_id').split("?")[0];;
 
 
   sql.select('notes','id',id,function(book) {
