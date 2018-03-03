@@ -16,65 +16,6 @@ app.get('/login', function(req, response) {
 });
 
 
-app.get('/order',function(req,res){
-
-
-// var http = require("http");
-// 	var xml ='<?xml version="1.0" encoding="utf-8"?>'+
-// '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'+
-//   '<soap:Body>'+
-//     '<GetQuote xmlns="http://www.webserviceX.NET/">'+
-//       '<symbol>string</symbol>'+
-//     '</GetQuote>'+
-//   '</soap:Body>'+
-// '</soap:Envelope>';
-
-
-
-// var soap = require('soap');
-// var url = 'https://test.myfatoorah.com/pg/PayGatewayServiceV2.asmx?WSDL';
-// var args = {Merchant_username: 'testapi@myfatoorah.com',Merchant_Password:'E55D0',merchant_ReferenceID:'554484'};
-// soap.createClient(url, function(err, client) {
-// 	client.PayGatewayServiceV2.PayGatewayServiceV2Soap.merchantDC(args,function(err,data){
-// 		if(err){
-// 			res.send(err);
-// 		}
-// 		else{
-// 			res.send(data);
-// 			console.log(data);
-// 		}
-// 	})
-//
-// });
-var fetch = require('node-fetch');
-
-var body =  {
-  "amount": 10,
-  "currency": "KWD",
-  "statement_descriptor": "Test Txn 001",
-  "redirect": {
-    "return_url": "http://google.com",
-    "post_url": "http://return.com/posturl"
-  },
-  "description": "Test Transaction",
-  "metadata": {
-    "Order Number": "ORD-1001"
-  },
-  "receipt_sms": "96598989898",
-  "receipt_email": "test@test.com"
-} ;
-fetch('https://api.tap.company/v1/charges', {
-    method: 'POST',
-    body:    JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json',
-	'Authorization':'Bearer sk_test_stR9ydEPWUcaN3kZ74TfuAYg'},
-})
-    .then(res => res.json())
-    .then(json => console.log(json));
-
-
-
-})
 
 app.get('/sdsa', function(req, res) {});
 app.get('/config',function(req,res){
@@ -356,7 +297,6 @@ app.get('/books', function(req, res) {
 			sql.select('subjects','1','1',function(categories){
 				sql.select('universities','1','1',function(universities){
 					res.render('books', { users: data,universities,categories });
-
 				})
 			})
 		});
@@ -374,6 +314,52 @@ app.get('/add-books', function(req, res) {
 		});
 	});
 });
+
+app.get('/add-university', function(req, res) {
+	sql.select('universities', '1', '1', function(data) {
+
+					res.render('add-university',{data});
+})
+});
+
+
+
+
+app.post('/add_university', function(req, res) {
+	var image = req.files.image;
+
+	var name = req.body.name;
+
+	var domain = 'http://' + req.get('host');
+	var random_num = Math.random();
+
+	image.mv('images/' + random_num + '.jpg', function(err) {
+
+
+	});
+
+	var image_link = 'images/' + random_num + '.jpg';
+
+
+	con.query(
+		'insert into universities(name,image) values(?,?)',
+		[
+			name,
+
+			domain + '/images/' + random_num + '.jpg',
+
+		],
+		function(err, ress) {
+			if (err) {
+				res.send(err);
+			} else {
+
+				res.redirect('/add-university');
+			}
+		}
+	);
+});
+
 
 app.post('/add_book', function(req, res) {
 	var image = req.files.image;
