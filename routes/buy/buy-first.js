@@ -10,10 +10,11 @@ app.get('/buy-first',function(req,res){
     .then((json) =>{
 
            var new_url =   "https://myfatoorah.com/pg/payment_invoice.aspx?id="+json.id
-            res.render('buy-first',{
-              book:note[0],
-              url: new_url
-            });
+          res.redirect(new_url)
+            // res.render('buy-first',{
+            //   book:note[0],
+            //   url: new_url
+            // });
 
 
 
