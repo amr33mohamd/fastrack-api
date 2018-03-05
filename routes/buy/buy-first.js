@@ -9,7 +9,7 @@ app.get('/buy-first',function(req,res){
     .then(res => res.json())
     .then((json) =>{
 
-           var new_url =   "https://test.myfatoorah.com/pg/payment_invoice.aspx?id="+json.id
+           var new_url =   "https://myfatoorah.com/pg/payment_invoice.aspx?id="+json.id
             res.render('buy-first',{
               book:note[0],
               url: new_url
