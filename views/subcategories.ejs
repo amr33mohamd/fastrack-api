@@ -166,7 +166,21 @@ $("select").change(function (){
                           <td><a style="color:red" href="/delete-subcategory?id=<%= subcat['id'] %>" onclick="return confirm('هل تريد حذف هذا القسم حقا !');">X</a></td>
 
 
+<script>
 
+$("select").change(function (){
+    var new_parent_cat = $(this).find("option:checked").val();
+    var id = $(this).attr('id');
+
+    $.get('/change-parent-category',{
+        id,
+        new_parent_cat
+      },function(data){
+        window.location = '/subjects';
+      })
+});
+
+</script>
 
                            </tr>
                      <% }); %>

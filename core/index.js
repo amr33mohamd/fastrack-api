@@ -19,7 +19,7 @@ fs = require('fs');
 app.use(fileUpload());
   con = mysql.createConnection({
   host: "159.89.95.28",
-  user: "root",
+  user: "amr",
   password: "a33304454",
   database:'fastrack'
   });
