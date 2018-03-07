@@ -147,6 +147,7 @@ $("select").on('change',function(){
                       <tr>
                         <th>الاسم</th>
                         <th> السعر ب الدينار الكويتى</th>
+                        <th> الوصف</th>
                         <th>القسم - الجامعه</th>
                         <th>التحميلات</th>
                         <th>حذف</th>
@@ -158,6 +159,8 @@ $("select").on('change',function(){
                         <tr>
                           <td><%= user['name']  %> <i id="<%= user['id']  %>" class="fa edit fa-pencil-square-o" aria-hidden="true" what="name"></i></td>
                           <td><%= user['price'] %> <i id="<%= user['id']  %>"  what="price" class="fa edit fa-pencil-square-o" aria-hidden="true"></i></td>
+                          <td><%= user['descc'] %> <i id="<%= user['id']  %>"  what="descc" class="fa edit fa-pencil-square-o" aria-hidden="true"></i></td>
+
                           <td>
                             <select class="form-control"  what="subject_id" id="university" noteId="<%= user['id'] %>" class="select_parent_category">
                               <%  categories.forEach(function(cat) {
