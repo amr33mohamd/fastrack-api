@@ -178,6 +178,22 @@ $("select").on('change',function(){
                      <% }); %>
 
                     </tbody>
+                    <script>
+                    $(".edit").click(function(){
+                     var id = $(this).attr('id');
+                     var new_name = prompt('تريد تغيره الى ماذا ؟');
+                     var what = $(this).attr('what');
+                     if(new_name != null){
+                       $.get('/change-book',{
+                           id,
+                           new_name,
+                           what
+                         },function(data){
+                           window.location = '/books';
+                         })
+                     }
+                    })
+                    </script>
                   </table>
                 </div>
               </div>
