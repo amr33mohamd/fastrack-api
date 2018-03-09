@@ -135,8 +135,10 @@ app.get('/change-subject', function(req, res) {
 app.get('/subjects', function(req, res) {
 	session.startSession(req, res, function() {
 		sql.select('subjects', '1', '1', function(sub_categories) {
-			sql.select('universities', '1', '1', function(categories) {
-				res.render('subcategories', { categories, sub_categories });
+			sql.select('sectors', '1', '1', function(categories) {
+				sql.select('universities', '1', '1', function(universities) {
+				res.render('subcategories', { categories, sub_categories,universities });
+				});
 			});
 		});
 	});
@@ -144,9 +146,9 @@ app.get('/subjects', function(req, res) {
 
 app.get('/add-subject', function(req, res) {
 	session.startSession(req, res, function() {
-		sql.select('universities', '1', '1', function(categories) {
-			sql.select('subjects', '1', '1', function(sub_categories) {
-				res.render('add-subcategories', { categories, sub_categories });
+		sql.select('sectors', '1', '1', function(categories) {
+			sql.select('universities', '1', '1', function(universities) {
+				res.render('add-subcategories', { categories, universities });
 			});
 		});
 	});
@@ -157,7 +159,7 @@ app.post('/add_subcategory', function(req, res) {
 	var category = req.body.category;
 
 	con.query(
-		'insert into subjects(name,university_id) values(?,?)',
+		'insert into subjects(name,sector_id) values(?,?)',
 		[name, category],
 		function(err, ress) {
 			if (err) {
@@ -169,12 +171,39 @@ app.post('/add_subcategory', function(req, res) {
 	);
 });
 
+
+app.get('/add-sector', function(req, res) {
+	session.startSession(req, res, function() {
+			sql.select('universities', '1', '1', function(universities) {
+				res.render('add-sector', {  universities });
+			});
+	});
+});
+
+app.post('/add_sector', function(req, res) {
+	var name = req.body.name;
+	var category = req.body.category;
+
+	con.query(
+		'insert into sectors(name,university_id) values(?,?)',
+		[name, category],
+		function(err, ress) {
+			if (err) {
+				res.send(err);
+			} else {
+				res.redirect('/add-sector');
+			}
+		}
+	);
+});
+
+
 app.get('/change-parent-category', function(req, res) {
 	var id = req.param('id');
 	var new_parent_cat = req.param('new_parent_cat');
 
 	con.query(
-		'update subjects set university_id=? where id=?',
+		'update subjects set sector_id=? where id=?',
 		[new_parent_cat, id],
 		function(err, res) {
 			if (err) {

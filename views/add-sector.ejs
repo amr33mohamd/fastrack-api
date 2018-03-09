@@ -1,17 +1,5 @@
 
-<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDqL4q3ZnKORiiM9HY8GcX8NBZ3DZr0k-M",
-    authDomain: "library-f0ef5.firebaseapp.com",
-    databaseURL: "https://library-f0ef5.firebaseio.com",
-    projectId: "library-f0ef5",
-    storageBucket: "",
-    messagingSenderId: "604212192169"
-  };
-  firebase.initializeApp(config);
-</script>
+
 <%- include('parts/header', {page: 'Users'}); %>
 <%- include('parts/slide_bar'); %>
 <style type="text/css">
@@ -105,8 +93,8 @@ $(".edit").click(function(){
              <div class="animated flipInY all-users col-lg-12 col-md-12 col-sm-12 col-xs-12">
                <div class="tile-stats text-center">
                  <div class="icon"><i style="padding-top:20px;"  class="fa fa-tasks"></i></div>
-                 <div class="count"> <%= categories.length %></div>
-                 <h3>عدد الاقسام الفرعية</h3>
+                 <div class="count"> <%= universities.length %></div>
+                 <h3>عدد الجامعات</h3>
                </div>
              </div>
 
@@ -117,7 +105,7 @@ $(".edit").click(function(){
 <div class="col-md-12 col-sm-9 col-xs-12">
                            <div class="x_panel">
                              <div class="x_title">
-                               <h2>اضف | <small>ماده</small></h2>
+                               <h2>اضف | <small>قسم</small></h2>
                                <ul class="nav navbar-right panel_toolbox">
 
                                  <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -128,10 +116,10 @@ $(".edit").click(function(){
                              <div class="x_content">
 
 
-                               <form encType="multipart/form-data" method="post" action="/add_subcategory" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                               <form encType="multipart/form-data" method="post" action="/add_sector" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                      <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">اسم الماده <span class="required">*</span>
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> اسم القسم <span class="required">*</span>
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
                          <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
@@ -139,12 +127,12 @@ $(".edit").click(function(){
                      </div>
 
                      <div class="form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">القسم  <span class="required">*</span>
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">الجامعه  <span class="required">*</span>
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
                            <select class="form-control col-md-7 col-xs-12" name="category">
-                             <%  categories.forEach(function(category){ %>
-                             <option value="<%= category['id'] %>"><%= category['name'] %> ---> <%= universities[category['university_id']-1].name %></option>
+                             <%  universities.forEach(function(category){ %>
+                             <option value="<%= category['id'] %>"><%= category['name'] %></option>
                              <% }) %>
                            </select>
                        </div>
