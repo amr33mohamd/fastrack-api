@@ -132,6 +132,17 @@ app.get('/change-subject', function(req, res) {
 	});
 });
 
+
+app.get('/edit-sector', function(req, res) {
+	var id = req.param('id');
+	var what = req.param('what');
+	var new_name = req.param('new_name');
+	sql.update('sectors', what, new_name, 'id', id, function(data) {
+		res.redirect(data);
+	});
+});
+
+
 app.get('/subjects', function(req, res) {
 	session.startSession(req, res, function() {
 		sql.select('subjects', '1', '1', function(sub_categories) {
@@ -139,6 +150,19 @@ app.get('/subjects', function(req, res) {
 				sql.select('universities', '1', '1', function(universities) {
 				res.render('subcategories', { categories, sub_categories,universities });
 				});
+			});
+		});
+	});
+});
+
+
+
+app.get('/sectors', function(req, res) {
+	session.startSession(req, res, function() {
+		sql.select('sectors', '1', '1', function(sub_categories) {
+				sql.select('universities', '1', '1', function(universities) {
+				res.render('sectors', {  sub_categories,universities });
+
 			});
 		});
 	});
@@ -213,6 +237,22 @@ app.get('/change-parent-category', function(req, res) {
 	);
 });
 
+
+
+app.get('/change-sector', function(req, res) {
+	var id = req.param('id');
+	var new_parent_cat = req.param('new_parent_cat');
+
+	con.query(
+		'update sectors set university_id=? where id=?',
+		[new_parent_cat, id],
+		function(err, ress) {
+			if (err) {
+				res.send(err);
+			}
+		}
+	);
+});
 app.get('/delete-subcategory', function(req, res) {
 	var cat_id = req.param('id');
 	sql.delete('subjects', 'id', cat_id, function(data) {
@@ -223,7 +263,16 @@ app.get('/delete-subcategory', function(req, res) {
 		}
 	});
 });
-
+app.get('/delete-sector', function(req, res) {
+	var cat_id = req.param('id');
+	sql.delete('sectors', 'id', cat_id, function(data) {
+		if (data) {
+			res.redirect('/sectors');
+		} else {
+			res.send('please contact programmer if you got that error again');
+		}
+	});
+});
 app.get('/test', function(req, res) {
 	var mysqll = require('mysql');
 
