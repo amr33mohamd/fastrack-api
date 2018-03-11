@@ -1,6 +1,6 @@
 app.get('/api/subjects',function(req,res){
   var university_id = req.query.id;
-    con.query('SELECT id, name FROM subjects where sector_id= ? ORDER BY id ASC ',[university_id], function(err,data) {
+    con.query('SELECT id, name FROM subjects where sector_id= ? ORDER BY name ',[university_id], function(err,data) {
         if(!err) {
             res.send(data);
         }
@@ -13,7 +13,7 @@ app.get('/api/subjects',function(req,res){
 
 app.get('/api/sectors',function(req,res){
   var university_id = req.query.id;
-    con.query('SELECT id, name FROM sectors where university_id= ? ORDER BY id ASC ',[university_id], function(err,data) {
+    con.query('SELECT id, name FROM sectors where university_id= ? ORDER BY name ',[university_id], function(err,data) {
         if(!err) {
             res.send(data);
         }
