@@ -9,89 +9,39 @@
 }
 </style>
 <div class="container">
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 
 
 
- $(document).ready(function(){
 
-var table = $('#datatable-buttons').DataTable();
 
-   $(".paid-users").click(function(){
-    table.search('نعم').draw();
-   })
-   $(".all-users").click(function(){
-     table.search('').draw();
-   })
-   $(".normal-users").click(function(){
-     table.search('لا').draw();
-   })
+$(document).ready(function(){
 
-$(".edit").click(function(){
- var id = $(this).attr('id');
- var new_name = prompt('تريد تغيره الى ماذا ؟');
- var what = $(this).attr('what');
- if(new_name != null){
-   $.get('/change-subject',{
-       id,
-       new_name,
-       what
-     },function(data){
-       location.reload();
-     })
-     location.reload();
 
- }
+   $('#username').editable();
+  $(".edit").click(function(){
+   var id = $(this).attr('id');
+   var new_name = prompt('تريد تغيره الى ماذا ؟');
+   var what = $(this).attr('what');
+   if(new_name != null){
+     $.get('/change-subject',{
+         id,
+         new_name,
+         what
+       },function(data){
+         window.location = '/subjects';
+       })
+
+   }
+  })
 })
 
-$("select").change(function (){
-    var new_parent_cat = $(this).find("option:checked").val();
-    var id = $(this).attr('id');
-
-    $.get('/change-parent-category',{
-        id,
-        new_parent_cat
-      },function(data){
-        window.location = '/subjects';
-      })
-});
-
-   $(".pay").click(function(){
-     var months = prompt('ما عدد الاشهر التى تريد اضافتها ؟');
-     var user_id = $(this).attr('user');
-     $.get('/pay-per-month',{
-       user_id,
-       months
-     },function(data){
-       window.location = '/users';
-     })
-   });
 
 
 
-   $("#admin").click(function(){
-     var user_id = $(this).attr('user');
-     $.get('/make-admin',{
-       user_id
-     },function(data){
-       window.location = '/users';
-     })
-   })
-
-
-
-     $("#pay2").click(function(){
-     var months = prompt('ما عدد الاشهر التى تريد حذفها ؟');
-     var user_id = $(this).attr('user');
-     $.get('/pay-per-month',{
-       user_id,
-       months: -months
-     },function(data){
-       window.location = '/users';
-     })
-   });
-
-  })
 
 </script>
 <!-- Table -->
@@ -150,7 +100,7 @@ $("select").change(function (){
 
                       <% sub_categories.forEach(function(subcat){ %>
                         <tr>
-                          <td><%= subcat['name']  %> <i id="<%= subcat['id']  %>" class="fa edit fa-pencil-square-o" aria-hidden="true" what="name"></i></td>
+                          <td><%= subcat['name']  %> <i id="<%= subcat['id']  %>" class="fa edit fa-pencil-square-o" aria-hidden="true" what="name"></i><a href="#" id="username" data-type="text" data-pk="1" data-url="/post" data-title="Enter username">superuser</a></td>
 
                           <td>
                             <select class="form-control" id="<%= subcat['id'] %>" class="select_parent_category">
@@ -165,26 +115,57 @@ $("select").change(function (){
 
                           <td><a style="color:red" href="/delete-subcategory?id=<%= subcat['id'] %>" onclick="return confirm('هل تريد حذف هذا القسم حقا !');">X</a></td>
 
-
 <script>
 
-$("select").change(function (){
-    var new_parent_cat = $(this).find("option:checked").val();
-    var id = $(this).attr('id');
+$(document).ready(function(){
+     $('#username').editable();
+  $("select").change(function (){
+      var new_parent_cat = $(this).find("option:checked").val();
+      var id = $(this).attr('id');
 
-    $.get('/change-parent-category',{
-        id,
-        new_parent_cat
-      },function(data){
-        window.location = '/subjects';
-      })
-});
+      $.get('/change-parent-category',{
+          id,
+          new_parent_cat
+        },function(data){
+          window.location = '/subjects';
+        })
+  });
+})
+
+
 
 </script>
+
 
                            </tr>
                      <% }); %>
 
+                     <script>
+
+
+
+                     $(".edit").click(function(){
+                       console.log('clicked');
+                      var id = $(this).attr('id');
+
+                        var new_name = prompt('تريد تغيره الى ماذا ؟');
+
+                      var what = $(this).attr('what');
+                      if(new_name != null){
+                        $.get('/change-subject',{
+                            id,
+                            new_name,
+                            what
+                          },function(data){
+                            window.location = '/subjects';
+
+                          })
+
+                      }
+
+                     })
+
+                     </script>
                     </tbody>
                   </table>
                 </div>
