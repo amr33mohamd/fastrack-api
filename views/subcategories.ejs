@@ -100,7 +100,7 @@ $(document).ready(function(){
 
                       <% sub_categories.forEach(function(subcat){ %>
                         <tr>
-                          <td><%= subcat['name']  %> <i id="<%= subcat['id']  %>" class="fa edit fa-pencil-square-o" aria-hidden="true" what="name"></i><a href="#" id="username" data-type="text" data-pk="1" data-url="/post" data-title="Enter username">superuser</a></td>
+                          <td><%= subcat['name']  %> <i id="<%= subcat['id']  %>" class="fa edit fa-pencil-square-o" aria-hidden="true" what="name"></i></td>
 
                           <td>
                             <select class="form-control" id="<%= subcat['id'] %>" class="select_parent_category">
