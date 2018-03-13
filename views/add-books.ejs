@@ -155,8 +155,10 @@ $(".edit").click(function(){
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
                          <select id="category" class="form-control col-md-7 col-xs-12" name="subject_id">
-                           <%  sub_categories.forEach(function(subcategories){ %>
-                           <option value="<%= subcategories['id'] %>"><%= subcategories['name'] %>--><%= categories[subcategories['university_id']-1].name %></option>
+                           <%  sub_categories.forEach(function(subcategories){
+                             var a = sectors.find(o => o.id === subcategories['sector_id']);
+                              %>
+                           <option value="<%= subcategories['id'] %>"><%= subcategories['name'] %>--><%= categories[a.university_id-1].name %></option>
                            <% }) %>
                          </select>
                      </div>

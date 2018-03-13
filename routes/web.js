@@ -385,8 +385,10 @@ app.get('/add-books', function(req, res) {
 	session.startSession(req, res, function() {
 		sql.select('universities', '1', '1', function(categories) {
 			sql.select('subjects', '1', '1', function(sub_categories) {
+				sql.select('sectors', '1', '1', function(sectors) {
 				sql.select('notes', '1', '1', function(data) {
-					res.render('add-books', { categories, sub_categories, data });
+					res.render('add-books', { categories, sub_categories, data,sectors });
+				});
 				});
 			});
 		});
