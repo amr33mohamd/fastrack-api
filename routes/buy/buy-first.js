@@ -3,7 +3,7 @@ app.get('/buy-first',function(req,res){
 
   sql.select('notes','id',note_id,function(note){
     const fetch = require('node-fetch');
-          var url = 'https://familytreee.000webhostapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id;
+          var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id;
           console.log(url);
           fetch(url)
     .then(res => res.json())
