@@ -1,4 +1,4 @@
-<%- include('parts/header', {page: 'books'}); %>
+﻿<%- include('parts/header', {page: 'books'}); %>
 <%- include('parts/slide_bar'); %>
 <style type="text/css">
  .edit:hover {
@@ -175,7 +175,7 @@ $("select").on('change',function(){
                             </select>
                           </td>
                           <td><%= user['downloads']  %></td>
-                          <td><input type="text" value="http://159.89.95.28:5050/buy-first?id=<%= user['id']  %>"/></td>
+                          <td><input type="text" class="form-control" value="http://www.fastrack.xyz:5050/buy-first?id=<%= user['id']  %>"/></td>
                           <td><a style="color:red" href="/delete-book?id=<%= user['id'] %>" onclick="return confirm('هل تريد حذف هذا الكتاب حقا !');">X</a></td>
                           <td><a href="/edit-book-images?id=<%= user['id'] %>"><i  class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                            </tr>
