@@ -19,9 +19,19 @@
 
 
 $(document).ready(function(){
+  $("select").change(function (){
+      var new_parent_cat = $(this).find("option:checked").val();
+      var id = $(this).attr('id');
+
+      $.get('/change-parent-category',{
+          id,
+          new_parent_cat
+        },function(data){
+          window.location = '/subjects';
+        })
+  });
 
 
-   $('#username').editable();
   $(".edit").click(function(){
    var id = $(this).attr('id');
    var new_name = prompt('تريد تغيره الى ماذا ؟');
@@ -118,7 +128,6 @@ $(document).ready(function(){
 <script>
 
 $(document).ready(function(){
-     $('#username').editable();
   $("select").change(function (){
       var new_parent_cat = $(this).find("option:checked").val();
       var id = $(this).attr('id');
