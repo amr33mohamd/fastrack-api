@@ -3,6 +3,11 @@ app.get('/buy-first',function(req,res){
 
   sql.select('notes','id',note_id,function(note){
     const fetch = require('node-fetch');
+    if(note[0].price == 0){
+      new_url = 'http://'+req.headers.host+'/buy-second?note_id='+note[0].id;
+      res.redirect(new_url);
+    }
+    else{
           var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id;
           console.log(url);
           fetch(url)
@@ -15,10 +20,8 @@ app.get('/buy-first',function(req,res){
             //   book:note[0],
             //   url: new_url
             // });
-
-
-
         })
+      }
 
 
 })
