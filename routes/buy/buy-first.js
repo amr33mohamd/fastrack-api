@@ -15,7 +15,7 @@ app.get('/buy-first',function(req,res){
     .then(res => res.json())
     .then((json) =>{
 
-           var new_url =   "https://test.myfatoorah.com/pg/payment_invoice.aspx?id="+json.id
+           var new_url =   "https://www.myfatoorah.com/pg/PayGatewayServiceV2.asmx?id="+json.id
           res.redirect(new_url)
             // res.render('buy-first',{
             //   book:note[0],
