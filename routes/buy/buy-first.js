@@ -1,6 +1,5 @@
 app.get('/buy-first',function(req,res){
   var note_id = req.param('id');
-
   sql.select('notes','id',note_id,function(note){
     const fetch = require('node-fetch');
     if(note[0].price == 0){
@@ -8,13 +7,15 @@ app.get('/buy-first',function(req,res){
       res.redirect(new_url);
     }
     else{
-          var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id;
+      var deviceId = req.param('deviceId')
+
+          var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId;
           console.log(url);
           fetch(url)
     .then(res => res.json())
     .then((json) =>{
 
-           var new_url =   "https://myfatoorah.com/pg/payment_invoice.aspx?id="+json.id
+           var new_url =   "https://test.myfatoorah.com/pg/payment_invoice.aspx?id="+json.id
           res.redirect(new_url)
             // res.render('buy-first',{
             //   book:note[0],

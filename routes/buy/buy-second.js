@@ -1,5 +1,7 @@
 app.get('/buy-second',function(req,res){
   var id = req.param('note_id').split("?")[0];;
+  var id = id.split(",")[0];
+  var deviceId = id.split(",")[1];
 
 
   sql.select('notes','id',id,function(book) {
@@ -9,7 +11,9 @@ app.get('/buy-second',function(req,res){
         }
         else{
           console.log(book);
+          con.query("insert into ownedNotes(note_id,deviceId) values('?','?')",[id,deviceId],function(err,ress){
           res.redirect(book[0].link);
+        });
         }
       })
   })
