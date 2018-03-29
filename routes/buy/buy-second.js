@@ -10,11 +10,21 @@ app.get('/buy-second',function(req,res){
           res.send(err);
         }
         else{
-          console.log(book[0].link);
+
           con.query("insert into ownedNotes(note_id,deviceId) values(?,?)",[id,deviceId],function(err,resss){
-          res.send(deviceId);
+          res.redirect(book[0].link);
           });
         }
       })
   })
+})
+
+
+app.get('/view-note',function(req,res){
+  var id = req.param('id');
+
+
+  sql.select('notes','id',id,function(book) {
+          res.redirect(book[0].link);
+      })
 })
