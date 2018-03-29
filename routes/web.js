@@ -413,7 +413,7 @@ app.get('/view-note',function(req,res){
 		var filePath = filePath.replace('.pdf','');
 		var note_name = filePath;
 		var dir = __dirname;
-		var dir = dir.replace('\\routes','/');
+		var dir = dir.replace('/routes','/');
 		var images = [];
 		console.log(dir+'books-images'+filePath);
 		fs.readdir(dir+'books-images'+filePath, (err, files) => {
