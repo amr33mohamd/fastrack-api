@@ -402,7 +402,24 @@ app.get('/add-university', function(req, res) {
 })
 });
 
+app.get('/view-note',function(req,res){
+  var id = req.param('id');
+	fs = require('fs'),
 
+  sql.select('notes','id',id,function(book) {
+		var filePath = book[0].link;
+		var filePath = filePath.replace('http://159.89.95.28:5050/','');
+		var dir = __dirname;
+		var dir = dir.replace('\\routes','/');
+		console.log(dir+filePath);
+	 fs.readFile(dir + filePath, function (err,data){
+			 res.contentType("application/pdf");
+			 res.send(data);
+	 });
+
+
+      })
+})
 app.get('/pdf2image',function(req,res){
 	var fs      = require('fs');
 var path    = require('path');
