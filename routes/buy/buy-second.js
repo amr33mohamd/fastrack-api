@@ -12,7 +12,7 @@ app.get('/buy-second',function(req,res){
         else{
 
           con.query("insert into ownedNotes(note_id,deviceId) values(?,?)",[id,deviceId],function(err,resss){
-          res.redirect(book[0].link);
+          res.redirect('http://example.com');
           });
         }
       })
