@@ -410,7 +410,7 @@ app.get('/view-note',function(req,res){
 		var filePath = book[0].link;
 		var filePath = filePath.replace('http://159.89.95.28:5050/','');
 		var dir = __dirname;
-		var dir = dir.replace('\\routes','/');
+		var dir = dir.replace('/routes','/');
 		console.log(dir+filePath);
 	 fs.readFile(dir + filePath, function (err,data){
 			 res.contentType("application/pdf");
