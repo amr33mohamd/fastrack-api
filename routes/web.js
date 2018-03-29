@@ -408,14 +408,31 @@ app.get('/view-note',function(req,res){
 
   sql.select('notes','id',id,function(book) {
 		var filePath = book[0].link;
-		var filePath = filePath.replace('http://159.89.95.28:5050/','');
+		var filePath = filePath.replace('http://159.89.95.28:5050/books','');
+		var domain = 'http://' + req.get('host');
+		var filePath = filePath.replace('.pdf','');
+		var note_name = filePath;
 		var dir = __dirname;
-		var dir = dir.replace('/routes','/');
-		console.log(dir+filePath);
-	 fs.readFile(dir + filePath, function (err,data){
-			 res.contentType("application/pdf");
-			 res.send(data);
-	 });
+		var dir = dir.replace('\\routes','/');
+		var images = [];
+		console.log(dir+'books-images'+filePath);
+		fs.readdir(dir+'books-images'+filePath, (err, files) => {
+			files_count = files.length+1;
+			console.log(files_count)
+			for(let i = 1;i <files_count;i++){
+				images.push({ source: { uri: domain + '/books-images'+note_name+ ''+ note_name+'-'+i+'.jpg' } });
+				if(files_count-1 == i){
+					res.send(images);
+				}
+			}
+		});
+
+
+
+	 // fs.readFile(dir + filePath, function (err,data){
+		// 	 res.contentType("application/pdf");
+		// 	 res.send(data);
+	 // });
 
 
       })
