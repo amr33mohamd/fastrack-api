@@ -408,7 +408,7 @@ app.get('/pdf2image',function(req,res){
 var path    = require('path');
 var pdf2img = require('pdf2img');
 
-var input   = __dirname + '/books/0.60416769657951571.pdf';
+var input   = '/home/fastrack-api/' + '/books/0.60416769657951571.pdf';
 console.log(input);
 pdf2img.setOptions({
   type: 'png',                                // png or jpg, default jpg
