@@ -402,6 +402,19 @@ app.get('/add-university', function(req, res) {
 })
 });
 
+
+app.get('/free-view-note',function(req,res){
+
+	var id = req.param('id');
+
+sql.select('notes','id',id,function(book) {
+
+res.redirect(book[0].link);
+});
+
+
+});
+
 app.get('/view-note',function(req,res){
   var id = req.param('id');
 	fs = require('fs'),
