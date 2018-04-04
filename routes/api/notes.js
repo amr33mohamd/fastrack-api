@@ -29,9 +29,16 @@ app.get('/api/mynotes',function(req,res){
 
 app.get('/api/verifynumber',function(req,res){
   var phone = req.query.phone;
-  con.query('SELECT * FROM ownedNotes where deviceId= ? ',[phone], function(err,data) {
+  con.query('SELECT * FROM users where number= ? and status = ?',[phone,1], function(err,data) {
     if(data.length == 0){
-      res.json({response:1});
+      con.query('insert into users(number,status) values(?,?)',[phone,1],function(err,response){
+        if(err){
+          res.json({response:err})
+        }
+        else{
+          res.json({response:1});
+        }
+      })
     }
     else {
       res.json({response:0});
