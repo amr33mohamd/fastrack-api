@@ -406,10 +406,13 @@ app.get('/add-university', function(req, res) {
 app.get('/free-view-note',function(req,res){
 
 	var id = req.param('id');
+	var deviceid = req.param('deviceid');
 
 sql.select('notes','id',id,function(book) {
 
-res.redirect(book[0].link);
+	con.query("insert into ownedNotes(note_id,deviceId) values(?,?)",[id,deviceid],function(err,resss){
+	res.json({response:1})
+	});
 });
 
 
