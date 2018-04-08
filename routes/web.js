@@ -528,7 +528,7 @@ app.post('/add_book', function(req, res) {
 	if (pdf == null) {
 		var pdf_link = '';
 	} else {
-		var pdf_link = domain + '/books/' + random_num + 1 + '.pdf';
+		var pdf_link = domain + '/new-books/' + random_num + 1 + '.pdf';
 	}
 
 	con.query(
