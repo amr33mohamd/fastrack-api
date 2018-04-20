@@ -10,7 +10,7 @@ moment().format('L');
   app.use('/public', express.static('public'));
   app.use('/images', express.static('images'));
   app.use('/books', express.static('books'));
-  app.use('/books-images', express.static('books-images'));
+  app.use('/booksimages', express.static('books-images'));
 
    fileUpload = require('express-fileupload');
    var bodyParser=  require("body-parser");
