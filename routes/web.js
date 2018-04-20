@@ -540,7 +540,7 @@ app.post('/add_book', function(req, res) {
 				}
 				pdfImage.convertPage(i).then(function (imagePath) {
 
-					fs.existsSync("books-images/"+random_num+1+"/slide-i.png") // => true
+					fs.existsSync("books-images/"+random_num+1+"/slide-i.jpg") // => true
 				});
 			}
 
