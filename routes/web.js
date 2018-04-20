@@ -531,12 +531,15 @@ app.post('/add_book', function(req, res) {
 
 			if (!fs.existsSync(dir)){
 			    if(fs.mkdirSync(dir)){
-						//	for(i = pages_num-1;i>=0;i--){
+							for(i = pages_num-1;i>=0;i--){
 								pdfImage.convertPage(0).then(function (imagePath) {
 									// 0-th page (first page) of the slide.pdf is available as slide-0.png
 									fs.existsSync("books-images/slide-0.png") // => true
+									fs.existsSync("books/slide-0.png") // => true
+									fs.existsSync("public/slide-0.png") // => true
+
 								});
-							//}
+							}
 					}
 			}
 
