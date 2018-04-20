@@ -504,7 +504,7 @@ app.post('/add_university', function(req, res) {
 app.post('/add_book', function(req, res) {
 	var image = req.files.image;
 	var subject_id = req.body.subject_id;
-
+	var pages_num = req.body.pages_num;
 	var name = req.body.name;
 	var descc = req.body.descc;
 
@@ -520,7 +520,28 @@ app.post('/add_book', function(req, res) {
 	image.mv('images/' + random_num + '.jpg', function(err) {
 
 		if (pdf != null) {
-			pdf.mv('books/' + random_num + 1 + '.pdf', function(err) {});
+
+			pdf.mv('books/' + random_num + 1 + '.pdf', function(err) {
+
+				var PDFImage = require("pdf-image").PDFImage;
+
+			var pdfImage = new PDFImage('books/' + random_num + 1 + '.pdf');
+			var fs = require('fs');
+			var dir = '/books-images/'+(random_num+1);
+
+			if (!fs.existsSync(dir)){
+			    fs.mkdirSync(dir);
+			}
+			for(let i in pages_num){
+				pdfImage.convertPage(i).then(function (imagePath) {
+					// 0-th page (first page) of the slide.pdf is available as slide-0.png
+					fs.existsSync("books/slide-i.png") // => true
+				});
+			}
+
+
+			});
+
 		}
 	});
 
