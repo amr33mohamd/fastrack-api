@@ -552,7 +552,7 @@ app.post('/add_book', function(req, res) {
 	});
 
 	var image_link = 'images/' + random_num + '.jpg';
-	image.mv('images/' + random_num  '.jpg', function(err) {
+	image.mv('images/' + random_num + '.jpg', function(err) {
 
 	});
 	if (pdf == null) {
