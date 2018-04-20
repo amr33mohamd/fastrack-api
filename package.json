@@ -22,6 +22,7 @@
     "node-fetch": "^2.0.0",
     "node-session": "^1.2.1",
     "nodemon": "^1.12.1",
+    "pdf-image": "^1.0.5",
     "pdf2img": "^0.5.0",
     "pdftohtmljs": "^0.4.2",
     "soap": "^0.23.0",

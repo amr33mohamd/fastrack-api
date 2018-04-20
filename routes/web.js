@@ -708,7 +708,17 @@ app.post('/add_screen', function(req, res) {
 		);
 	});
 });
+app.get('/try-pdf',function(req,res){
 
+	var PDFImage = require("pdf-image").PDFImage;
+
+var pdfImage = new PDFImage("books/0.0084491886138309271.pdf");
+pdfImage.convertPage(0).then(function (imagePath) {
+  // 0-th page (first page) of the slide.pdf is available as slide-0.png
+  fs.existsSync("books/slide-0.png") // => true
+});
+
+})
 app.post('/change-pdf', function(req, res) {
 	var random_num = Math.random();
 	var book_id = req.body.book_id;
