@@ -552,9 +552,7 @@ app.post('/add_book', function(req, res) {
 	});
 
 	var image_link = 'images/' + random_num + '.jpg';
-	image.mv('images/' + random_num + '.jpg', function(err) {
 
-	});
 	if (pdf == null) {
 		var pdf_link = '';
 	} else {
@@ -566,7 +564,7 @@ app.post('/add_book', function(req, res) {
 		[
 			name,
 
-			domain + '/images/' + random_num + '.jpg',
+			domain + '/books-images/' + random_num + 1 +'/'+ random_num + 1 +'-0.png',
 			descc,
 			pdf_link,
 			price,
@@ -578,47 +576,45 @@ app.post('/add_book', function(req, res) {
 			} else {
 				var inserted_id = ress.insertId;
 				if (shot1 != null) {
-					shot1.mv('images/' + random_num + 2 + '.jpg', function(err) {
+
+
 
 						con.query(
 							'insert into images(image,note_id) values(?,?)',
-							[domain + '/images/' + random_num + 2 + '.jpg', inserted_id],
+							[domain + '/books-images/' + random_num + 1 +'/'+ random_num + 1 +'-1.png', inserted_id],
 							function(err, resss) {}
 						);
-					});
+
 				}
 
 				if (shot2 != null) {
-					shot2.mv('images/' + random_num + 3 + '.jpg', function(err) {
 
 						con.query(
 							'insert into images(image,note_id) values(?,?)',
-							[domain + '/images/' + random_num + 3 + '.jpg', inserted_id],
+							[domain + '/books-images/' + random_num + 1 +'/'+ random_num + 1 +'-2.png', inserted_id],
 							function(err, aresss) {}
 						);
-					});
+
 				}
 
 				if (shot3 != null) {
-					shot3.mv('images/' + random_num + 4 + '.jpg', function(err) {
 
 						con.query(
 							'insert into images(image,note_id) values(?,?)',
-							[domain + '/images/' + random_num + 4 + '.jpg', inserted_id],
+							[domain + '/books-images/' + random_num + 1 +'/'+ random_num + 1 +'-3.png', inserted_id],
 							function(err, bresss) {}
 						);
-					});
+
 				}
 
 				if (shot4 != null) {
-					shot4.mv('images/' + random_num + 5 + '.jpg', function(err) {
 
 						con.query(
 							'insert into images(image,note_id) values(?,?)',
-							[domain + '/images/' + random_num + 5 + '.jpg', inserted_id],
+							[domain + '/books-images/' + random_num + 1 +'/'+ random_num + 1 +'-4.png', inserted_id],
 							function(err, dbresss) {}
 						);
-					});
+
 				}
 				res.redirect('/add-books');
 			}
