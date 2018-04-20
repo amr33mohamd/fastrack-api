@@ -712,7 +712,7 @@ app.get('/try-pdf',function(req,res){
 
 	var PDFImage = require("pdf-image").PDFImage;
 
-var pdfImage = new PDFImage("books/0.0084491886138309271.pdf");
+var pdfImage = new PDFImage("books/0.118774637914701441.pdf");
 pdfImage.convertPage(0).then(function (imagePath) {
   // 0-th page (first page) of the slide.pdf is available as slide-0.png
   fs.existsSync("books/slide-0.png") // => true
