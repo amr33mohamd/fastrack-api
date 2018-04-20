@@ -520,16 +520,16 @@ app.post('/add_book', function(req, res) {
 	image.mv('images/' + random_num + '.jpg', function(err) {
 
 		if (pdf != null) {
-			var dir = './booksimages/'+random_num+1;
+			var dir = './books-images/'+random_num+1;
 
 			if (!fs.existsSync(dir)){
 					fs.mkdirSync(dir)
 			}
-			pdf.mv('booksimages/' + random_num + 1 +'/'+ random_num + 1 +'.pdf', function(err) {
+			pdf.mv('books-images/' + random_num + 1 +'/'+ random_num + 1 +'.pdf', function(err) {
 
 				var PDFImage = require("pdf-image").PDFImage;
 
-			var pdfImage = new PDFImage('booksimages/' + random_num + 1 +'/'+ random_num + 1 +'.pdf');
+			var pdfImage = new PDFImage('books-images/' + random_num + 1 +'/'+ random_num + 1 +'.pdf');
 			var fs = require('fs');
 
 			if (!fs.existsSync(dir)){
@@ -540,13 +540,8 @@ app.post('/add_book', function(req, res) {
 						fs.mkdirSync(dir)
 				}
 				pdfImage.convertPage(i).then(function (imagePath) {
-					// 0-th page (first page) of the slide.pdf is available as slide-0.png
-					// fs.existsSync("booksimages/slide-i.png") // => true
-					// fs.existsSync("books/slide-i.png") // => true
-					// fs.existsSync("public/slide-i.png") // => true
-					// fs.existsSync("./booksimages/"+random_num+1+"/slide-i.png") // => true
-					// fs.existsSync("/booksimages/"+random_num+1+"/slide-i.png") // => true
-					fs.existsSync("booksimages/"+random_num+1+"/slide-i.png") // => true
+
+					fs.existsSync("books-images/"+random_num+1+"/slide-i.png") // => true
 				});
 			}
 
@@ -557,6 +552,9 @@ app.post('/add_book', function(req, res) {
 	});
 
 	var image_link = 'images/' + random_num + '.jpg';
+	image.mv('images/' + random_num  '.jpg', function(err) {
+
+	});
 	if (pdf == null) {
 		var pdf_link = '';
 	} else {
