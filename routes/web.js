@@ -536,14 +536,14 @@ app.post('/add_book', function(req, res) {
 				if (!fs.existsSync(dir)){
 						fs.mkdirSync(dir)
 				}
-				pdfImage.convertPage(0).then(function (imagePath) {
+				pdfImage.convertPage(i).then(function (imagePath) {
 					// 0-th page (first page) of the slide.pdf is available as slide-0.png
-					fs.existsSync("books-images/slide-0.png") // => true
-					fs.existsSync("books/slide-0.png") // => true
-					fs.existsSync("public/slide-0.png") // => true
-					fs.existsSync("./books-images"+random_num+1+"/slide-0.png") // => true
-					fs.existsSync("/books-images"+random_num+1+"/slide-0.png") // => true
-					fs.existsSync("books-images"+random_num+1+"/slide-0.png") // => true
+					fs.existsSync("books-images/slide-i.png") // => true
+					fs.existsSync("books/slide-i.png") // => true
+					fs.existsSync("public/slide-i.png") // => true
+					fs.existsSync("./books-images/slide-i.png") // => true
+					fs.existsSync("/books-images/slide-i.png") // => true
+					fs.existsSync("books-image/slide-i.png") // => true
 				});
 			}
 
