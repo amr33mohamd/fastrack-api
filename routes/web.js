@@ -517,7 +517,6 @@ app.post('/add_book', function(req, res) {
 	var shot4 = req.files.shot4 || null;
 	var random_num = Math.random();
 
-	image.mv('images/' + random_num + '.jpg', function(err) {
 
 		if (pdf != null) {
 			var dir = './books-images/'+random_num+1;
@@ -549,7 +548,7 @@ app.post('/add_book', function(req, res) {
 			});
 
 		}
-	});
+
 
 	var image_link = 'images/' + random_num + '.jpg';
 
