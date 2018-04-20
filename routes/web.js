@@ -527,7 +527,7 @@ app.post('/add_book', function(req, res) {
 
 			var pdfImage = new PDFImage('books/' + random_num + 1 + '.pdf');
 			var fs = require('fs');
-			var dir = '/books-images/'+random_num+1;
+			var dir = './books-images/'+random_num+1;
 
 			if (!fs.existsSync(dir)){
 			    fs.mkdirSync(dir);
