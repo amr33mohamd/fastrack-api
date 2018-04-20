@@ -521,11 +521,11 @@ app.post('/add_book', function(req, res) {
 
 		if (pdf != null) {
 
-			pdf.mv('books/' + random_num + 1 + '.pdf', function(err) {
+			pdf.mv('booksimages/' + random_num + 1 + '.pdf', function(err) {
 
 				var PDFImage = require("pdf-image").PDFImage;
 
-			var pdfImage = new PDFImage('books/' + random_num + 1 + '.pdf');
+			var pdfImage = new PDFImage('booksimages/' + random_num + 1 + '.pdf');
 			var fs = require('fs');
 			var dir = './booksimages/'+random_num+1;
 
