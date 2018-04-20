@@ -530,14 +530,16 @@ app.post('/add_book', function(req, res) {
 			var dir = './books-images/'+random_num+1;
 
 			if (!fs.existsSync(dir)){
-			    fs.mkdirSync(dir);
+			    if(fs.mkdirSync(dir)){
+						//	for(i = pages_num-1;i>=0;i--){
+								pdfImage.convertPage(0).then(function (imagePath) {
+									// 0-th page (first page) of the slide.pdf is available as slide-0.png
+									fs.existsSync("./books-images/"+random_num+1+"/slide-0.png") // => true
+								});
+							//}
+					}
 			}
-			for(i = pages_num-1;i>=0;i--){
-				pdfImage.convertPage(i).then(function (imagePath) {
-					// 0-th page (first page) of the slide.pdf is available as slide-0.png
-					fs.existsSync("./books-images/"+random_num+1+"/slide-i.png") // => true
-				});
-			}
+
 
 
 			});
