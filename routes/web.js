@@ -436,7 +436,12 @@ app.get('/view-note',function(req,res){
 			files_count = files.length+1;
 			console.log(files_count)
 			for(let i = 1;i <files_count;i++){
-				images.push({ source: { uri: domain + '/books-images'+note_name+ ''+ note_name+'-'+i+'.jpg' } });
+				if(book[0].jpg == 1){
+					images.push({ source: { uri: domain + '/books-images'+note_name+ ''+ note_name+'-'+i+'.jpg' } });
+				}
+				else {
+					images.push({ source: { uri: domain + '/books-images'+note_name+ ''+ note_name+'-'+i+'.png' } });
+				}
 				if(files_count-1 == i){
 					res.send(images);
 				}
@@ -559,62 +564,60 @@ app.post('/add_book', function(req, res) {
 	}
 
 	con.query(
-		'insert into notes(name,image,descc,link,price,subject_id) values(?,?,?,?,?,?)',
+		'insert into notes(name,image,descc,link,price,subject_id,jpg) values(?,?,?,?,?,?,?)',
 		[
 			name,
-
 			domain + '/books-images/' + random_num + 1 +'/'+ random_num + 1 +'-0.png',
 			descc,
 			pdf_link,
 			price,
-			subject_id
+			subject_id,
+			0
 		],
 		function(err, ress) {
 			if (err) {
 				res.send(err);
 			} else {
 				var inserted_id = ress.insertId;
-				if (shot1 != null) {
-
-
-
+				//first shot ---->
 						con.query(
 							'insert into images(image,note_id) values(?,?)',
 							[domain + '/books-images/' + random_num + 1 +'/'+ random_num + 1 +'-1.png', inserted_id],
-							function(err, resss) {}
+							function(aerr, resss) {
+								if(aerr){
+									res.send(aerr);
+								}
+							}
 						);
 
-				}
 
-				if (shot2 != null) {
 
+//second shot ---->
 						con.query(
 							'insert into images(image,note_id) values(?,?)',
 							[domain + '/books-images/' + random_num + 1 +'/'+ random_num + 1 +'-2.png', inserted_id],
 							function(err, aresss) {}
 						);
 
-				}
 
-				if (shot3 != null) {
 
+//third shot ---->
 						con.query(
 							'insert into images(image,note_id) values(?,?)',
 							[domain + '/books-images/' + random_num + 1 +'/'+ random_num + 1 +'-3.png', inserted_id],
 							function(err, bresss) {}
 						);
 
-				}
 
-				if (shot4 != null) {
 
+//forth shot ---->
 						con.query(
 							'insert into images(image,note_id) values(?,?)',
 							[domain + '/books-images/' + random_num + 1 +'/'+ random_num + 1 +'-4.png', inserted_id],
 							function(err, dbresss) {}
 						);
 
-				}
+
 				res.redirect('/add-books');
 			}
 		}
