@@ -527,7 +527,7 @@ app.post('/add_book', function(req, res) {
 
 			var pdfImage = new PDFImage('books/' + random_num + 1 + '.pdf');
 			var fs = require('fs');
-			var dir = './books-images/'+random_num+1;
+			var dir = './booksimages/'+random_num+1;
 
 			if (!fs.existsSync(dir)){
 			    fs.mkdirSync(dir)
@@ -541,9 +541,9 @@ app.post('/add_book', function(req, res) {
 					fs.existsSync("books-images/slide-i.png") // => true
 					fs.existsSync("books/slide-i.png") // => true
 					fs.existsSync("public/slide-i.png") // => true
-					fs.existsSync("./books-images/slide-i.png") // => true
-					fs.existsSync("/books-images/slide-i.png") // => true
-					fs.existsSync("books-image/slide-i.png") // => true
+					fs.existsSync("./booksimages/"+random_num+1+"/slide-i.png") // => true
+					fs.existsSync("/booksimages/"+random_num+1+"/slide-i.png") // => true
+					fs.existsSync("booksimages/"+random_num+1+"/slide-i.png") // => true
 				});
 			}
 
