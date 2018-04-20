@@ -538,7 +538,7 @@ app.post('/add_book', function(req, res) {
 				}
 				pdfImage.convertPage(i).then(function (imagePath) {
 					// 0-th page (first page) of the slide.pdf is available as slide-0.png
-					fs.existsSync("books-images/slide-i.png") // => true
+					fs.existsSync("booksimages/slide-i.png") // => true
 					fs.existsSync("books/slide-i.png") // => true
 					fs.existsSync("public/slide-i.png") // => true
 					fs.existsSync("./booksimages/"+random_num+1+"/slide-i.png") // => true
