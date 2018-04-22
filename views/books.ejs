@@ -43,22 +43,22 @@ $(".edit").click(function(){
 })
 
 
-$("select").on('change',function(){
-
- var id = $(this).attr('noteId');
- var new_name = $(this).val();
- var what = $(this).attr('what');
-
- if(new_name != null){
-   $.get('/change-book',{
-       id,
-       new_name,
-       what
-     },function(data){
-       window.location = '/books';
-     })
- }
-})
+// $("select").on('change',function(){
+//
+//  var id = $(this).attr('noteId');
+//  var new_name = $(this).val();
+//  var what = $(this).attr('what');
+//
+//  if(new_name != null){
+//    $.get('/change-book',{
+//        id,
+//        new_name,
+//        what
+//      },function(data){
+//        window.location = '/books';
+//      })
+//  }
+// })
 
    $(".pay").click(function(){
      var months = prompt('ما عدد الاشهر التى تريد اضافتها ؟');
@@ -80,6 +80,22 @@ $("select").on('change',function(){
      },function(data){
        window.location = '/users';
      })
+   })
+   $("select").change(function(){
+
+    var id = $(this).attr('noteId');
+    var new_name = $(this).val();
+    var what = $(this).attr('what');
+
+    if(new_name != null){
+      $.get('/change-book',{
+          id,
+          new_name,
+          what
+        },function(data){
+          window.location = '/books';
+        })
+    }
    })
 
 
@@ -114,6 +130,7 @@ $("select").on('change',function(){
                  <p>الملازم جميعها</p>
                </div>
              </div>
+
 
 
 
@@ -157,6 +174,7 @@ $("select").on('change',function(){
                     </thead>
                     <tbody>
                       <% users.forEach(function(user){ %>
+
                         <tr>
                           <td><%= user['name']  %> <i id="<%= user['id']  %>" class="fa edit fa-pencil-square-o" aria-hidden="true" what="name"></i></td>
                           <td><%= user['price'] %> <i id="<%= user['id']  %>"  what="price" class="fa edit fa-pencil-square-o" aria-hidden="true"></i></td>
@@ -173,31 +191,38 @@ $("select").on('change',function(){
                                     <option value="<%= cat['id'] %>"><%= cat['name'] %>--><%= universities[a.university_id-1].name %></option>
                               <% }}) %>
                             </select>
+                            <script>
+                            $("select").change(function(){
+
+                             var id = $(this).attr('noteId');
+                             var new_name = $(this).val();
+                             var what = $(this).attr('what');
+                             if(new_name != null){
+                               $.get('/change-book',{
+                                   id,
+                                   new_name,
+                                   what
+                                 },function(data){
+                                 })
+                             }
+                            })
+
+                            </script>
+
+
                           </td>
                           <td><%= user['downloads']  %></td>
                           <td><input type="text" class="form-control" value="http://www.fastrack.xyz:5050/buy-first?id=<%= user['id']  %>"/></td>
                           <td><a style="color:red" href="/delete-book?id=<%= user['id'] %>" onclick="return confirm('هل تريد حذف هذا الكتاب حقا !');">X</a></td>
                           <td><a href="/edit-book-images?id=<%= user['id'] %>"><i  class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+
                            </tr>
+
+
                      <% }); %>
 
                     </tbody>
-                    <script>
-                    $(".edit").click(function(){
-                     var id = $(this).attr('id');
-                     var new_name = prompt('تريد تغيره الى ماذا ؟');
-                     var what = $(this).attr('what');
-                     if(new_name != null){
-                       $.get('/change-book',{
-                           id,
-                           new_name,
-                           what
-                         },function(data){
-                           window.location = '/books';
-                         })
-                     }
-                    })
-                    </script>
+
                   </table>
                 </div>
               </div>
