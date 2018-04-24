@@ -1,0 +1,256 @@
+﻿
+
+<%- include('parts/header', {page: 'Users'}); %>
+<%- include('parts/slide_bar'); %>
+<style type="text/css">
+ .edit:hover {
+   cursor: pointer;
+}
+.animated:hover {
+   cursor: pointer;
+}
+</style>
+<div class="container">
+<script type="text/javascript">
+
+
+
+ $(document).ready(function(){
+
+var table = $('#datatable-buttons').DataTable();
+
+   $(".paid-users").click(function(){
+    table.search('نعم').draw();
+   })
+   $(".all-users").click(function(){
+     table.search('').draw();
+   })
+   $(".normal-users").click(function(){
+     table.search('لا').draw();
+   })
+
+$(".edit").click(function(){
+ var id = $(this).attr('id');
+ var new_name = prompt('تريد تغيره الى ماذا ؟');
+ var what = $(this).attr('what');
+ if(new_name != null){
+   $.get('/change',{
+       id,
+       new_name,
+       what
+     },function(data){
+       window.location = '/users';
+     })
+ }
+})
+
+   $(".pay").click(function(){
+     var months = prompt('ما عدد الاشهر التى تريد اضافتها ؟');
+     var user_id = $(this).attr('user');
+     $.get('/pay-per-month',{
+       user_id,
+       months
+     },function(data){
+       window.location = '/users';
+     })
+   });
+
+
+
+   $("#admin").click(function(){
+     var user_id = $(this).attr('user');
+     $.get('/make-admin',{
+       user_id
+     },function(data){
+       window.location = '/users';
+     })
+   })
+
+
+
+     $("#pay2").click(function(){
+     var months = prompt('ما عدد الاشهر التى تريد حذفها ؟');
+     var user_id = $(this).attr('user');
+     $.get('/pay-per-month',{
+       user_id,
+       months: -months
+     },function(data){
+       window.location = '/users';
+     })
+   });
+
+  })
+
+</script>
+<!-- Table -->
+<!-- page content -->
+
+
+<div class="col-md-10 col-sm-9 col-xs-9">
+
+        <a href="/books"> <div style="margin-top:20px;" class="">
+           <div class="row top_tiles">
+             <div class="animated flipInY all-users col-lg-12 col-md-12 col-sm-12 col-xs-12">
+               <div class="tile-stats text-center">
+                 <div class="icon"><i style="padding-top:20px;"  class="fa fa-book"></i></div>
+                 <div class="count"> <%= universities.length %></div>
+                 <h3>عدد الملازم</h3>
+                 <p>
+                  الملازم جميعا</p>
+               </div>
+             </div>
+           </a>
+
+
+
+
+<div class="col-md-12 col-sm-9 col-xs-12">
+                           <div class="x_panel">
+                             <div class="x_title">
+                               <h2>اضف | <small>ملزمه</small></h2>
+                               <ul class="nav navbar-right panel_toolbox">
+
+                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                 </li>
+                               </ul>
+                               <div class="clearfix"></div>
+                             </div>
+                             <div class="x_content">
+
+
+
+
+
+
+                               <div class="accordion" id="accordion">
+                                 <% universities.forEach(function(university){
+                                  %>
+
+  <div class="card">
+    <div class="card-header" id="heading<%= university.id %>">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse<%= university.id %>" aria-expanded="false" aria-controls="collapse<%= university.id %>">
+          <h1 style="color:#000;font-weight:bold;"><%= university.name %></h1>
+        </button>
+      </h5>
+    </div>
+    <div id="collapse<%= university.id %>" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+
+
+<!-- Sectors level -->
+
+<div style="margin-left:30px" class="accordion" id="sectors">
+  <% sectors.forEach(function(sector){
+    if(sector.university_id == university.id){
+   %>
+
+<div class="card">
+<div class="card-header" id="heading<%= sector.id %>">
+<h5 class="mb-0">
+<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#sectors<%= sector.id %>" aria-expanded="false" aria-controls="sectors<%= sector.id %>">
+<h3 style="color:blue;"><%= sector.name %></h3>
+</button>
+</h5>
+</div>
+<div id="sectors<%= sector.id %>" class="collapse" aria-labelledby="headingTwo" data-parent="#sectors">
+<div class="card-body">
+<!-- subjects Level -->
+
+<div style="margin-left:30px" class="accordion" id="subjects">
+  <% subjects.forEach(function(subject){
+    if(subject.sector_id == sector.id){
+   %>
+
+<div class="card">
+<div class="card-header" id="heading<%= subject.id %>">
+<h5 class="mb-0">
+<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#subjects<%= subject.id %>" aria-expanded="false" aria-controls="subjects<%= subject.id %>">
+<h4><%= subject.name %></h4>
+</button>
+</h5>
+</div>
+<div id="subjects<%= subject.id %>" class="collapse" aria-labelledby="headingTwo" data-parent="#subjects">
+<div class="card-body">
+
+
+  <!-- Notes Level -->
+
+  <div style="margin-left:30px" >
+    <% notes.forEach(function(note){
+      if(note.subject_id == subject.id){
+     %>
+
+
+  <h5 class="mb-0">
+  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#notes<%= note.id %>" aria-expanded="false" aria-controls="notes<%= note.id %>">
+  <h5><%= note.name %></h5>
+  </button>
+  </h5>
+
+
+
+  <% }}) %>
+  <!-- Notes subjects -->
+
+</div>
+
+
+
+</div>
+</div>
+</div>
+
+<% }}) %>
+<!-- End subjects -->
+</div>
+</div>
+</div>
+
+<% }}) %>
+
+</div>
+
+
+<!-- EnD Sectors Level-->
+
+      </div>
+    </div>
+  </div>
+
+<% }) %>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             </div>
+                           </div>
+                         </div>
+
+
+
+
+                  </div>
+
+
+
+
+
+
+<%- include('parts/footer'); %>

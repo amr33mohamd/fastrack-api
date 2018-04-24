@@ -395,6 +395,22 @@ app.get('/add-books', function(req, res) {
 	});
 });
 
+
+
+app.get('/tree', function(req, res) {
+	session.startSession(req, res, function() {
+		sql.select('universities', '1', '1', function(universities) {
+			sql.select('subjects', '1', '1', function(subjects) {
+				sql.select('sectors', '1', '1', function(sectors) {
+				sql.select('notes', '1', '1', function(notes) {
+					res.render('tree', { universities, subjects, sectors,notes });
+				});
+				});
+			});
+		});
+	});
+});
+
 app.get('/add-university', function(req, res) {
 	sql.select('universities', '1', '1', function(data) {
 
