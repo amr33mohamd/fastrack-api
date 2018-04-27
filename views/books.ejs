@@ -27,20 +27,20 @@ var table = $('#datatable-buttons').DataTable();
      table.search('لا').draw();
    })
 
-$(".edit").click(function(){
- var id = $(this).attr('id');
- var new_name = prompt('تريد تغيره الى ماذا ؟');
- var what = $(this).attr('what');
- if(new_name != null){
-   $.get('/change-book',{
-       id,
-       new_name,
-       what
-     },function(data){
-       window.location = '/books';
-     })
- }
-})
+// $(".edit").click(function(){
+//  var id = $(this).attr('id');
+//  var new_name = prompt('تريد تغيره الى ماذا ؟');
+//  var what = $(this).attr('what');
+//  if(new_name != null){
+//    $.get('/change-book',{
+//        id,
+//        new_name,
+//        what
+//      },function(data){
+//        window.location = '/books';
+//      })
+//  }
+// })
 
 
 // $("select").on('change',function(){
@@ -207,6 +207,7 @@ $(".edit").click(function(){
                              }
                             })
 
+
                             </script>
 
 
@@ -220,7 +221,29 @@ $(".edit").click(function(){
 
 
                      <% }); %>
+                     <script>
+                     $(".edit").click(function(){
 
+                      var id = $(this).attr('id');
+                      if(clicked == 1){
+
+                      }
+                      else {
+                        var new_name = prompt('تريد تغيره الى ماذا ؟');
+                        var clicked = 1;
+                      }
+                      var what = $(this).attr('what');
+                      if(new_name != null){
+                        $.get('/change-book',{
+                            id,
+                            new_name,
+                            what
+                          },function(data){
+                            window.location = '/books';
+                          })
+                      }
+                     })
+                     </script>
                     </tbody>
 
                   </table>
