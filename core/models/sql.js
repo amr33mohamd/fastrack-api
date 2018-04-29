@@ -1,6 +1,6 @@
 exports.select = function(table,what,that,callback){
 
-    var sql = "SELECT * FROM `"+table+"` WHERE "+what+" = ? order by id ";
+    var sql = "SELECT * FROM `"+table+"` WHERE "+what+" = ? order by name ";
     con.query(sql,[that],function(res,err){
     	if(err){
     		callback(err);

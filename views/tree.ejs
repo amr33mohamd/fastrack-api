@@ -149,7 +149,10 @@ $(".edit").click(function(){
 <div class="card-header" id="heading<%= sector.id %>">
 <h5 class="mb-0">
 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#sectors<%= sector.id %>" aria-expanded="false" aria-controls="sectors<%= sector.id %>">
-<h3 style="color:blue;"><%= sector.name %></h3>
+<h3 style="color:white;background-color: #a76767;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;"><%= sector.name %></h3>
 </button>
 </h5>
 </div>
@@ -166,7 +169,11 @@ $(".edit").click(function(){
 <div class="card-header" id="heading<%= subject.id %>">
 <h5 class="mb-0">
 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#subjects<%= subject.id %>" aria-expanded="false" aria-controls="subjects<%= subject.id %>">
-<h4><%= subject.name %></h4>
+<h4 style="background-color: #594f82;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;"><%= subject.name %></h4>
 </button>
 </h5>
 </div>
@@ -184,9 +191,13 @@ $(".edit").click(function(){
 
   <h5 class="mb-0">
   <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#notes<%= note.id %>" aria-expanded="false" aria-controls="notes<%= note.id %>">
-  <h5><%= note.name %></h5>
+  <h4 style="    background-color: #33b5bb;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;"><%= note.name %></h5>
   </button>
-  </h5>
+</h4>
 
 
 
