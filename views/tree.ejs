@@ -29,20 +29,6 @@ var table = $('#datatable-buttons').DataTable();
      table.search('لا').draw();
    })
 
-$(".edit").click(function(){
- var id = $(this).attr('id');
- var new_name = prompt('تريد تغيره الى ماذا ؟');
- var what = $(this).attr('what');
- if(new_name != null){
-   $.get('/change',{
-       id,
-       new_name,
-       what
-     },function(data){
-       window.location = '/users';
-     })
- }
-})
 
    $(".pay").click(function(){
      var months = prompt('ما عدد الاشهر التى تريد اضافتها ؟');
@@ -79,6 +65,57 @@ $(".edit").click(function(){
      })
    });
 
+  })
+  $(document).ready(function(){
+    $(".edit").click(function(){
+     var id = $(this).attr('id');
+     var type = $(this).attr('type');
+     var new_name = prompt('تريد تغيره الى ماذا ؟');
+     var what = $(this).attr('what');
+     if(type == "university"){
+       if(new_name != null){
+         $.get('/change-university',{
+             id,
+             new_name,
+             what
+           },function(data){
+           })
+       }
+     }
+     else if(type == "sector") {
+       if(new_name != null){
+         $.get('/edit-sector',{
+             id,
+             new_name,
+             what
+           },function(data){
+           })
+
+       }
+     }
+     else if(type == "subject") {
+       if(new_name != null){
+         $.get('/change-subject',{
+             id,
+             new_name,
+             what
+           },function(data){
+           })
+
+       }
+     }
+     else if (type == "note") {
+       if(new_name != null){
+         $.get('/change-book',{
+             id,
+             new_name,
+             what
+           },function(data){
+           })
+       }
+     }
+
+    })
   })
 
 </script>
@@ -130,7 +167,7 @@ $(".edit").click(function(){
     <div class="card-header" id="heading<%= university.id %>">
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse<%= university.id %>" aria-expanded="false" aria-controls="collapse<%= university.id %>">
-          <h1 style="color:#000;font-weight:bold;"><%= university.name %></h1>
+          <h1 style="color:#000;font-weight:bold;"><%= university.name %> <i id="<%= university.id  %>" class="fa edit fa-pencil-square-o" type="university" aria-hidden="true" what="name"></i></h1>
         </button>
       </h5>
     </div>
@@ -149,10 +186,7 @@ $(".edit").click(function(){
 <div class="card-header" id="heading<%= sector.id %>">
 <h5 class="mb-0">
 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#sectors<%= sector.id %>" aria-expanded="false" aria-controls="sectors<%= sector.id %>">
-<h3 style="color:white;background-color: #a76767;
-    text-align: center;
-    border-radius: 10px;
-    padding: 10px;"><%= sector.name %></h3>
+<h3 style="color:white;background-color: #a76767;text-align: center;border-radius: 10px;padding: 10px;"><%= sector.name %><i id="<%= sector.id  %>" class="fa edit fa-pencil-square-o" type="sector" aria-hidden="true" what="name"></i></h3>
 </button>
 </h5>
 </div>
@@ -169,11 +203,7 @@ $(".edit").click(function(){
 <div class="card-header" id="heading<%= subject.id %>">
 <h5 class="mb-0">
 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#subjects<%= subject.id %>" aria-expanded="false" aria-controls="subjects<%= subject.id %>">
-<h4 style="background-color: #594f82;
-    text-align: center;
-    border-radius: 10px;
-    padding: 10px;
-    color: white;"><%= subject.name %></h4>
+<h4 style="background-color: #594f82;text-align: center;border-radius: 10px;padding: 10px;color: white;"><%= subject.name %><i id="<%= subject.id  %>" class="fa edit fa-pencil-square-o" type="subject" aria-hidden="true" what="name"></i></h4>
 </button>
 </h5>
 </div>
@@ -191,11 +221,7 @@ $(".edit").click(function(){
 
   <h5 class="mb-0">
   <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#notes<%= note.id %>" aria-expanded="false" aria-controls="notes<%= note.id %>">
-  <h4 style="    background-color: #33b5bb;
-    text-align: center;
-    border-radius: 10px;
-    padding: 10px;
-    color: white;"><%= note.name %></h5>
+  <h4 style="background-color: #33b5bb;text-align: center;border-radius: 10px;padding: 10px;color: white;"><%= note.name %><i id="<%= note.id  %>" class="fa edit fa-pencil-square-o" type="note" aria-hidden="true" what="name"></i></h5>
   </button>
 </h4>
 
