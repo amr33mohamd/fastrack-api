@@ -525,7 +525,6 @@ app.post('/add_university', function(req, res) {
 app.post('/add_book', function(req, res) {
 	var image = req.files.image;
 	var subject_id = req.body.subject_id;
-	var pages_num = req.body.pages_num;
 	var name = req.body.name;
 	var descc = req.body.descc;
 
@@ -548,6 +547,7 @@ app.post('/add_book', function(req, res) {
 			pdf.mv('books-images/' + random_num + 1 +'/'+ random_num + 1 +'.pdf', function(err) {
 
 				var PDFImage = require("pdf-image").PDFImage;
+				const getPageCount = require('docx-pdf-pagecount');
 
 			var pdfImage = new PDFImage('books-images/' + random_num + 1 +'/'+ random_num + 1 +'.pdf');
 			var fs = require('fs');
@@ -555,16 +555,18 @@ app.post('/add_book', function(req, res) {
 			if (!fs.existsSync(dir)){
 			    fs.mkdirSync(dir)
 			}
-			for(i = pages_num-1;i>=0;i--){
-				if (!fs.existsSync(dir)){
-						fs.mkdirSync(dir)
-				}
-				pdfImage.convertPage(i).then(function (imagePath) {
+			getPageCount('books-images/' + random_num + 1 +'/'+ random_num + 1 +'.pdf')
+			  .then(pages_num => {
+						for(i = pages_num-1;i>=0;i--){
+							if (!fs.existsSync(dir)){
+									fs.mkdirSync(dir)
+							}
+							pdfImage.convertPage(i).then(function (imagePath) {
 
-					fs.existsSync("books-images/"+random_num+1+"/slide-i.jpg") // => true
-				});
-			}
-
+								fs.existsSync("books-images/"+random_num+1+"/slide-i.jpg") // => true
+							});
+						}
+			 })
 
 			});
 
