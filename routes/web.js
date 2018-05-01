@@ -555,8 +555,7 @@ app.post('/add_book', function(req, res) {
 			if (!fs.existsSync(dir)){
 			    fs.mkdirSync(dir)
 			}
-			getPageCount('books-images/' + random_num + 1 +'/'+ random_num + 1 +'.pdf')
-			  .then(pages_num => {
+			getPageCount('books-images/' + random_num + 1 +'/'+ random_num + 1 +'.pdf').then(pages_num => {
 						for(i = pages_num-1;i>=0;i--){
 							if (!fs.existsSync(dir)){
 									fs.mkdirSync(dir)
