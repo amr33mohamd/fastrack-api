@@ -17,6 +17,7 @@ app.get('/api/notes',function(req,res){
           else {
             mynotes.push({
               id:notes[i].id,
+              name:note[i].name,
               description:notes[i].description,
               image:notes[i].image,
               price:notes[i].price,
@@ -105,6 +106,7 @@ app.get('/api/freenotes',function(req,res){
           if(video.length == 0){
             mynotes.push({
               id:notes[i].id,
+              name:notes[i].name,
               description:notes[i].description,
               image:notes[i].image,
               price:notes[i].price,
