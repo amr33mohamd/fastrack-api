@@ -11,6 +11,7 @@ moment().format('L');
   app.use('/images', express.static('images'));
   app.use('/books', express.static('books'));
   app.use('/books-images', express.static('books-images'));
+  app.use('/videos', express.static('videos'));
 
    fileUpload = require('express-fileupload');
    var bodyParser=  require("body-parser");

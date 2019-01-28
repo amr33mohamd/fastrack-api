@@ -142,6 +142,14 @@ app.get('/edit-sector', function(req, res) {
 	});
 });
 
+app.get('/edit-video', function(req, res) {
+	var id = req.param('id');
+	var what = req.param('what');
+	var new_name = req.param('new_name');
+	sql.update('videos', what, new_name, 'id', id, function(data) {
+		res.redirect(data);
+	});
+});
 
 app.get('/subjects', function(req, res) {
 		sql.select('subjects', '1', '1', function(sub_categories) {
@@ -165,6 +173,18 @@ app.get('/sectors', function(req, res) {
 		});
 	});
 });
+
+app.get('/videos', function(req, res) {
+	session.startSession(req, res, function() {
+		sql.select('videos', '1', '1', function(videos) {
+				sql.select('notes', '1', '1', function(notes) {
+				res.render('videos', {  videos,notes });
+
+			});
+		});
+	});
+});
+
 
 app.get('/add-subject', function(req, res) {
 	session.startSession(req, res, function() {
@@ -251,6 +271,22 @@ app.get('/change-sector', function(req, res) {
 		}
 	);
 });
+
+app.get('/change-video', function(req, res) {
+	var id = req.param('id');
+	var new_parent_cat = req.param('new_parent_cat');
+
+	con.query(
+		'update videos set note_id=? where id=?',
+		[new_parent_cat, id],
+		function(err, ress) {
+			if (err) {
+				res.send(err);
+			}
+		}
+	);
+});
+
 app.get('/delete-subcategory', function(req, res) {
 	var cat_id = req.param('id');
 	sql.delete('subjects', 'id', cat_id, function(data) {
@@ -395,6 +431,14 @@ app.get('/add-books', function(req, res) {
 	});
 });
 
+app.get('/add-video', function(req, res) {
+	session.startSession(req, res, function() {
+				sql.select('notes', '1', '1', function(notes) {
+					res.render('add-video', { notes });
+				});
+				});
+});
+
 
 
 app.get('/tree', function(req, res) {
@@ -521,6 +565,31 @@ app.post('/add_university', function(req, res) {
 	);
 });
 
+app.post('/add_video',function(req,res){
+	var name = req.body.name;
+	var price = req.body.price;
+	var bothh = req.body.bothh;
+	var note_id = req.body.note_id;
+	var video = req.files.video;
+	var domain = 'http://' + req.get('host');
+	var random_num = Math.random();
+
+	video.mv('videos/' + random_num + 1 +'.mp4', function(err) {
+		con.query(
+			'insert into videos(name,video,note_id,price,bothh,downloads) values(?,?,?,?,?,0)',
+			[
+				name,
+				domain + '/videos/' + random_num + 1 +'.mp4',
+				note_id,
+				price,
+				bothh,
+			],
+			function(err, ress) {
+				res.redirect('/add-video')
+			})
+		});
+
+})
 
 app.post('/add_book', function(req, res) {
 	var image = req.files.image;
