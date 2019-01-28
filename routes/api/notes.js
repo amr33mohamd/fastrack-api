@@ -45,7 +45,7 @@ app.get('/api/mynotes',function(req,res){
       con.query('SELECT id, name,descc AS `description`,image,price FROM notes where id= ? ',[notes[i].note_id], function(errr,data) {
         mynotes.push(data[0]);
         if(i == notes.length-1){
-          res.send(mynotes);
+          res.json(mynotes);
         }
       })
 
