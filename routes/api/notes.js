@@ -1,12 +1,37 @@
 app.get('/api/notes',function(req,res){
   var subject_id = req.query.id;
-    con.query('SELECT id, name,descc AS `description`,image,price FROM notes where subject_id= ? and price > 0 ORDER BY name ',[subject_id], function(err,data) {
-        if(!err) {
-            res.send(data);
-        }
-        else{
-          res.send(err);
-        }
+  mynotes = [];
+    con.query('SELECT id, name,descc AS `description`,image,price FROM notes where subject_id= ? and price > 0 ORDER BY name ',[subject_id], function(err,notes) {
+      for(let i in notes){
+        con.query('SELECT * FROM videos where note_id= ? ',[notes[i].id], function(errr,video) {
+          if(video.length == 0){
+            mynotes.push({
+              id:notes[i].id,
+              description:notes[i].description,
+              image:notes[i].image,
+              price:notes[i].price,
+              video:0
+            });
+
+          }
+          else {
+            mynotes.push({
+              id:notes[i].id,
+              description:notes[i].description,
+              image:notes[i].image,
+              price:notes[i].price,
+              video:1,
+              video_price:video[0].price,
+              both:video[0].bothh
+            });
+          }
+          if(i == notes.length-1){
+            res.send(mynotes);
+          }
+        })
+
+      }
+
     })
 });
 
@@ -27,9 +52,33 @@ app.get('/api/mynotes',function(req,res){
 
 });
 
+app.get('/api/myvideos',function(req,res){
+  var id = req.query.id;
+  var mynotes = [];
+  con.query('SELECT video_id FROM ownedVideos where deviceId= ?',[id],function(err,notes){
+    con.query('SELECT * FROM videos where id= ?',[notes[0].video_id],function(err,video){
+    for(let i in notes){
+      con.query('SELECT id, name,descc AS `description`,image,price FROM notes where id= ? ',[video[i].note_id], function(errr,data) {
+        mynotes.push({
+          id:video[0].id,
+          name:video[0].name,
+          video:video[0].video,
+          image:data[0].image,
+          description:data[0].description
+        });
+        if(i == notes.length-1){
+          res.send(mynotes);
+        }
+      })
+
+    }
+  })
+});
+
+});
 app.get('/api/verifynumber',function(req,res){
   var phone = req.query.phone;
-  con.query('SELECT * FROM users where number= ? and status = ?',[phone,1], function(err,data) {
+  con.query('SELECT * FROM users where number= ? ',[phone], function(err,data) {
     if(data.length == 0){
       con.query('insert into users(number,status) values(?,?)',[phone,1],function(err,response){
         if(err){
@@ -41,20 +90,45 @@ app.get('/api/verifynumber',function(req,res){
       })
     }
     else {
-      res.json({response:0});
+      res.json({response:1});
     }
   });
 });
 
 app.get('/api/freenotes',function(req,res){
   var subject_id = req.query.id;
-    con.query('SELECT id, name,descc AS `description`,image,price FROM notes where subject_id= ? and price= ? ORDER BY name ',[subject_id,0], function(err,data) {
-        if(!err) {
-            res.send(data);
-        }
-        else{
-          res.send(err);
-        }
+  mynotes = [];
+
+    con.query('SELECT id, name,descc AS `description`,image,price FROM notes where subject_id= ? and price= ? ORDER BY name ',[subject_id,0], function(err,notes) {
+      for(let i in notes){
+        con.query('SELECT * FROM videos where note_id= ? ',[notes[i].id], function(errr,video) {
+          if(video.length == 0){
+            mynotes.push({
+              id:notes[i].id,
+              description:notes[i].description,
+              image:notes[i].image,
+              price:notes[i].price,
+              video:0
+            });
+
+          }
+          else {
+            mynotes.push({
+              id:notes[i].id,
+              description:notes[i].description,
+              image:notes[i].image,
+              price:notes[i].price,
+              video:1,
+              video_price:video[0].price,
+              both:video[0].bothh
+            });
+          }
+          if(i == notes.length-1){
+            res.send(mynotes);
+          }
+        })
+
+      }
     })
 });
 

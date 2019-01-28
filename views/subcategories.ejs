@@ -114,11 +114,12 @@ $(document).ready(function(){
 
                           <td>
                             <select class="form-control" id="<%= subcat['id'] %>" class="select_parent_category">
+                              <!-- categories (cat -> sector) -> sectors /// subcat -> subject -->
                               <%  categories.forEach(function(cat) {
                                         if(cat['id'] == subcat['sector_id']) {%>
-                                    <option value="<%= cat['id'] %>" selected><%= cat['name'] %> ----> <%= universities[cat['university_id']-1].name %></option>
+                                    <option value="<%= cat['id'] %>" selected><%= cat['name'] %> ----> <% if(universities[cat['university_id']-1]){ %><%= universities[cat['university_id']-1].name %><% }else {%>not exist university<% }%></option>
                                         <% } else {%>
-                                    <option value="<%= cat['id'] %>"><%= cat['name'] %> ----> <%= universities[cat['university_id']-1].name %></option>
+                                    <option value="<%= cat['id'] %>"><%= cat['name'] %> ----> <% if(universities[cat['university_id']-1]){ %><%= universities[cat['university_id']-1].name %><% }else {%>not exist university<% }%> </option>
                               <% }}) %>
                             </select>
                         </td>

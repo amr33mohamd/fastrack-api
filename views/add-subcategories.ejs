@@ -144,7 +144,7 @@ $(".edit").click(function(){
                          <div class="col-md-6 col-sm-6 col-xs-12">
                            <select class="form-control col-md-7 col-xs-12" name="category">
                              <%  categories.forEach(function(category){ %>
-                             <option value="<%= category['id'] %>"><%= category['name'] %> ---> <%= universities[category['university_id']-1].name %></option>
+                             <option value="<%= category['id'] %>"><%= category['name'] %> ---> <% if(universities[category['university_id']-1]){ %><%= universities[category['university_id']-1].name %><% }else {%>not exist university<% }%></option>
                              <% }) %>
                            </select>
                        </div>
