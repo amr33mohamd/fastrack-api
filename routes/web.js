@@ -630,9 +630,12 @@ app.post('/add_book', function(req, res) {
 									fs.mkdirSync(dir)
 							}
 							pdfImage.convertPage(i).then(function (imagePath) {
-								
+								console.log(imagePath)
 								fs.existsSync("books-images/"+random_num+1+"/slide-i.png") // => true
-							});
+							}, function (err) {
+      res.send(err, 500);
+    });
+
 						}
 			 })
 
