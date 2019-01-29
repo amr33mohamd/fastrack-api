@@ -25,6 +25,7 @@
     "nodemon": "^1.12.1",
     "pdf-image": "^1.0.5",
     "pdf2img": "^0.5.0",
+    "pdf2pic": "^1.2.6",
     "pdftohtmljs": "^0.4.2",
     "soap": "^0.23.0",
     "strong-soap": "^1.5.0",

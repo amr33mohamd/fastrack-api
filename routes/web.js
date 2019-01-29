@@ -576,7 +576,7 @@ app.post('/add_video',function(req,res){
 
 	video.mv('videos/' + random_num + 1 +'.mp4', function(err) {
 		con.query(
-			'insert into videos(name,video,note_id,price,bothh,downloads) values(?,?,?,?,?,0)',
+			'insert into videos(name,video,note_id,price,bothh,downloads) values(?,?,?,?,?)',
 			[
 				name,
 				domain + '/videos/' + random_num + 1 +'.mp4',
@@ -630,12 +630,9 @@ app.post('/add_book', function(req, res) {
 									fs.mkdirSync(dir)
 							}
 							pdfImage.convertPage(i).then(function (imagePath) {
-								console.log(imagePath)
-								fs.existsSync("books-images/"+random_num+1+"/slide-i.png") // => true
-							}, function (err) {
-      res.send(err, 500);
-    });
 
+								fs.existsSync("books-images/"+random_num+1+"/slide-i.jpg") // => true
+							});
 						}
 			 })
 
