@@ -484,7 +484,7 @@ app.get('/view-note',function(req,res){
 
   sql.select('notes','id',id,function(book) {
 		var filePath = book[0].link;
-		var filePath = filePath.replace('http://159.89.95.28:5050/books','');
+		var filePath = filePath.replace('http://159.89.95.28/books','');
 		var domain = 'http://' + req.get('host');
 		var filePath = filePath.replace('.pdf','');
 		var note_name = filePath;

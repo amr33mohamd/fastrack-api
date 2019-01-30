@@ -64,23 +64,29 @@ app.get('/api/myvideos',function(req,res){
   var id = req.query.id;
   var mynotes = [];
   con.query('SELECT video_id FROM ownedVideos where deviceId= ?',[id],function(err,notes){
-    con.query('SELECT * FROM videos where id= ?',[notes[0].video_id],function(err,video){
-    for(let i in notes){
-      con.query('SELECT id, name,descc AS `description`,image,price FROM notes where id= ? ',[video[i].note_id], function(errr,data) {
-        mynotes.push({
-          id:video[0].id,
-          name:video[0].name,
-          video:video[0].video,
-          image:data[0].image,
-          description:data[0].description
-        });
-        if(i == notes.length-1){
-          res.send(mynotes);
-        }
-      })
-
+    if(notes.length == 0 ){
+      res.json([]);
     }
-  })
+    else {
+      con.query('SELECT * FROM videos where id= ?',[notes[0].video_id],function(err,video){
+      for(let i in notes){
+        con.query('SELECT id, name,descc AS `description`,image,price FROM notes where id= ? ',[video[i].note_id], function(errr,data) {
+          mynotes.push({
+            id:video[0].id,
+            name:video[0].name,
+            video:video[0].video,
+            image:data[0].image,
+            description:data[0].description
+          });
+          if(i == notes.length-1){
+            res.send(mynotes);
+          }
+        })
+
+      }
+    })
+    }
+
 });
 
 });
