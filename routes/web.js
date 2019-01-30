@@ -576,7 +576,7 @@ app.post('/add_video',function(req,res){
 
 	video.mv('videos/' + random_num + 1 +'.mp4', function(err) {
 		con.query(
-			'insert into videos(name,video,note_id,price,bothh,downloads) values(?,?,?,?,?)',
+			'insert into videos(name,video,note_id,price,bothh,downloads) values(?,?,?,?,?,0)',
 			[
 				name,
 				domain + '/videos/' + random_num + 1 +'.mp4',
@@ -585,7 +585,7 @@ app.post('/add_video',function(req,res){
 				bothh,
 			],
 			function(err, ress) {
-				res.redirect('/add-video')
+				res.send(err)
 			})
 		});
 
