@@ -585,7 +585,7 @@ app.post('/add_video',function(req,res){
 				bothh,
 			],
 			function(err, ress) {
-				res.send(err)
+				res.redirect('/add-video')
 			})
 		});
 
