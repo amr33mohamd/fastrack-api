@@ -140,11 +140,11 @@ app.get('/api/freenotes',function(req,res){
           }
           if(i == notes.length-1){
             if(mynotes.length == 0){
-              res.Json([{}]);
+              res.json([{}]);
 
             }
             else {
-              res.Json(mynotes);
+              res.json(mynotes);
 
             }
           }
