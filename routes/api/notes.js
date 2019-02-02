@@ -2,6 +2,7 @@ app.get('/api/notes',function(req,res){
   var subject_id = req.query.id;
   mynotes = [];
     con.query('SELECT id, name,descc AS `description`,image,price FROM notes where subject_id= ? and price > 0 ORDER BY name ',[subject_id], function(err,notes) {
+      if(notes.length != 0){
       for(let i in notes){
         con.query('SELECT * FROM videos where note_id= ? ',[notes[i].id], function(errr,video) {
           if(video.length == 0){
@@ -28,6 +29,7 @@ app.get('/api/notes',function(req,res){
             });
           }
           if(i == notes.length-1){
+
             if(mynotes.length == 0){
               res.json([])
             }
@@ -38,7 +40,10 @@ app.get('/api/notes',function(req,res){
         })
 
       }
-
+    }
+    else {
+      res.json([])
+    }
     })
 });
 
