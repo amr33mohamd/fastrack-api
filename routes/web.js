@@ -408,7 +408,7 @@ app.get('/books', function(req, res) {
 		sql.select('notes', '1', '1', function(data) {
 			sql.select('subjects','1','1',function(categories){
 				sql.select('sectors', '1', '1', function(sectors) {
-				sql.select('universities','1','1',function(universities){
+				sql.selectno('universities','1','1',function(universities){
 					res.render('books', { users: data,universities,categories,sectors });
 				})
 			});
@@ -419,7 +419,7 @@ app.get('/books', function(req, res) {
 
 app.get('/add-books', function(req, res) {
 	session.startSession(req, res, function() {
-		sql.select('universities', '1', '1', function(categories) {
+		sql.selectno('universities', '1', '1', function(categories) {
 			sql.select('subjects', '1', '1', function(sub_categories) {
 				sql.select('sectors', '1', '1', function(sectors) {
 				sql.select('notes', '1', '1', function(data) {
