@@ -28,7 +28,12 @@ app.get('/api/notes',function(req,res){
             });
           }
           if(i == notes.length-1){
-            res.send(mynotes);
+            if(mynotes.length == 0){
+              res.json([])
+            }
+            else {
+              res.json(mynotes);
+            }
           }
         })
 
