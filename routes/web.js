@@ -477,7 +477,20 @@ sql.select('notes','id',id,function(book) {
 
 
 });
+app.get('/free-view-video',function(req,res){
 
+	var id = req.param('id');
+	var deviceid = req.param('deviceid');
+
+sql.select('videos','id',id,function(book) {
+
+	con.query("insert into ownedVideos(video_id,deviceId) values(?,?)",[id,deviceid],function(err,resss){
+	res.json({response:1})
+	});
+});
+
+
+});
 app.get('/view-note',function(req,res){
   var id = req.param('id');
 	fs = require('fs'),
