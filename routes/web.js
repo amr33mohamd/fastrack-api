@@ -502,7 +502,7 @@ app.get('/api/sharevideo',function(req,res){
 
 	var video_id = req.param('id');
 	var ip = req.connection.remoteAddress;
-	con.query("select * from video_ip where video_id = ? and deviceId = ? ",[ip,video_id,deviceId],function(err,video_ip_data){
+	con.query("select * from video_ip where video_id = ? and deviceId = ? ",[video_id,deviceId],function(err,video_ip_data){
 		if(video_ip_data.length == 0){
 			con.query("insert into video_ip(deviceId,video_id,ip) values(?,?,?)",[deviceId,video_id,ip],function(err,final){
 				sql.select('videos','id',video_id,function(video){
