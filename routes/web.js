@@ -479,12 +479,12 @@ sql.select('notes','id',id,function(book) {
 });
 app.get('/free-view-video',function(req,res){
 
-	var id = req.param('id');
+	var id = req.param('id'); // note_id
 	var deviceid = req.param('deviceid');
 
-sql.select('videos','id',id,function(book) {
+sql.select('videos','note_id',id,function(book) {
 
-	con.query("insert into ownedVideos(video_id,deviceId) values(?,?)",[id,deviceid],function(err,resss){
+	con.query("insert into ownedVideos(video_id,deviceId) values(?,?)",[book[0].id,deviceid],function(err,resss){
 	res.json({response:1})
 	});
 });
