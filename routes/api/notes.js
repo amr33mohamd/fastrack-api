@@ -78,9 +78,9 @@ app.get('/api/myvideos',function(req,res){
       res.json([]);
     }
     else {
-      con.query('SELECT * FROM videos where id= ?',[notes[0].video_id],function(err,video){
       for(let i in notes){
-        con.query('SELECT id, name,descc AS `description`,image,price FROM notes where id= ? ',[video[i].note_id], function(errr,data) {
+        con.query('SELECT * FROM videos where id= ?',[notes[i].video_id],function(err,video){
+        con.query('SELECT id, name,descc AS `description`,image,price FROM notes where id= ? ',[video[0].note_id], function(errr,data) {
           mynotes.push({
             id:video[0].id,
             name:video[0].name,
@@ -92,12 +92,13 @@ app.get('/api/myvideos',function(req,res){
             res.send(mynotes);
           }
         })
-
+      })
       }
-    })
-    }
 
-});
+
+    }
+  });
+
 
 });
 app.get('/api/verifynumber',function(req,res){
