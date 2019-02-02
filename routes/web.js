@@ -154,7 +154,7 @@ app.get('/edit-video', function(req, res) {
 app.get('/subjects', function(req, res) {
 		sql.select('subjects', '1', '1', function(sub_categories) {
 			sql.select('sectors', '1', '1', function(categories) {
-				sql.select('universities', '1', '1', function(universities) {
+				sql.selectno('universities', '1', '1', function(universities) {
 				res.render('subcategories', { categories, sub_categories,universities });
 				});
 			});
@@ -189,7 +189,7 @@ app.get('/videos', function(req, res) {
 app.get('/add-subject', function(req, res) {
 	session.startSession(req, res, function() {
 		sql.select('sectors', '1', '1', function(categories) {
-			sql.select('universities', '1', '1', function(universities) {
+			sql.selectno('universities', '1', '1', function(universities) {
 				res.render('add-subcategories', { categories, universities });
 			});
 		});

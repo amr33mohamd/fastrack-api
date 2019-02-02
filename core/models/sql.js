@@ -10,6 +10,18 @@ exports.select = function(table,what,that,callback){
     	}
     });
 };
+exports.selectno = function(table,what,that,callback){
+
+    var sql = "SELECT * FROM `"+table+"` WHERE "+what+" = ?  ";
+    con.query(sql,[that],function(res,err){
+    	if(err){
+    		callback(err);
+    	}
+    	else{
+    		callback(res);
+    	}
+    });
+};
 exports.lselect = function(table,what,that,callback){
 
     var sql = "SELECT * FROM `"+table+"` WHERE "+what+" LIKE  ? order by id desc";
