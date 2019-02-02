@@ -491,6 +491,36 @@ sql.select('videos','note_id',id,function(book) {
 
 
 });
+
+
+app.get('/api/sharevideo',function(req,res){
+	var deviceId = req.param('deviceId');
+	var ip = require('ip');
+
+	var video_id = req.param('id');
+	var ip = ip.address()
+	con.query("select * from video_ip where ip = ? and video_id = ? and deviceId = ? ",[ip,video_id,deviceId],function(err,video_ip_data){
+		if(video_ip_data.length == 0){
+			con.query("insert into video_ip(deviceId,video_id,ip) values(?,?,?)",[deviceId,video_id,ip],function(err,final){
+				sql.select('videos','id',video_id,function(video){
+					res.render('video',{video:video[0]})
+				})
+			})
+		}
+		else {
+			if(video_ip_data[0].ip == ip){
+				sql.select('videos','id',video_id,function(video){
+					res.render('video',{video:video[0]})
+				})
+			}
+			else {
+				res.send('you are not allowed to view this');
+			}
+		}
+	})
+})
+
+
 app.get('/view-note',function(req,res){
   var id = req.param('id');
 	fs = require('fs'),
