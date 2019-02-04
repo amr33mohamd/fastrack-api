@@ -117,7 +117,7 @@ app.get('/buy-first',function(req,res){
              "SendInvoiceOption": 1,
              "InvoiceItemsCreate": [
              {
-             "ProductId": null
+             "ProductId": null,
              "ProductName": "Product01",
              "Quantity": 1,
              "UnitPrice": video[0].price
