@@ -13,8 +13,9 @@ app.get('/buy-first',function(req,res){
       const fetch = require('node-fetch');
       if(note[0].price == 0){
         var deviceId = req.param('deviceId')
+        new_url = 'http://'+req.headers.host+'/buy-second?note_id='+note[0].id+'&deviceId='+deviceId+'&type=1';
+        console.log(new_url)
 
-        new_url = 'http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId+',1';
         res.redirect(new_url);
       }
       else{
