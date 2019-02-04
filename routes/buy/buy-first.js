@@ -152,7 +152,7 @@ app.get('/buy-first',function(req,res){
   else if(type == 3){
     sql.select('videos','id',note_id,function(video){
       const fetch = require('node-fetch');
-      if(note[0].price == 0){
+      if(video[0].bothh == 0){
         var deviceId = req.param('deviceId')
 
         new_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+'&deviceId='+deviceId+'&type=3';
