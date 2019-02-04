@@ -150,7 +150,7 @@ app.get('/buy-first',function(req,res){
     })
   }
   else if(type == 3){
-    sql.select('videos','id',note_id,function(video){
+    sql.select('videos','note_id',note_id,function(video){
       const fetch = require('node-fetch');
       if(video[0].bothh == 0){
         var deviceId = req.param('deviceId')
