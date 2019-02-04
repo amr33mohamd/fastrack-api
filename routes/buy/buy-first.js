@@ -24,11 +24,11 @@ app.get('/buy-first',function(req,res){
         console.log(redirect_url)
             // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId+',1';
             const options = {
-              url: 'https://apidemo.myfatoorah.com/ApiInvoices/Create',
+              url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
               method:'post',
               headers: {
                 'Content-Type': 'application/json',
-                'authorization': 'bearer F9YFUHUamf8ht8NtX2ALCsEr-dQUvNpnwlJow33haf7XnnEoD7Todj9Wys33StExdGn4A-2mnDKiwdwuk73rpK5hCEwzchlVYGIrMvDNHKwsc2X_qV3-KljiJMDshWVcb8nkhKRtQjXhOkfIE8tO8N3p7CNFZ2smGT8cnYYHMup3KX7tiTuV0a44A1THlMoU_x9Lc29hAM_RttoMSfukEULkn0Dxy3IiIxX6ASBGRAolKWM0uPkuWePtKckRuGO4cJKxxzyLdQmYZuGkyG3SMU9mmNO3-uZYtF-uQul2Z5znjzVZLyWBc5JS3-Q5OKE7tpnExfblAMxJm8uqwI4lo6ABfZCZPeJQPSynJJfVwlHbyo4R6bjrWpAPm-nkKoovUX8n3VbKH8MH7bz-b7qB8FmGdGuAGU6sYS2CSFnoJUURJThyBut9WqAi_sPxqFaGs75bp4wU0f5Kx62qbLYdt1ZGLficHOsUK-tdG94rfq6OvqF9APbDGUH0rXx2iJ6Qq5DyWROO5FpPUW6hfgBsDJaURAfru6Ko7Oaknarb1JhRi0D6mpc_3YO_i_KFFl0j8hTvNYSZQBh9__rM66V3dMGEI3RSexE6cyDrXKhrwPumbc06mrBGIXqV1EcRXOGGApumjw'
+                'authorization': 'bearer LMjn59SqhP1RcAo_QZExCSyM_SV7sxnBBwiNhwXr12emGo_QehOhNdhEUMqaFJlHU7dybbdU4Cuq7ZT8VYTJJMxWtNceZKLkq-vEUSIO9lewO4pYLulm32boPyH59m4LJhFZ5031QuDG8LhiYIf69IJ1v5T8Su3Oy-jdsHLh6h3BvMVnNMxpNJgo1D5mLOYTFjL-UVlq07XD9AdIKAjOZy-Z_HM77lHHHScYM_urJaTGfn91rr4Dm5cPhoi-1AxH1p-wFMXgpCltn_JThen-_I7d6eWLSX71eZea8TyIDWnLiwxjgeWv6g-X80N27N8r2v7pDUrQZ707e6In7EF4tYALmYtyEYWqFnnVKQhNSZ70CifL0vypB2w_8fZ1zTJsVYDMdDUQkSeSS5Zhwypaje8BuoWORowZelNWuWk3q1Y2Vi3RGJd0GkoFkglQnDL0xH9sFZliOQad-vTb7HI79GOxjV0oW65-KJ7tIUQ7f6z2tsLCtshYf5CrA-5WVKiyeMOwJAR6dghzazAhi46b0k6rp9cYybbrus6MLcWMcy5sLPIDcYlh4Jno0inTDIvClPdk0y796qHK1llc7BURj1heCI8jFDveC9ZfSBje1nd3mXCMPP7GaD2Gay812vcQ3wDKl6lYIuMlCpP45GZ9HIX4sBs'
               },
               form: {
 
@@ -94,11 +94,11 @@ app.get('/buy-first',function(req,res){
             // var url = 'https://php-helper.herokuapp.com/try.php?price='+video[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',2';
 
             const options = {
-              url: 'https://apidemo.myfatoorah.com/ApiInvoices/Create',
+              url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
               method:'post',
               headers: {
                 'Content-Type': 'application/json',
-                'authorization': 'bearer F9YFUHUamf8ht8NtX2ALCsEr-dQUvNpnwlJow33haf7XnnEoD7Todj9Wys33StExdGn4A-2mnDKiwdwuk73rpK5hCEwzchlVYGIrMvDNHKwsc2X_qV3-KljiJMDshWVcb8nkhKRtQjXhOkfIE8tO8N3p7CNFZ2smGT8cnYYHMup3KX7tiTuV0a44A1THlMoU_x9Lc29hAM_RttoMSfukEULkn0Dxy3IiIxX6ASBGRAolKWM0uPkuWePtKckRuGO4cJKxxzyLdQmYZuGkyG3SMU9mmNO3-uZYtF-uQul2Z5znjzVZLyWBc5JS3-Q5OKE7tpnExfblAMxJm8uqwI4lo6ABfZCZPeJQPSynJJfVwlHbyo4R6bjrWpAPm-nkKoovUX8n3VbKH8MH7bz-b7qB8FmGdGuAGU6sYS2CSFnoJUURJThyBut9WqAi_sPxqFaGs75bp4wU0f5Kx62qbLYdt1ZGLficHOsUK-tdG94rfq6OvqF9APbDGUH0rXx2iJ6Qq5DyWROO5FpPUW6hfgBsDJaURAfru6Ko7Oaknarb1JhRi0D6mpc_3YO_i_KFFl0j8hTvNYSZQBh9__rM66V3dMGEI3RSexE6cyDrXKhrwPumbc06mrBGIXqV1EcRXOGGApumjw'
+                'authorization': 'bearer LMjn59SqhP1RcAo_QZExCSyM_SV7sxnBBwiNhwXr12emGo_QehOhNdhEUMqaFJlHU7dybbdU4Cuq7ZT8VYTJJMxWtNceZKLkq-vEUSIO9lewO4pYLulm32boPyH59m4LJhFZ5031QuDG8LhiYIf69IJ1v5T8Su3Oy-jdsHLh6h3BvMVnNMxpNJgo1D5mLOYTFjL-UVlq07XD9AdIKAjOZy-Z_HM77lHHHScYM_urJaTGfn91rr4Dm5cPhoi-1AxH1p-wFMXgpCltn_JThen-_I7d6eWLSX71eZea8TyIDWnLiwxjgeWv6g-X80N27N8r2v7pDUrQZ707e6In7EF4tYALmYtyEYWqFnnVKQhNSZ70CifL0vypB2w_8fZ1zTJsVYDMdDUQkSeSS5Zhwypaje8BuoWORowZelNWuWk3q1Y2Vi3RGJd0GkoFkglQnDL0xH9sFZliOQad-vTb7HI79GOxjV0oW65-KJ7tIUQ7f6z2tsLCtshYf5CrA-5WVKiyeMOwJAR6dghzazAhi46b0k6rp9cYybbrus6MLcWMcy5sLPIDcYlh4Jno0inTDIvClPdk0y796qHK1llc7BURj1heCI8jFDveC9ZfSBje1nd3mXCMPP7GaD2Gay812vcQ3wDKl6lYIuMlCpP45GZ9HIX4sBs'
               },
               form: {
 
@@ -163,11 +163,11 @@ app.get('/buy-first',function(req,res){
         var redirect_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+'&deviceId='+deviceId+'&type=3'
 
         const options = {
-          url: 'https://apidemo.myfatoorah.com/ApiInvoices/Create',
+          url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
           method:'post',
           headers: {
             'Content-Type': 'application/json',
-            'authorization': 'bearer F9YFUHUamf8ht8NtX2ALCsEr-dQUvNpnwlJow33haf7XnnEoD7Todj9Wys33StExdGn4A-2mnDKiwdwuk73rpK5hCEwzchlVYGIrMvDNHKwsc2X_qV3-KljiJMDshWVcb8nkhKRtQjXhOkfIE8tO8N3p7CNFZ2smGT8cnYYHMup3KX7tiTuV0a44A1THlMoU_x9Lc29hAM_RttoMSfukEULkn0Dxy3IiIxX6ASBGRAolKWM0uPkuWePtKckRuGO4cJKxxzyLdQmYZuGkyG3SMU9mmNO3-uZYtF-uQul2Z5znjzVZLyWBc5JS3-Q5OKE7tpnExfblAMxJm8uqwI4lo6ABfZCZPeJQPSynJJfVwlHbyo4R6bjrWpAPm-nkKoovUX8n3VbKH8MH7bz-b7qB8FmGdGuAGU6sYS2CSFnoJUURJThyBut9WqAi_sPxqFaGs75bp4wU0f5Kx62qbLYdt1ZGLficHOsUK-tdG94rfq6OvqF9APbDGUH0rXx2iJ6Qq5DyWROO5FpPUW6hfgBsDJaURAfru6Ko7Oaknarb1JhRi0D6mpc_3YO_i_KFFl0j8hTvNYSZQBh9__rM66V3dMGEI3RSexE6cyDrXKhrwPumbc06mrBGIXqV1EcRXOGGApumjw'
+            'authorization': 'bearer LMjn59SqhP1RcAo_QZExCSyM_SV7sxnBBwiNhwXr12emGo_QehOhNdhEUMqaFJlHU7dybbdU4Cuq7ZT8VYTJJMxWtNceZKLkq-vEUSIO9lewO4pYLulm32boPyH59m4LJhFZ5031QuDG8LhiYIf69IJ1v5T8Su3Oy-jdsHLh6h3BvMVnNMxpNJgo1D5mLOYTFjL-UVlq07XD9AdIKAjOZy-Z_HM77lHHHScYM_urJaTGfn91rr4Dm5cPhoi-1AxH1p-wFMXgpCltn_JThen-_I7d6eWLSX71eZea8TyIDWnLiwxjgeWv6g-X80N27N8r2v7pDUrQZ707e6In7EF4tYALmYtyEYWqFnnVKQhNSZ70CifL0vypB2w_8fZ1zTJsVYDMdDUQkSeSS5Zhwypaje8BuoWORowZelNWuWk3q1Y2Vi3RGJd0GkoFkglQnDL0xH9sFZliOQad-vTb7HI79GOxjV0oW65-KJ7tIUQ7f6z2tsLCtshYf5CrA-5WVKiyeMOwJAR6dghzazAhi46b0k6rp9cYybbrus6MLcWMcy5sLPIDcYlh4Jno0inTDIvClPdk0y796qHK1llc7BURj1heCI8jFDveC9ZfSBje1nd3mXCMPP7GaD2Gay812vcQ3wDKl6lYIuMlCpP45GZ9HIX4sBs'
           },
           form: {
 
