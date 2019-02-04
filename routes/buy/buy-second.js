@@ -1,8 +1,8 @@
 app.get('/buy-second',function(req,res){
-  var id = req.param('note_id').split("?")[0];
-  var id = id.split(",")[0];
-  var deviceId = req.param('note_id').split("?")[0].split(",")[1];
-  var type = req.param('note_id').split("?")[0].split(",")[2];
+  var id = req.param('note_id')
+
+  var deviceId = req.param('deviceId');
+  var type = req.param('type');
 
   if(type == 1){
     sql.select('notes','id',id,function(book) {
