@@ -86,7 +86,7 @@ app.get('/buy-first',function(req,res){
       var deviceId = req.param('deviceId')
 
       if(video[0].price == 0){
-        new_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',2';
+        new_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+'&deviceId='+deviceId+'&type=2';
         res.redirect(new_url);
       }
       else{
@@ -155,7 +155,7 @@ app.get('/buy-first',function(req,res){
       if(note[0].price == 0){
         var deviceId = req.param('deviceId')
 
-        new_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',3';
+        new_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+'&deviceId='+deviceId+'&type=3';
         res.redirect(new_url);
       }
       else{
