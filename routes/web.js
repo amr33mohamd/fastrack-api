@@ -996,6 +996,16 @@ app.get('/delete-user', function(req, res) {
 	});
 });
 
+app.get('/delete-video', function(req, res) {
+	var user_id = req.param('id');
+	sql.delete('videos', 'id', user_id, function(data) {
+		if (data) {
+			res.redirect('/videos');
+		} else {
+			res.send('please contact programmer if you got that error again');
+		}
+	});
+});
 app.get('/delete-book', function(req, res) {
 	var book_id = req.param('id');
 	sql.delete('notes', 'id', book_id, function(data) {
