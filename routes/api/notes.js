@@ -101,6 +101,45 @@ app.get('/api/myvideos',function(req,res){
 
 
 });
+
+app.get('/api/couponvideo',function(req,res){
+  var deviceId = req.query.deviceId;
+  var coupon = req.query.coupon;
+  var note_id = req.query.note_id;
+  con.query("select * from coupons where deviceId = ? and coupon = ? and note_id = ? and status = 0",[deviceId,coupon,note_id],function(err,data){
+    if(data.length != 0){
+      // buy note ->
+      con.query("UPDATE notes SET downloads = downloads + 1 WHERE id = ?",[note_id],function(err,ress){
+        if(err){
+          res.send(err);
+        }
+        else{
+
+          con.query("insert into ownedNotes(note_id,deviceId) values(?,?)",[note_id,deviceId],function(err,resss){
+            //buy video -->
+            sql.select('videos','note_id',note_id,function(book) {
+                con.query("UPDATE videos SET downloads = downloads + 1 WHERE id = ?",[book[0].id],function(err,ress){
+                  if(err){
+                    res.send(err);
+                  }
+                  else{
+
+                    con.query("insert into ownedVideos(video_id,deviceId) values(?,?)",[book[0].id,deviceId],function(err,resss){
+                      res.json({response:1})
+                    });
+                  }
+                })
+            })
+          });
+        }
+      })
+    }
+    else {
+      res.json({response:0})
+    }
+  })
+})
+
 app.get('/api/verifynumber',function(req,res){
   var phone = req.query.phone;
   con.query('SELECT * FROM users where number= ? ',[phone], function(err,data) {

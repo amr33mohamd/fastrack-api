@@ -132,6 +132,14 @@ app.get('/change-subject', function(req, res) {
 	});
 });
 
+app.get('/change-coupon', function(req, res) {
+	var id = req.param('id');
+	var what = req.param('what');
+	var new_name = req.param('new_name');
+	sql.update('coupons', what, new_name, 'id', id, function(data) {
+		res.redirect(data);
+	});
+});
 
 app.get('/edit-sector', function(req, res) {
 	var id = req.param('id');
@@ -141,6 +149,16 @@ app.get('/edit-sector', function(req, res) {
 		res.redirect(data);
 	});
 });
+
+app.get('/edit-coupon', function(req, res) {
+	var id = req.param('id');
+	var what = req.param('what');
+	var new_name = req.param('new_name');
+	sql.update('coupons', what, new_name, 'id', id, function(data) {
+		res.redirect(data);
+	});
+});
+
 
 app.get('/edit-video', function(req, res) {
 	var id = req.param('id');
@@ -173,6 +191,17 @@ app.get('/sectors', function(req, res) {
 		});
 	});
 });
+
+app.get('/coupons', function(req, res) {
+	session.startSession(req, res, function() {
+		sql.selectno('coupons', '1', '1', function(sub_categories) {
+				sql.select('videos', '1', '1', function(universities) {
+						res.render('coupons', {  sub_categories,universities });
+			});
+		});
+	});
+});
+
 
 app.get('/videos', function(req, res) {
 	session.startSession(req, res, function() {
@@ -221,19 +250,25 @@ app.get('/add-sector', function(req, res) {
 			});
 	});
 });
-
-app.post('/add_sector', function(req, res) {
-	var name = req.body.name;
-	var category = req.body.category;
-
+app.get('/add-coupon', function(req, res) {
+	session.startSession(req, res, function() {
+			sql.select('videos', '1', '1', function(universities) {
+				res.render('add-coupon', {  universities });
+			});
+	});
+});
+app.post('/add_coupon', function(req, res) {
+	var coupon = req.body.coupon;
+	var video = req.body.video;
+	var deviceId = req.body.deviceid;
 	con.query(
-		'insert into sectors(name,university_id) values(?,?)',
-		[name, category],
+		'insert into coupons(coupon,deviceId,note_id,status) values(?,?,?,0)',
+		[coupon, deviceId,video],
 		function(err, ress) {
 			if (err) {
 				res.send(err);
 			} else {
-				res.redirect('/add-sector');
+				res.redirect('/add-coupon');
 			}
 		}
 	);
