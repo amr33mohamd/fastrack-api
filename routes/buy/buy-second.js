@@ -34,6 +34,17 @@ app.get('/buy-second',function(req,res){
         })
     })
   }
+  else if (type == 4) {
+    sql.select('midterm','id',id,function(book) {
+      var mohafza = req.param('mohafza');
+      var mntqa = req.param('mantqa');
+      var qt3a = req.param('qt3a');
+      var street = req.param('street');
+      var home = req.param('home');
+//email here ------>
+
+    })
+  }
   else if (type == 3) {
     sql.select('videos','id',id,function(book) {
       con.query("UPDATE notes SET downloads = downloads + 1 WHERE id = ?",[book[0].note_id],function(err,resss){

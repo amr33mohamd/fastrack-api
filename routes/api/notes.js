@@ -1,7 +1,7 @@
 app.get('/api/notes',function(req,res){
   var subject_id = req.query.id;
   mynotes = [];
-    con.query('SELECT id, name,descc AS `description`,image,price FROM notes where subject_id= ? and price > 0 ORDER BY name ',[subject_id], function(err,notes) {
+    con.query('SELECT id, name,descc AS `description`,deliver,image,price FROM notes where subject_id= ? and price > 0 ORDER BY name ',[subject_id], function(err,notes) {
       if(notes.length != 0){
       for(let i in notes){
         con.query('SELECT * FROM videos where note_id= ? ',[notes[i].id], function(errr,video) {
@@ -12,7 +12,8 @@ app.get('/api/notes',function(req,res){
               description:notes[i].description,
               image:notes[i].image,
               price:notes[i].price,
-              video:0
+              video:0,
+              deliver:notes[i].deliver
             });
 
           }
@@ -23,9 +24,13 @@ app.get('/api/notes',function(req,res){
               description:notes[i].description,
               image:notes[i].image,
               price:notes[i].price,
+              deliver:notes[i].deliver,
+
               video:1,
               video_price:video[0].price,
-              both:video[0].bothh
+              both:video[0].bothh,
+              with_deliver:video[0].with_deliver,
+
             });
           }
           if(i == notes.length-1){

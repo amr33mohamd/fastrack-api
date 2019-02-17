@@ -122,6 +122,16 @@ app.get('/delete-university', function(req, res) {
 		}
 	});
 });
+app.get('/delete-midterm', function(req, res) {
+	var cat_id = req.param('id');
+	sql.delete('midterm', 'id', cat_id, function(data) {
+		if (data) {
+			res.redirect('/midterms');
+		} else {
+			res.send('please contact programmer if you got that error again');
+		}
+	});
+});
 
 app.get('/change-subject', function(req, res) {
 	var id = req.param('id');
@@ -178,7 +188,17 @@ app.get('/subjects', function(req, res) {
 			});
 		});
 });
-
+app.get('/midterms', function(req, res) {
+	sql.select('midterm','1','1',function(midterms){
+		sql.select('subjects', '1', '1', function(sub_categories) {
+			sql.select('sectors', '1', '1', function(categories) {
+				sql.selectno('universities', '1', '1', function(universities) {
+				res.render('midterms', { categories, sub_categories,universities,midterms });
+				});
+			});
+		});
+	})
+});
 
 
 app.get('/sectors', function(req, res) {
@@ -225,6 +245,22 @@ app.get('/add-subject', function(req, res) {
 	});
 });
 
+app.get('/add-midterm', function(req, res) {
+	session.startSession(req, res, function() {
+
+		sql.selectno('universities', '1', '1', function(categories) {
+			sql.select('subjects', '1', '1', function(sub_categories) {
+				sql.select('sectors', '1', '1', function(sectors) {
+				sql.select('notes', '1', '1', function(data) {
+					res.render('add-midterm', { categories, sub_categories, data,sectors });
+				});
+				});
+			});
+		});
+	});
+});
+
+
 app.post('/add_subcategory', function(req, res) {
 	var name = req.body.name;
 	var category = req.body.category;
@@ -242,6 +278,22 @@ app.post('/add_subcategory', function(req, res) {
 	);
 });
 
+app.post('/add_midterm', function(req, res) {
+	var name = req.body.name;
+	var category = req.body.subject_id;
+	var descc = req.body.descc;
+	con.query(
+		'insert into midterm(name,subject_id,descc) values(?,?,?)',
+		[name, category,descc],
+		function(err, ress) {
+			if (err) {
+				res.send(err);
+			} else {
+				res.redirect('/add-midterm');
+			}
+		}
+	);
+});
 
 app.get('/add-sector', function(req, res) {
 	session.startSession(req, res, function() {
@@ -290,7 +342,20 @@ app.get('/change-parent-category', function(req, res) {
 	);
 });
 
+app.get('/change-parent-category-midterm', function(req, res) {
+	var id = req.param('id');
+	var new_parent_cat = req.param('new_parent_cat');
 
+	con.query(
+		'update midterm set subject_id=? where id=?',
+		[new_parent_cat, id],
+		function(err, res) {
+			if (err) {
+				res.send(err);
+			}
+		}
+	);
+});
 
 app.get('/change-sector', function(req, res) {
 	var id = req.param('id');
@@ -1083,7 +1148,14 @@ app.get('/change-book', function(req, res) {
 		res.send(data);
 	});
 });
-
+app.get('/change-midterm', function(req, res) {
+	var id = req.param('id');
+	var what = req.param('what');
+	var new_name = req.param('new_name');
+	sql.update('midterm', what, new_name, 'id', id, function(data) {
+		res.send(data);
+	});
+});
 app.get('/change-university', function(req, res) {
 	var id = req.param('id');
 	var what = req.param('what');
