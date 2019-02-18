@@ -41,11 +41,14 @@ app.get('/buy-second',function(req,res){
       var qt3a = req.param('qt3a');
       var street = req.param('street');
       var home = req.param('home');
+      var gada = req.param('gada');
+      var floor = req.param('floor');
+
 //email here ------>
 const fetch = require('node-fetch');
-var message = '-------- Student midterm backage ----- \n backage data -> name : '+book[0].name+' description :'+book[0].descc
-+'\n student data -> \n Address : '+mohafza+'mantqa : '+mntqa +'qeta3  :'+qt3a+' street : '+street+' home number : '+home+
-'phone number : '+deviceId
+var message = '-------- مجموعه ميدترم ----- \n بيانات المجموعه -> اسم المجموعه : '+book[0].name+' الوصف :'+book[0].descc
++'\n بيانات الطالب -> \n العنوان : '+mohafza+' المنطقه : '+mntqa +' القطعه  :'+qt3a+' الشارع : '+street+' رقم الشقه / العماره : '+home+
+'رقم الهاتف  : '+deviceId+'جاده : '+gada+' الدور / الشقه'+floor
 fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
   res.redirect('http://example.com');
 
@@ -59,11 +62,14 @@ fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
       var qt3a = req.param('qt3a');
       var street = req.param('street');
       var home = req.param('home');
+      var gada = req.param('gada');
+      var floor = req.param('floor');
+
 //email here ------>
 const fetch = require('node-fetch');
-var message = '-------- Student note ----- \n note data -> name : '+book[0].name+' description :'+book[0].descc
-+'\n student data -> \n Address : '+mohafza+'mantqa : '+mntqa +'qeta3  :'+qt3a+' street : '+street+' home number : '+home+
-'phone number : '+deviceId
+var message = '-------- طلب ملزمه ----- \n note data -> الاسم : '+book[0].name+' الوصف :'+book[0].descc
++'\n بيانات الطالب -> \n العنوان : '+mohafza+' المنطقه : '+mntqa +' القطعه  :'+qt3a+' الشارع : '+street+' رقم المنزل / العماره : '+home+
+' رقم الهاتف : '+deviceId+'جاده : '+gada+' الدور / الشقه'+floor
 fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
   res.redirect('http://example.com');
 
@@ -88,12 +94,15 @@ fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
           var qt3a = req.param('qt3a');
           var street = req.param('street');
           var home = req.param('home');
+          var gada = req.param('gada');
+          var floor = req.param('floor');
+
       //email here ------>
 
       const fetch = require('node-fetch');
-      var message = '-------- Student note ----- \n note data -> name : '+book[0].name+' description :'+book[0].descc
-      +'\n student data -> \n Address : '+mohafza+'mantqa : '+mntqa +'qeta3  :'+qt3a+' street : '+street+' home number : '+home+
-      'phone number : '+deviceId
+      var message = '-------- طلب ملزمه ----- \n note data -> الاسم : '+book[0].name+' الوصف :'+book[0].descc
+      +'\n بيانات الطالب -> \n العنوان : '+mohafza+' المنطقه : '+mntqa +' القطعه  :'+qt3a+' الشارع : '+street+' رقم المنزل / العماره : '+home+
+      ' رقم الهاتف : '+deviceId+'جاده : '+gada+' الدور / الشقه'+floor
       fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
         res.redirect('http://example.com');
 
