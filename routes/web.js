@@ -282,9 +282,11 @@ app.post('/add_midterm', function(req, res) {
 	var name = req.body.name;
 	var category = req.body.subject_id;
 	var descc = req.body.descc;
+	var price = req.body.price;
+
 	con.query(
-		'insert into midterm(name,subject_id,descc) values(?,?,?)',
-		[name, category,descc],
+		'insert into midterm(name,subject_id,descc,price) values(?,?,?,?)',
+		[name, category,descc,price],
 		function(err, ress) {
 			if (err) {
 				res.send(err);
