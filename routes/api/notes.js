@@ -223,7 +223,7 @@ app.get('/api/searchnotes',function(req,res){
 
 app.get('/api/midterms',function(req,res){
   var subject_id = req.query.id;
-    con.query('SELECT * FROM miderm where subject_id= ? ORDER BY name ',[subject_id], function(err,data) {
+    con.query('SELECT * FROM midterm where subject_id= ? ORDER BY name ',[subject_id], function(err,data) {
         if(!err) {
             res.send(data);
         }
