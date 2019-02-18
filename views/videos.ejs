@@ -141,6 +141,7 @@ $("select").change(function (){
                         <th>الملزمه</th>
                         <th>سعر الفيديو</th>
                         <th>سعر الملزمه مع الفيديو</th>
+                        <th>السعر مع التوصيل</th>
                         <th>التحميلات</th>
                         <th>حذف</th>
 
@@ -166,6 +167,8 @@ $("select").change(function (){
                         </td>
                         <td><%= video['price']  %> <i id="<%= video['id']  %>" class="fa edit fa-pencil-square-o" aria-hidden="true" what="price"></i></td>
                         <td><%= video['bothh']  %> <i id="<%= video['id']  %>" class="fa edit fa-pencil-square-o" aria-hidden="true" what="bothh"></i></td>
+                        <td><%= video['with_deliver']  %> <i id="<%= video['id']  %>" class="fa edit fa-pencil-square-o" aria-hidden="true" what="with_deliver"></i></td>
+
                         <td><%= video['downloads']  %> </td>
 
                           <td><a style="color:red" href="/delete-video?id=<%= video['id'] %>" onclick="return confirm('هل تريد حذف هذا القسم حقا !');">X</a></td>

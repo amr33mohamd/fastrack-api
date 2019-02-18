@@ -181,6 +181,8 @@ else {
                         <th>القسم - الجامعه</th>
                         <th>التحميلات</th>
                         <th>رابط الشراء</th>
+                        <th>سعر التوصيل</th>
+
                         <th>حذف</th>
                         <th>تعديل الصور و الملزمه</th>
                       </tr>
@@ -227,6 +229,8 @@ else {
                           </td>
                           <td><%= user['downloads']  %></td>
                           <td><input type="text" class="form-control" value="http://www.fastrack.xyz:5050/buy-first?id=<%= user['id']  %>"/></td>
+                          <td><%= user['deliver'] %> <i id="<%= user['id']  %>"  what="deliver" class="fa edit fa-pencil-square-o" aria-hidden="true"></i></td>
+
                           <td><a style="color:red" href="/delete-book?id=<%= user['id'] %>" onclick="return confirm('هل تريد حذف هذا الكتاب حقا !');">X</a></td>
                           <td><a href="/edit-book-images?id=<%= user['id'] %>"><i  class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
 

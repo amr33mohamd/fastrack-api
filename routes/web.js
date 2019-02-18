@@ -719,18 +719,20 @@ app.post('/add_video',function(req,res){
 	var bothh = req.body.bothh;
 	var note_id = req.body.note_id;
 	var video = req.files.video;
+	var with_deliver = req.files.with_deliver;
 	var domain = 'http://' + req.get('host');
 	var random_num = Math.random();
 
 	video.mv('videos/' + random_num + 1 +'.mp4', function(err) {
 		con.query(
-			'insert into videos(name,video,note_id,price,bothh,downloads) values(?,?,?,?,?,0)',
+			'insert into videos(name,video,note_id,price,bothh,downloads,with_deliver) values(?,?,?,?,?,0,?)',
 			[
 				name,
 				domain + '/videos/' + random_num + 1 +'.mp4',
 				note_id,
 				price,
 				bothh,
+				with_deliver
 			],
 			function(err, ress) {
 				res.redirect('/add-video')
@@ -744,6 +746,8 @@ app.post('/add_book', function(req, res) {
 	var subject_id = req.body.subject_id;
 	var name = req.body.name;
 	var descc = req.body.descc;
+	var deliver = req.body.deliver;
+
 
 	var pdf = req.files.pdf || null;
 	var domain = 'http://' + req.get('host');
@@ -798,7 +802,7 @@ app.post('/add_book', function(req, res) {
 	}
 
 	con.query(
-		'insert into notes(name,image,descc,link,price,subject_id,jpg) values(?,?,?,?,?,?,?)',
+		'insert into notes(name,image,descc,link,price,subject_id,jpg,deliver) values(?,?,?,?,?,?,?,?)',
 		[
 			name,
 			domain + '/books-images/' + random_num + 1 +'/'+ random_num + 1 +'-0.png',
@@ -806,7 +810,8 @@ app.post('/add_book', function(req, res) {
 			pdf_link,
 			price,
 			subject_id,
-			0
+			0,
+			deliver
 		],
 		function(err, ress) {
 			if (err) {

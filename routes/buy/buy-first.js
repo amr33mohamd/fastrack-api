@@ -364,7 +364,7 @@ app.get('/buy-first',function(req,res){
     })
   }
   else if(type == 5) { // video + delivery
-    sql.select('videos','id',note_id,function(video){
+    sql.select('videos','note_id',note_id,function(video){
       const fetch = require('node-fetch');
       var deviceId = req.param('deviceId');
       var mohafza = req.param('mohafza');
@@ -375,7 +375,7 @@ app.get('/buy-first',function(req,res){
 
         var redirect_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+'&deviceId='+deviceId+'&type=5'+'&mohafza='+mohafza+'&mntqa='+mntqa+'&qt3a='+qt3a+'&street='+street+'&home='+home;
             // var url = 'https://php-helper.herokuapp.com/try.php?price='+video[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',2';
-
+console.log(redirect_url)
             const options = {
               url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
               method:'post',
