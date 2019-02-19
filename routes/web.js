@@ -735,7 +735,8 @@ app.post('/add_video',function(req,res){
 				with_deliver
 			],
 			function(err, ress) {
-				res.redirect('/add-video')
+				//res.redirect('/add-video')
+				console.log(err)
 			})
 		});
 
