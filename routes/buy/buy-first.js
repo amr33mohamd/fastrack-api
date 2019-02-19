@@ -129,7 +129,7 @@ app.get('/buy-first',function(req,res){
              "UnitPrice": note[0].price
              }
              ],
-             "CallBackUrl": redirect_url,
+             "CallBackUrl": encodeURI(redirect_url),
              "Language": 1
             }
             };
@@ -341,7 +341,7 @@ app.get('/buy-first',function(req,res){
              "UnitPrice": video[0].price
              }
              ],
-             "CallBackUrl": redirect_url,
+             "CallBackUrl": encodeURI(redirect_url),
              "Language": 1
             }
             };
@@ -412,7 +412,7 @@ console.log(redirect_url)
              "UnitPrice": video[0].with_deliver
              }
              ],
-             "CallBackUrl": redirect_url,
+             "CallBackUrl": encodeURI(redirect_url),
              "Language": 1
             }
             };
