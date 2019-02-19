@@ -46,9 +46,9 @@ app.get('/buy-second',function(req,res){
 
 //email here ------>
 const fetch = require('node-fetch');
-var message = '-------- مجموعه ميدترم ----- \n بيانات المجموعه -> اسم المجموعه : '+book[0].name+' الوصف :'+book[0].descc
-+'\n بيانات الطالب -> \n العنوان : '+mohafza+' المنطقه : '+mntqa +' القطعه  :'+qt3a+' الشارع : '+street+' رقم الشقه / العماره : '+home+
-'رقم الهاتف  : '+deviceId+'جاده : '+gada+' الدور / الشقه'+floor
+var message = '-------- midterm package----- \n pacakge data ---> name : : '+book[0].name+' description :'+book[0].descc
++'\n student data -> \n Adress : '+mohafza+' mantqa : '+mntqa +' ktaa  :'+qt3a+' street : '+street+' home number : : '+home+
+'phone number : '+deviceId+'gada : '+gada+'floor'+floor
 fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
   res.redirect('http://example.com');
 
@@ -67,9 +67,9 @@ fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
 
 //email here ------>
 const fetch = require('node-fetch');
-var message = '-------- طلب ملزمه ----- \n note data -> الاسم : '+book[0].name+' الوصف :'+book[0].descc
-+'\n بيانات الطالب -> \n العنوان : '+mohafza+' المنطقه : '+mntqa +' القطعه  :'+qt3a+' الشارع : '+street+' رقم المنزل / العماره : '+home+
-' رقم الهاتف : '+deviceId+'جاده : '+gada+' الدور / الشقه'+floor
+var message = '-------- Request note ----- \n note data -> name : '+book[0].name+' description :'+book[0].descc
++'\n student data -> \n address : '+mohafza+' mantqa : '+mntqa +' qtaa  :'+qt3a+' street : '+street+' home number : '+home+
+' phone number: '+deviceId+'gada : '+gada+' floor'+floor
 fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
   res.redirect('http://example.com');
 
@@ -100,10 +100,11 @@ fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
       //email here ------>
 
       const fetch = require('node-fetch');
-      var message = '-------- طلب ملزمه ----- \n note data -> الاسم : '+book[0].name+' الوصف :'+book[0].descc
-      +'\n بيانات الطالب -> \n العنوان : '+mohafza+' المنطقه : '+mntqa +' القطعه  :'+qt3a+' الشارع : '+street+' رقم المنزل / العماره : '+home+
-      ' رقم الهاتف : '+deviceId+'جاده : '+gada+' الدور / الشقه'+floor
-      fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
+      const fetch = require('node-fetch');
+      var message = '-------- Request note ----- \n note data -> name : '+book[0].name+' description :'+book[0].descc
+      +'\n student data -> \n address : '+mohafza+' mantqa : '+mntqa +' qtaa  :'+qt3a+' street : '+street+' home number : '+home+
+      ' phone number: '+deviceId+'gada : '+gada+' floor'+floor
+            fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
         res.redirect('http://example.com');
 
       })
