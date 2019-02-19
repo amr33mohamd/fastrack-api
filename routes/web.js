@@ -719,7 +719,7 @@ app.post('/add_video',function(req,res){
 	var bothh = req.body.bothh;
 	var note_id = req.body.note_id;
 	var video = req.files.video;
-	var with_deliver = req.files.with_deliver;
+	var with_deliver = req.files.withdeliver;
 	var domain = 'http://' + req.get('host');
 	var random_num = Math.random();
 
