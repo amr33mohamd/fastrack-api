@@ -100,7 +100,6 @@ fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
       //email here ------>
 
       const fetch = require('node-fetch');
-      const fetch = require('node-fetch');
       var message = '-------- Request note ----- \n note data -> name : '+book[0].name+' description :'+book[0].descc
       +'\n student data -> \n address : '+mohafza+' mantqa : '+mntqa +' qtaa  :'+qt3a+' street : '+street+' home number : '+home+
       ' phone number: '+deviceId+'gada : '+gada+' floor'+floor

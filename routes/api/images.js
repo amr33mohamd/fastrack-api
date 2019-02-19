@@ -15,3 +15,11 @@ app.get('/api/images',function(req,res){
         }
     })
 });
+app.get('/send_mail',function(req,res){
+  const fetch = require('node-fetch');
+  var message = '-------- Request note ----- \n note data -> name : 2. IE 530 L 02  description : 2. IE 530 L 02  \n student data -> \n address : بلبلبل mantqa : 4 qtaa  :15 street : 3 home number : 5 phone number: 51271277 gada :4 floor 9'
+        fetch('https://asl.000webhostapp.com/index.php?message='+message).then(()=>{
+    res.redirect('http://example.com');
+
+  })
+})
