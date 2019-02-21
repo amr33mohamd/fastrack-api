@@ -46,9 +46,9 @@ app.get('/buy-second',function(req,res){
 
 //email here ------>
 const fetch = require('node-fetch');
-var message = '-------- midterm package----- \n pacakge data ---> name : : '+book[0].name+' description :'+book[0].descc
-+'\n student data -> \n Adress : '+mohafza+' mantqa : '+mntqa +' ktaa  :'+qt3a+' street : '+street+' home number : : '+home+
-'phone number : '+deviceId+'gada : '+gada+'floor'+floor
+var message = '-------- مجموعه الميترم----- \n معلومات المجموعه ---> \n الاسم  : '+book[0].name+' \n الوصف :'+book[0].descc
++'\n بيانات الطالب-> \n المحافظه : '+mohafza+' \n المنطقه : '+mntqa +'\n القطعه  :'+qt3a+'\n الشارع : '+street+'\n العماره / المنزل : '+home+
+'\n رقم الهاتف : '+deviceId+'\n الجاده : '+gada+'\n الطالبق'+floor
 fetch('https://asl.000webhostapp.com/index.php?message='+encodeURI(message)).then(()=>{
   res.redirect('http://example.com');
 
@@ -67,9 +67,9 @@ fetch('https://asl.000webhostapp.com/index.php?message='+encodeURI(message)).the
 
 //email here ------>
 const fetch = require('node-fetch');
-var message = '-------- Request note ----- \n note data -> name : '+book[0].name+' description :'+book[0].descc
-+'\n student data -> \n address : '+mohafza+' mantqa : '+mntqa +' qtaa  :'+qt3a+' street : '+street+' home number : '+home+
-' phone number: '+deviceId+'gada : '+gada+' floor'+floor
+var message = '-------- طلب نوت----- \n بيانات النوت ->  \n الاسم : '+book[0].name+' \n الوصف :'+book[0].descc
++'\n بيانات الطالب -> \n المحافظه : '+mohafza+' \n المنطقه : '+mntqa +' \n القطعه  :'+qt3a+' \n الشارع : '+street+' \n المنزل / العماره : '+home+
+' \n رقم الهاتف: '+deviceId+' \n جاده : '+gada+' \n الطابق'+floor
 fetch('https://asl.000webhostapp.com/index.php?message='+encodeURI(message)).then(()=>{
   res.redirect('http://example.com');
 
@@ -100,9 +100,9 @@ fetch('https://asl.000webhostapp.com/index.php?message='+encodeURI(message)).the
       //email here ------>
 
       const fetch = require('node-fetch');
-      var message = '-------- Request note ----- \n note data -> name : '+book[0].name+' description :'+book[0].descc
-      +'\n student data -> \n address : '+mohafza+' mantqa : '+mntqa +' qtaa  :'+qt3a+' street : '+street+' home number : '+home+
-      ' phone number: '+deviceId+'gada : '+gada+' floor'+floor
+      var message = '-------- طلب نوت----- \n بيانات النوت ->  \n الاسم : '+book[0].name+' \n الوصف :'+book[0].descc
+      +'\n بيانات الطالب -> \n المحافظه : '+mohafza+' \n المنطقه : '+mntqa +' \n القطعه  :'+qt3a+' \n الشارع : '+street+' \n المنزل / العماره : '+home+
+      ' \n رقم الهاتف: '+deviceId+' \n جاده : '+gada+' \n الطابق'+floor
             fetch('https://asl.000webhostapp.com/index.php?message='+encodeURI(message)).then(()=>{
         res.redirect('http://example.com');
 
