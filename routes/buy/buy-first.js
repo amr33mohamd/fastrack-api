@@ -65,9 +65,7 @@ app.get('/buy-first',function(req,res){
               }
           };
 
-          callback = (error, response, body) =
-      >
-          {
+          callback = (error, response, body) =>{
               if (!error && response.statusCode == 200) {
                   const info = JSON.parse(body);
                   res.redirect(info.RedirectUrl)
