@@ -2,6 +2,7 @@ app.get('/buy-first',function(req,res){
   var note_id = req.param('id');
   var type = req.param('type')
   const request = require('request');
+    const shortUrl = require('node-url-shortener');
 
   /*
    note -> 1
@@ -21,65 +22,69 @@ app.get('/buy-first',function(req,res){
 
         res.redirect(new_url);
       }
-      else{
-        var deviceId = req.param('deviceId')
-        redirect_url = 'http://'+req.headers.host+'/buy-second?note_id='+note[0].id+'&deviceId='+deviceId+'&type=1';
-        console.log(redirect_url)
-            // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId+',1';
-            const options = {
+      else {
+          var deviceId = req.param('deviceId')
+          redirect_url = 'http://' + req.headers.host + '/buy-second?note_id=' + note[0].id + '&deviceId=' + deviceId + '&type=1';
+
+          console.log(redirect_url)
+          shortUrl.short(redirect_url, function(err, redirect_url2){
+
+              // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId+',1';
+          const options = {
               url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
-              method:'post',
+              method: 'post',
               headers: {
-                'Content-Type': 'application/json',
-                'authorization': 'bearer b06Ci4ElTqnTFLYdKLsHBF7RIROXz1UKSMq2if38Ui3Qh6q7h2bcjr3zVauZW63Q-f98c5L_eu2Jc0uoLlxbcxqi7J5ByK-xuIBu3x2xo8x03CS9Ovw6dCRkWLSEd1WTwOeBo764Y8SdY7ACMr8xT71HtXB3RoVj-KPa_hg9ek3gNsYwSlUwSwapwmmekZKNPu7AwC8ZNlFVESp_bSQNaDYBFQTuqsy3q3nosGn8rQtCqgWSMk3iGKTVMu5hZnQaxd77k7WKRh2BWiEyFqsQSfR-u58mkitunj6JIloxIBGdaEv8cHE3LkH7led91Uvsm5XJdc9n06-b8HPOLVvS2u4soOSIw5P1M9jSOIAPLcNrV9KemwEmX_sSJ_jOTV-3djlasdN1GXDNthPN_hC5vNAUv2o1w7fEsHJ9WZptyUAjWQKF2K89zlTDo8y2N4EFAGw3Gy5uB0jdU9lpOuZii-K6ot-wQCPPROumOTGDKWuTu747PSf6jEmgVgu9i6Qit68XCkocTKd48sBb9055QS84mrLy_xJz-da0E7JI8Ij5pc4oDz5qDAmboWsjMsnQTNi6usdamsFOj4DPueOe4G-ydG78qWwBGxah0ic56cr-t4UpEilFth-95iEGNhgcsvZrJm2u836TT3e3mdG7P6dQx-4'
+                  'Content-Type': 'application/json',
+                  'authorization': 'bearer b06Ci4ElTqnTFLYdKLsHBF7RIROXz1UKSMq2if38Ui3Qh6q7h2bcjr3zVauZW63Q-f98c5L_eu2Jc0uoLlxbcxqi7J5ByK-xuIBu3x2xo8x03CS9Ovw6dCRkWLSEd1WTwOeBo764Y8SdY7ACMr8xT71HtXB3RoVj-KPa_hg9ek3gNsYwSlUwSwapwmmekZKNPu7AwC8ZNlFVESp_bSQNaDYBFQTuqsy3q3nosGn8rQtCqgWSMk3iGKTVMu5hZnQaxd77k7WKRh2BWiEyFqsQSfR-u58mkitunj6JIloxIBGdaEv8cHE3LkH7led91Uvsm5XJdc9n06-b8HPOLVvS2u4soOSIw5P1M9jSOIAPLcNrV9KemwEmX_sSJ_jOTV-3djlasdN1GXDNthPN_hC5vNAUv2o1w7fEsHJ9WZptyUAjWQKF2K89zlTDo8y2N4EFAGw3Gy5uB0jdU9lpOuZii-K6ot-wQCPPROumOTGDKWuTu747PSf6jEmgVgu9i6Qit68XCkocTKd48sBb9055QS84mrLy_xJz-da0E7JI8Ij5pc4oDz5qDAmboWsjMsnQTNi6usdamsFOj4DPueOe4G-ydG78qWwBGxah0ic56cr-t4UpEilFth-95iEGNhgcsvZrJm2u836TT3e3mdG7P6dQx-4'
               },
               form: {
 
-             "InvoiceValue": note[0].price,
-             "CustomerName": "Customer01",
-             "CustomerBlock": "",
-             "CustomerStreet": "",
-             "CustomerHouseBuildingNo": "",
-             "CustomerCivilId": "string",
-             "CustomerAddress": "string",
-             "CustomerReference": "string",
-             "CountryCodeId": "+965",
-             "CustomerMobile": deviceId,
-             "CustomerEmail": "tracksuccess@gmail.com",
-             "DisplayCurrencyId": 1,
-             "SendInvoiceOption": 1,
-             "InvoiceItemsCreate": [
-             {
-             "ProductId": null,
-             "ProductName": "Product01",
-             "Quantity": 1,
-             "UnitPrice": note[0].price
-             }
-             ],
-             "CallBackUrl": redirect_url,
-             "Language": 1
-            }
-            };
+                  "InvoiceValue": note[0].price,
+                  "CustomerName": "Customer01",
+                  "CustomerBlock": "",
+                  "CustomerStreet": "",
+                  "CustomerHouseBuildingNo": "",
+                  "CustomerCivilId": "string",
+                  "CustomerAddress": "string",
+                  "CustomerReference": "string",
+                  "CountryCodeId": "+965",
+                  "CustomerMobile": deviceId,
+                  "CustomerEmail": "tracksuccess@gmail.com",
+                  "DisplayCurrencyId": 1,
+                  "SendInvoiceOption": 1,
+                  "InvoiceItemsCreate": [
+                      {
+                          "ProductId": null,
+                          "ProductName": "Product01",
+                          "Quantity": 1,
+                          "UnitPrice": note[0].price
+                      }
+                  ],
+                  "CallBackUrl": redirect_url2,
+                  "Language": 1
+              }
+          };
 
-             callback = (error, response, body) =>{
+          callback = (error, response, body) =
+      >
+          {
               if (!error && response.statusCode == 200) {
-                const info = JSON.parse(body);
-                res.redirect(info.RedirectUrl)
+                  const info = JSON.parse(body);
+                  res.redirect(info.RedirectUrl)
               }
               else {
-                res.json(response)
+                  res.json(response)
               }
-            }
+          }
 
-            request(options, callback);
+          request(options, callback);
 
 
-
-              // res.render('buy-first',{
-              //   book:note[0],
-              //   url: new_url
-              // });
-
+          // res.render('buy-first',{
+          //   book:note[0],
+          //   url: new_url
+          // });
+      });
         }
     })
   }
