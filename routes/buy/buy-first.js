@@ -14,10 +14,12 @@ app.get('/buy-first',function(req,res){
   if(type == 1){
     sql.select('notes','id',note_id,function(note){
       const fetch = require('node-fetch');
-      if(note[0].price == 0){
+        var shortUrl = require('node-url-shortener');
+
+        if(note[0].price == 0){
         var deviceId = req.param('deviceId')
         new_url = 'http://'+req.headers.host+'/buy-second?note_id='+note[0].id+'&deviceId='+deviceId+'&type=1';
-        console.log(new_url)
+        console.log('llll')
 
         res.redirect(new_url);
       }
@@ -26,7 +28,6 @@ app.get('/buy-first',function(req,res){
           redirect_url = 'http://' + req.headers.host + '/buy-second?note_id=' + note[0].id + '&deviceId=' + deviceId + '&type=1';
 
           console.log(redirect_url)
-          var shortUrl = require('node-url-shortener');
 
           shortUrl.short(redirect_url, function(err, test){
 console.log(test)
