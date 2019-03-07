@@ -46,8 +46,8 @@
       <file leaf-file-name="buy-first.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/buy/buy-first.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="416">
+              <caret line="397" column="52" selection-start-line="397" selection-start-column="52" selection-end-line="397" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -172,12 +172,12 @@
       <option name="presentableId" value="Default" />
       <updated>1513634643275</updated>
       <workItem from="1513634649661" duration="494000" />
-      <workItem from="1551972959898" duration="5002000" />
+      <workItem from="1551972959898" duration="5078000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5496000" />
+    <option name="totallyTimeSpent" value="5572000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="983" extended-state="6" />
@@ -277,8 +277,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/buy/buy-first.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="416">
+          <caret line="397" column="52" selection-start-line="397" selection-start-column="52" selection-end-line="397" selection-end-column="52" />
         </state>
       </provider>
     </entry>
