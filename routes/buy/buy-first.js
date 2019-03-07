@@ -241,6 +241,8 @@ app.get('/buy-first',function(req,res){
       else{
         var deviceId = req.param('deviceId')
         var redirect_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+'&deviceId='+deviceId+'&type=3'
+          var shortUrl = require('node-url-shortener');
+
           shortUrl.short(redirect_url, function(err, redirect_url2) {
 
               const options = {
@@ -313,6 +315,7 @@ app.get('/buy-first',function(req,res){
       var home = req.param('home');
       var gada = req.param('gada');
       var floor = req.param('floor');
+        var shortUrl = require('node-url-shortener');
 
         var redirect_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+'&deviceId='+deviceId+'&type=4'+'&mohafza='+mohafza+'&mntqa='+mntqa+'&qt3a='+qt3a+'&street='+street+'&home='+home+'&gada='+gada+'&floor='+floor;
             // var url = 'https://php-helper.herokuapp.com/try.php?price='+video[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',2';
@@ -386,6 +389,7 @@ app.get('/buy-first',function(req,res){
         var home = req.param('home');
         var gada = req.param('gada');
         var floor = req.param('floor');
+        var shortUrl = require('node-url-shortener');
 
         var redirect_url = 'http://' + req.headers.host + '/buy-second?note_id=' + video[0].id + '&deviceId=' + deviceId + '&type=5' + '&mohafza=' + mohafza + '&mntqa=' + mntqa + '&qt3a=' + qt3a + '&street=' + street + '&home=' + home + '&gada=' + gada + '&floor=' + floor;
         // var url = 'https://php-helper.herokuapp.com/try.php?price='+video[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',2';
