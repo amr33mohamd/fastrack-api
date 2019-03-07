@@ -27,7 +27,7 @@ app.get('/buy-first',function(req,res){
           var deviceId = req.param('deviceId')
           redirect_url = 'http://' + req.headers.host + '/buy-second?note_id=' + note[0].id + '&deviceId=' + deviceId + '&type=1';
 
-          console.log(redirect_url)
+          console.log("r"+redirect_url)
 
           shortUrl.short(redirect_url, function(err, test){
 console.log("llll"+test)
