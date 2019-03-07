@@ -2,7 +2,6 @@ app.get('/buy-first',function(req,res){
   var note_id = req.param('id');
   var type = req.param('type')
   const request = require('request');
-    var shortUrl = require('node-url-shortener');
 
   /*
    note -> 1
@@ -26,70 +25,67 @@ app.get('/buy-first',function(req,res){
         var deviceId = req.param('deviceId')
         redirect_url = 'http://'+req.headers.host+'/buy-second?note_id='+note[0].id+'&deviceId='+deviceId+'&type=1';
         console.log(redirect_url)
-          shortUrl.short(encodeURI(redirect_url), function (err, redirect_url2) {
+            // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId+',1';
+            const options = {
+              url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
+              method:'post',
+              headers: {
+                'Content-Type': 'application/json',
+                'authorization': 'bearer b06Ci4ElTqnTFLYdKLsHBF7RIROXz1UKSMq2if38Ui3Qh6q7h2bcjr3zVauZW63Q-f98c5L_eu2Jc0uoLlxbcxqi7J5ByK-xuIBu3x2xo8x03CS9Ovw6dCRkWLSEd1WTwOeBo764Y8SdY7ACMr8xT71HtXB3RoVj-KPa_hg9ek3gNsYwSlUwSwapwmmekZKNPu7AwC8ZNlFVESp_bSQNaDYBFQTuqsy3q3nosGn8rQtCqgWSMk3iGKTVMu5hZnQaxd77k7WKRh2BWiEyFqsQSfR-u58mkitunj6JIloxIBGdaEv8cHE3LkH7led91Uvsm5XJdc9n06-b8HPOLVvS2u4soOSIw5P1M9jSOIAPLcNrV9KemwEmX_sSJ_jOTV-3djlasdN1GXDNthPN_hC5vNAUv2o1w7fEsHJ9WZptyUAjWQKF2K89zlTDo8y2N4EFAGw3Gy5uB0jdU9lpOuZii-K6ot-wQCPPROumOTGDKWuTu747PSf6jEmgVgu9i6Qit68XCkocTKd48sBb9055QS84mrLy_xJz-da0E7JI8Ij5pc4oDz5qDAmboWsjMsnQTNi6usdamsFOj4DPueOe4G-ydG78qWwBGxah0ic56cr-t4UpEilFth-95iEGNhgcsvZrJm2u836TT3e3mdG7P6dQx-4'
+              },
+              form: {
 
-              // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId+',1';
-              const options = {
-                  url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
-                  method: 'post',
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'authorization': 'bearer b06Ci4ElTqnTFLYdKLsHBF7RIROXz1UKSMq2if38Ui3Qh6q7h2bcjr3zVauZW63Q-f98c5L_eu2Jc0uoLlxbcxqi7J5ByK-xuIBu3x2xo8x03CS9Ovw6dCRkWLSEd1WTwOeBo764Y8SdY7ACMr8xT71HtXB3RoVj-KPa_hg9ek3gNsYwSlUwSwapwmmekZKNPu7AwC8ZNlFVESp_bSQNaDYBFQTuqsy3q3nosGn8rQtCqgWSMk3iGKTVMu5hZnQaxd77k7WKRh2BWiEyFqsQSfR-u58mkitunj6JIloxIBGdaEv8cHE3LkH7led91Uvsm5XJdc9n06-b8HPOLVvS2u4soOSIw5P1M9jSOIAPLcNrV9KemwEmX_sSJ_jOTV-3djlasdN1GXDNthPN_hC5vNAUv2o1w7fEsHJ9WZptyUAjWQKF2K89zlTDo8y2N4EFAGw3Gy5uB0jdU9lpOuZii-K6ot-wQCPPROumOTGDKWuTu747PSf6jEmgVgu9i6Qit68XCkocTKd48sBb9055QS84mrLy_xJz-da0E7JI8Ij5pc4oDz5qDAmboWsjMsnQTNi6usdamsFOj4DPueOe4G-ydG78qWwBGxah0ic56cr-t4UpEilFth-95iEGNhgcsvZrJm2u836TT3e3mdG7P6dQx-4'
-                  },
-                  form: {
+             "InvoiceValue": note[0].price,
+             "CustomerName": "Customer01",
+             "CustomerBlock": "",
+             "CustomerStreet": "",
+             "CustomerHouseBuildingNo": "",
+             "CustomerCivilId": "string",
+             "CustomerAddress": "string",
+             "CustomerReference": "string",
+             "CountryCodeId": "+965",
+             "CustomerMobile": deviceId,
+             "CustomerEmail": "tracksuccess@gmail.com",
+             "DisplayCurrencyId": 1,
+             "SendInvoiceOption": 1,
+             "InvoiceItemsCreate": [
+             {
+             "ProductId": null,
+             "ProductName": "Product01",
+             "Quantity": 1,
+             "UnitPrice": note[0].price
+             }
+             ],
+             "CallBackUrl": redirect_url,
+             "Language": 1
+            }
+            };
 
-                      "InvoiceValue": note[0].price,
-                      "CustomerName": "Customer01",
-                      "CustomerBlock": "",
-                      "CustomerStreet": "",
-                      "CustomerHouseBuildingNo": "",
-                      "CustomerCivilId": "string",
-                      "CustomerAddress": "string",
-                      "CustomerReference": "string",
-                      "CountryCodeId": "+965",
-                      "CustomerMobile": deviceId,
-                      "CustomerEmail": "tracksuccess@gmail.com",
-                      "DisplayCurrencyId": 1,
-                      "SendInvoiceOption": 1,
-                      "InvoiceItemsCreate": [
-                          {
-                              "ProductId": null,
-                              "ProductName": "Product01",
-                              "Quantity": 1,
-                              "UnitPrice": note[0].price
-                          }
-                      ],
-                      "CallBackUrl": redirect_url2,
-                      "Language": 1
-                  }
-              };
-
-              callback = (error, response, body) =>
-              {
-                  if (!error && response.statusCode == 200) {
-                      const info = JSON.parse(body);
-                      res.redirect(info.RedirectUrl)
-                  }
-                  else {
-                      res.json(response)
-                  }
+             callback = (error, response, body) =>{
+              if (!error && response.statusCode == 200) {
+                const info = JSON.parse(body);
+                res.redirect(info.RedirectUrl)
               }
+              else {
+                res.json(response)
+              }
+            }
 
-              request(options, callback);
+            request(options, callback);
+
 
 
               // res.render('buy-first',{
               //   book:note[0],
               //   url: new_url
               // });
-          });
+
         }
     })
-
   }
   else if(type == 6){
-    sql.select('notes','id',note_id,function(note) {
-        const fetch = require('node-fetch');
+    sql.select('notes','id',note_id,function(note){
+      const fetch = require('node-fetch');
 
         var deviceId = req.param('deviceId')
         var mohafza = req.param('mohafza');
@@ -100,69 +96,65 @@ app.get('/buy-first',function(req,res){
         var gada = req.param('gada');
         var floor = req.param('floor');
 
-        redirect_url = 'http://' + req.headers.host + '/buy-second?note_id=' + note[0].id + '&deviceId=' + deviceId + '&type=6' + '&mohafza=' + mohafza + '&mntqa=' + mntqa + '&qt3a=' + qt3a + '&street=' + street + '&home=' + home + '&gada=' + gada + '&floor=' + floor;
-        ;
+        redirect_url = 'http://'+req.headers.host+'/buy-second?note_id='+note[0].id+'&deviceId='+deviceId+'&type=6'+'&mohafza='+mohafza+'&mntqa='+mntqa+'&qt3a='+qt3a+'&street='+street+'&home='+home+'&gada='+gada+'&floor='+floor;;
         console.log(redirect_url)
-        shortUrl.short(encodeURI(redirect_url), function (err, redirect_url2) {
-
             // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId+',1';
             const options = {
-                url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
-                method: 'post',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': 'bearer b06Ci4ElTqnTFLYdKLsHBF7RIROXz1UKSMq2if38Ui3Qh6q7h2bcjr3zVauZW63Q-f98c5L_eu2Jc0uoLlxbcxqi7J5ByK-xuIBu3x2xo8x03CS9Ovw6dCRkWLSEd1WTwOeBo764Y8SdY7ACMr8xT71HtXB3RoVj-KPa_hg9ek3gNsYwSlUwSwapwmmekZKNPu7AwC8ZNlFVESp_bSQNaDYBFQTuqsy3q3nosGn8rQtCqgWSMk3iGKTVMu5hZnQaxd77k7WKRh2BWiEyFqsQSfR-u58mkitunj6JIloxIBGdaEv8cHE3LkH7led91Uvsm5XJdc9n06-b8HPOLVvS2u4soOSIw5P1M9jSOIAPLcNrV9KemwEmX_sSJ_jOTV-3djlasdN1GXDNthPN_hC5vNAUv2o1w7fEsHJ9WZptyUAjWQKF2K89zlTDo8y2N4EFAGw3Gy5uB0jdU9lpOuZii-K6ot-wQCPPROumOTGDKWuTu747PSf6jEmgVgu9i6Qit68XCkocTKd48sBb9055QS84mrLy_xJz-da0E7JI8Ij5pc4oDz5qDAmboWsjMsnQTNi6usdamsFOj4DPueOe4G-ydG78qWwBGxah0ic56cr-t4UpEilFth-95iEGNhgcsvZrJm2u836TT3e3mdG7P6dQx-4'
-                },
-                form: {
+              url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
+              method:'post',
+              headers: {
+                'Content-Type': 'application/json',
+                'authorization': 'bearer b06Ci4ElTqnTFLYdKLsHBF7RIROXz1UKSMq2if38Ui3Qh6q7h2bcjr3zVauZW63Q-f98c5L_eu2Jc0uoLlxbcxqi7J5ByK-xuIBu3x2xo8x03CS9Ovw6dCRkWLSEd1WTwOeBo764Y8SdY7ACMr8xT71HtXB3RoVj-KPa_hg9ek3gNsYwSlUwSwapwmmekZKNPu7AwC8ZNlFVESp_bSQNaDYBFQTuqsy3q3nosGn8rQtCqgWSMk3iGKTVMu5hZnQaxd77k7WKRh2BWiEyFqsQSfR-u58mkitunj6JIloxIBGdaEv8cHE3LkH7led91Uvsm5XJdc9n06-b8HPOLVvS2u4soOSIw5P1M9jSOIAPLcNrV9KemwEmX_sSJ_jOTV-3djlasdN1GXDNthPN_hC5vNAUv2o1w7fEsHJ9WZptyUAjWQKF2K89zlTDo8y2N4EFAGw3Gy5uB0jdU9lpOuZii-K6ot-wQCPPROumOTGDKWuTu747PSf6jEmgVgu9i6Qit68XCkocTKd48sBb9055QS84mrLy_xJz-da0E7JI8Ij5pc4oDz5qDAmboWsjMsnQTNi6usdamsFOj4DPueOe4G-ydG78qWwBGxah0ic56cr-t4UpEilFth-95iEGNhgcsvZrJm2u836TT3e3mdG7P6dQx-4'
+              },
+              form: {
 
-                    "InvoiceValue": note[0].price,
-                    "CustomerName": "Customer01",
-                    "CustomerBlock": "",
-                    "CustomerStreet": "",
-                    "CustomerHouseBuildingNo": "",
-                    "CustomerCivilId": "string",
-                    "CustomerAddress": "string",
-                    "CustomerReference": "string",
-                    "CountryCodeId": "+965",
-                    "CustomerMobile": deviceId,
-                    "CustomerEmail": "tracksuccess@gmail.com",
-                    "DisplayCurrencyId": 1,
-                    "SendInvoiceOption": 1,
-                    "InvoiceItemsCreate": [
-                        {
-                            "ProductId": null,
-                            "ProductName": "Product01",
-                            "Quantity": 1,
-                            "UnitPrice": note[0].price
-                        }
-                    ],
-                    "CallBackUrl": encodeURI(redirect_url2),
-                    "Language": 1
-                }
+             "InvoiceValue": note[0].price,
+             "CustomerName": "Customer01",
+             "CustomerBlock": "",
+             "CustomerStreet": "",
+             "CustomerHouseBuildingNo": "",
+             "CustomerCivilId": "string",
+             "CustomerAddress": "string",
+             "CustomerReference": "string",
+             "CountryCodeId": "+965",
+             "CustomerMobile": deviceId,
+             "CustomerEmail": "tracksuccess@gmail.com",
+             "DisplayCurrencyId": 1,
+             "SendInvoiceOption": 1,
+             "InvoiceItemsCreate": [
+             {
+             "ProductId": null,
+             "ProductName": "Product01",
+             "Quantity": 1,
+             "UnitPrice": note[0].price
+             }
+             ],
+             "CallBackUrl": encodeURI(redirect_url),
+             "Language": 1
+            }
             };
 
-            callback = (error, response, body) =>
-            {
-                if (!error && response.statusCode == 200) {
-                    const info = JSON.parse(body);
-                    res.redirect(info.RedirectUrl)
-                }
-                else {
-                    res.json(response)
-                }
+             callback = (error, response, body) =>{
+              if (!error && response.statusCode == 200) {
+                const info = JSON.parse(body);
+                res.redirect(info.RedirectUrl)
+              }
+              else {
+                res.json(response)
+              }
             }
 
             request(options, callback);
 
 
-            // res.render('buy-first',{
-            //   book:note[0],
-            //   url: new_url
-            // });
+
+              // res.render('buy-first',{
+              //   book:note[0],
+              //   url: new_url
+              // });
 
 
-        })
-    });
+    })
   }
   else if(type == 2) {
     sql.select('videos','note_id',note_id,function(video){
@@ -176,10 +168,6 @@ app.get('/buy-first',function(req,res){
       else{
         var redirect_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+'&deviceId='+deviceId+'&type=2';
             // var url = 'https://php-helper.herokuapp.com/try.php?price='+video[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',2';
-          var shortUrl = require('node-url-shortener');
-
-          shortUrl.short(encodeURI(redirect_url), function (err, redirect_url2) {
-
 
             const options = {
               url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
@@ -211,7 +199,7 @@ app.get('/buy-first',function(req,res){
              "UnitPrice": video[0].price
              }
              ],
-             "CallBackUrl": redirect_url2,
+             "CallBackUrl": redirect_url,
              "Language": 1
             }
             };
@@ -233,7 +221,7 @@ app.get('/buy-first',function(req,res){
               //   book:note[0],
               //   url: new_url
               // });
-          });
+
 }
     })
   }
@@ -249,66 +237,62 @@ app.get('/buy-first',function(req,res){
       else{
         var deviceId = req.param('deviceId')
         var redirect_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+'&deviceId='+deviceId+'&type=3'
-          var shortUrl = require('node-url-shortener');
 
-          shortUrl.short(encodeURI(redirect_url), function (err, redirect_url2) {
+        const options = {
+          url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
+          method:'post',
+          headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'bearer b06Ci4ElTqnTFLYdKLsHBF7RIROXz1UKSMq2if38Ui3Qh6q7h2bcjr3zVauZW63Q-f98c5L_eu2Jc0uoLlxbcxqi7J5ByK-xuIBu3x2xo8x03CS9Ovw6dCRkWLSEd1WTwOeBo764Y8SdY7ACMr8xT71HtXB3RoVj-KPa_hg9ek3gNsYwSlUwSwapwmmekZKNPu7AwC8ZNlFVESp_bSQNaDYBFQTuqsy3q3nosGn8rQtCqgWSMk3iGKTVMu5hZnQaxd77k7WKRh2BWiEyFqsQSfR-u58mkitunj6JIloxIBGdaEv8cHE3LkH7led91Uvsm5XJdc9n06-b8HPOLVvS2u4soOSIw5P1M9jSOIAPLcNrV9KemwEmX_sSJ_jOTV-3djlasdN1GXDNthPN_hC5vNAUv2o1w7fEsHJ9WZptyUAjWQKF2K89zlTDo8y2N4EFAGw3Gy5uB0jdU9lpOuZii-K6ot-wQCPPROumOTGDKWuTu747PSf6jEmgVgu9i6Qit68XCkocTKd48sBb9055QS84mrLy_xJz-da0E7JI8Ij5pc4oDz5qDAmboWsjMsnQTNi6usdamsFOj4DPueOe4G-ydG78qWwBGxah0ic56cr-t4UpEilFth-95iEGNhgcsvZrJm2u836TT3e3mdG7P6dQx-4'
+          },
+          form: {
 
-              const options = {
-                  url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
-                  method: 'post',
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'authorization': 'bearer b06Ci4ElTqnTFLYdKLsHBF7RIROXz1UKSMq2if38Ui3Qh6q7h2bcjr3zVauZW63Q-f98c5L_eu2Jc0uoLlxbcxqi7J5ByK-xuIBu3x2xo8x03CS9Ovw6dCRkWLSEd1WTwOeBo764Y8SdY7ACMr8xT71HtXB3RoVj-KPa_hg9ek3gNsYwSlUwSwapwmmekZKNPu7AwC8ZNlFVESp_bSQNaDYBFQTuqsy3q3nosGn8rQtCqgWSMk3iGKTVMu5hZnQaxd77k7WKRh2BWiEyFqsQSfR-u58mkitunj6JIloxIBGdaEv8cHE3LkH7led91Uvsm5XJdc9n06-b8HPOLVvS2u4soOSIw5P1M9jSOIAPLcNrV9KemwEmX_sSJ_jOTV-3djlasdN1GXDNthPN_hC5vNAUv2o1w7fEsHJ9WZptyUAjWQKF2K89zlTDo8y2N4EFAGw3Gy5uB0jdU9lpOuZii-K6ot-wQCPPROumOTGDKWuTu747PSf6jEmgVgu9i6Qit68XCkocTKd48sBb9055QS84mrLy_xJz-da0E7JI8Ij5pc4oDz5qDAmboWsjMsnQTNi6usdamsFOj4DPueOe4G-ydG78qWwBGxah0ic56cr-t4UpEilFth-95iEGNhgcsvZrJm2u836TT3e3mdG7P6dQx-4'
-                  },
-                  form: {
+         "InvoiceValue": video[0].bothh,
+         "CustomerName": "Customer01",
+             "CustomerBlock": "",
+             "CustomerStreet": "",
+             "CustomerHouseBuildingNo": "",
+             "CustomerCivilId": "string",
+             "CustomerAddress": "string",
+             "CustomerReference": "string",
+             "CountryCodeId": "+965",
+             "CustomerMobile": deviceId,
+             "CustomerEmail": "tracksuccess@gmail.com",
+             "DisplayCurrencyId": 1,
+             "SendInvoiceOption": 1,
+         "InvoiceItemsCreate": [
+         {
+         "ProductId": null,
+         "ProductName": "Product01",
+         "Quantity": 1,
+         "UnitPrice": video[0].bothh
+         }
+         ],
+         "CallBackUrl": redirect_url,
+         "Language": 1
+        }
+        };
 
-                      "InvoiceValue": video[0].bothh,
-                      "CustomerName": "Customer01",
-                      "CustomerBlock": "",
-                      "CustomerStreet": "",
-                      "CustomerHouseBuildingNo": "",
-                      "CustomerCivilId": "string",
-                      "CustomerAddress": "string",
-                      "CustomerReference": "string",
-                      "CountryCodeId": "+965",
-                      "CustomerMobile": deviceId,
-                      "CustomerEmail": "tracksuccess@gmail.com",
-                      "DisplayCurrencyId": 1,
-                      "SendInvoiceOption": 1,
-                      "InvoiceItemsCreate": [
-                          {
-                              "ProductId": null,
-                              "ProductName": "Product01",
-                              "Quantity": 1,
-                              "UnitPrice": video[0].bothh
-                          }
-                      ],
-                      "CallBackUrl": redirect_url2,
-                      "Language": 1
-                  }
-              };
+         callback = (error, response, body) =>{
+          if (!error && response.statusCode == 200) {
+            const info = JSON.parse(body);
+            res.redirect(info.RedirectUrl)
+          }
+          else {
+            res.json(response)
+          }
+        }
 
-              callback = (error, response, body) =>
-              {
-                  if (!error && response.statusCode == 200) {
-                      const info = JSON.parse(body);
-                      res.redirect(info.RedirectUrl)
-                  }
-                  else {
-                      res.json(response)
-                  }
-              }
+        request(options, callback);
 
-              request(options, callback);
+            // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',3';
 
-              // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',3';
 
 
               // res.render('buy-first',{
               //   book:note[0],
               //   url: new_url
               // });
-          });
         }
     })
   }
@@ -323,143 +307,136 @@ app.get('/buy-first',function(req,res){
       var home = req.param('home');
       var gada = req.param('gada');
       var floor = req.param('floor');
-        var shortUrl = require('node-url-shortener');
 
         var redirect_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+'&deviceId='+deviceId+'&type=4'+'&mohafza='+mohafza+'&mntqa='+mntqa+'&qt3a='+qt3a+'&street='+street+'&home='+home+'&gada='+gada+'&floor='+floor;
             // var url = 'https://php-helper.herokuapp.com/try.php?price='+video[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',2';
-        shortUrl.short(encodeURI(redirect_url), function (err, redirect_url2) {
 
             const options = {
-                url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
-                method: 'post',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': 'bearer b06Ci4ElTqnTFLYdKLsHBF7RIROXz1UKSMq2if38Ui3Qh6q7h2bcjr3zVauZW63Q-f98c5L_eu2Jc0uoLlxbcxqi7J5ByK-xuIBu3x2xo8x03CS9Ovw6dCRkWLSEd1WTwOeBo764Y8SdY7ACMr8xT71HtXB3RoVj-KPa_hg9ek3gNsYwSlUwSwapwmmekZKNPu7AwC8ZNlFVESp_bSQNaDYBFQTuqsy3q3nosGn8rQtCqgWSMk3iGKTVMu5hZnQaxd77k7WKRh2BWiEyFqsQSfR-u58mkitunj6JIloxIBGdaEv8cHE3LkH7led91Uvsm5XJdc9n06-b8HPOLVvS2u4soOSIw5P1M9jSOIAPLcNrV9KemwEmX_sSJ_jOTV-3djlasdN1GXDNthPN_hC5vNAUv2o1w7fEsHJ9WZptyUAjWQKF2K89zlTDo8y2N4EFAGw3Gy5uB0jdU9lpOuZii-K6ot-wQCPPROumOTGDKWuTu747PSf6jEmgVgu9i6Qit68XCkocTKd48sBb9055QS84mrLy_xJz-da0E7JI8Ij5pc4oDz5qDAmboWsjMsnQTNi6usdamsFOj4DPueOe4G-ydG78qWwBGxah0ic56cr-t4UpEilFth-95iEGNhgcsvZrJm2u836TT3e3mdG7P6dQx-4'
-                },
-                form: {
+              url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
+              method:'post',
+              headers: {
+                'Content-Type': 'application/json',
+                'authorization': 'bearer b06Ci4ElTqnTFLYdKLsHBF7RIROXz1UKSMq2if38Ui3Qh6q7h2bcjr3zVauZW63Q-f98c5L_eu2Jc0uoLlxbcxqi7J5ByK-xuIBu3x2xo8x03CS9Ovw6dCRkWLSEd1WTwOeBo764Y8SdY7ACMr8xT71HtXB3RoVj-KPa_hg9ek3gNsYwSlUwSwapwmmekZKNPu7AwC8ZNlFVESp_bSQNaDYBFQTuqsy3q3nosGn8rQtCqgWSMk3iGKTVMu5hZnQaxd77k7WKRh2BWiEyFqsQSfR-u58mkitunj6JIloxIBGdaEv8cHE3LkH7led91Uvsm5XJdc9n06-b8HPOLVvS2u4soOSIw5P1M9jSOIAPLcNrV9KemwEmX_sSJ_jOTV-3djlasdN1GXDNthPN_hC5vNAUv2o1w7fEsHJ9WZptyUAjWQKF2K89zlTDo8y2N4EFAGw3Gy5uB0jdU9lpOuZii-K6ot-wQCPPROumOTGDKWuTu747PSf6jEmgVgu9i6Qit68XCkocTKd48sBb9055QS84mrLy_xJz-da0E7JI8Ij5pc4oDz5qDAmboWsjMsnQTNi6usdamsFOj4DPueOe4G-ydG78qWwBGxah0ic56cr-t4UpEilFth-95iEGNhgcsvZrJm2u836TT3e3mdG7P6dQx-4'
+              },
+              form: {
 
-                    "InvoiceValue": video[0].price,
-                    "CustomerName": "Customer01",
-                    "CustomerBlock": "",
-                    "CustomerStreet": "",
-                    "CustomerHouseBuildingNo": "",
-                    "CustomerCivilId": "string",
-                    "CustomerAddress": "string",
-                    "CustomerReference": "string",
-                    "CountryCodeId": "+965",
-                    "CustomerMobile": deviceId,
-                    "CustomerEmail": "tracksuccess@gmail.com",
-                    "DisplayCurrencyId": 1,
-                    "SendInvoiceOption": 1,
-                    "InvoiceItemsCreate": [
-                        {
-                            "ProductId": null,
-                            "ProductName": "Product01",
-                            "Quantity": 1,
-                            "UnitPrice": video[0].price
-                        }
-                    ],
-                    "CallBackUrl": encodeURI(redirect_url2),
-                    "Language": 1
-                }
+             "InvoiceValue": video[0].price,
+             "CustomerName": "Customer01",
+             "CustomerBlock": "",
+             "CustomerStreet": "",
+             "CustomerHouseBuildingNo": "",
+             "CustomerCivilId": "string",
+             "CustomerAddress": "string",
+             "CustomerReference": "string",
+             "CountryCodeId": "+965",
+             "CustomerMobile": deviceId,
+             "CustomerEmail": "tracksuccess@gmail.com",
+             "DisplayCurrencyId": 1,
+             "SendInvoiceOption": 1,
+               "InvoiceItemsCreate": [
+             {
+             "ProductId": null,
+             "ProductName": "Product01",
+             "Quantity": 1,
+             "UnitPrice": video[0].price
+             }
+             ],
+             "CallBackUrl": encodeURI(redirect_url),
+             "Language": 1
+            }
             };
 
-            callback = (error, response, body) =>
-            {
-                if (!error && response.statusCode == 200) {
-                    const info = JSON.parse(body);
-                    res.redirect(info.RedirectUrl)
-                }
-                else {
-                    res.json(response)
-                }
+             callback = (error, response, body) =>{
+              if (!error && response.statusCode == 200) {
+                const info = JSON.parse(body);
+                res.redirect(info.RedirectUrl)
+              }
+              else {
+                res.json(response)
+              }
             }
 
             request(options, callback);
 
 
-            // res.render('buy-first',{
-            //   book:note[0],
-            //   url: new_url
-            // });
+              // res.render('buy-first',{
+              //   book:note[0],
+              //   url: new_url
+              // });
 
-        });
+
     })
   }
   else if(type == 5) { // video + delivery
-    sql.select('videos','note_id',note_id,function(video) {
-        const fetch = require('node-fetch');
-        var deviceId = req.param('deviceId');
-        var mohafza = req.param('mohafza');
-        var mntqa = req.param('mntqa');
-        var qt3a = req.param('qt3a');
-        var street = req.param('street');
-        var home = req.param('home');
-        var gada = req.param('gada');
-        var floor = req.param('floor');
+    sql.select('videos','note_id',note_id,function(video){
+      const fetch = require('node-fetch');
+      var deviceId = req.param('deviceId');
+      var mohafza = req.param('mohafza');
+      var mntqa = req.param('mntqa');
+      var qt3a = req.param('qt3a');
+      var street = req.param('street');
+      var home = req.param('home');
+      var gada = req.param('gada');
+      var floor = req.param('floor');
 
-        var redirect_url = 'http://' + req.headers.host + '/buy-second?note_id=' + video[0].id + '&deviceId=' + deviceId + '&type=5' + '&mohafza=' + mohafza + '&mntqa=' + mntqa + '&qt3a=' + qt3a + '&street=' + street + '&home=' + home + '&gada=' + gada + '&floor=' + floor;
-        // var url = 'https://php-helper.herokuapp.com/try.php?price='+video[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',2';
-        console.log(redirect_url)
-        shortUrl.short(encodeURI(redirect_url), function (err, redirect_url2) {
-
+        var redirect_url = 'http://'+req.headers.host+'/buy-second?note_id='+video[0].id+'&deviceId='+deviceId+'&type=5'+'&mohafza='+mohafza+'&mntqa='+mntqa+'&qt3a='+qt3a+'&street='+street+'&home='+home+'&gada='+gada+'&floor='+floor;
+            // var url = 'https://php-helper.herokuapp.com/try.php?price='+video[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',2';
+console.log(redirect_url)
             const options = {
-                url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
-                method: 'post',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': 'bearer b06Ci4ElTqnTFLYdKLsHBF7RIROXz1UKSMq2if38Ui3Qh6q7h2bcjr3zVauZW63Q-f98c5L_eu2Jc0uoLlxbcxqi7J5ByK-xuIBu3x2xo8x03CS9Ovw6dCRkWLSEd1WTwOeBo764Y8SdY7ACMr8xT71HtXB3RoVj-KPa_hg9ek3gNsYwSlUwSwapwmmekZKNPu7AwC8ZNlFVESp_bSQNaDYBFQTuqsy3q3nosGn8rQtCqgWSMk3iGKTVMu5hZnQaxd77k7WKRh2BWiEyFqsQSfR-u58mkitunj6JIloxIBGdaEv8cHE3LkH7led91Uvsm5XJdc9n06-b8HPOLVvS2u4soOSIw5P1M9jSOIAPLcNrV9KemwEmX_sSJ_jOTV-3djlasdN1GXDNthPN_hC5vNAUv2o1w7fEsHJ9WZptyUAjWQKF2K89zlTDo8y2N4EFAGw3Gy5uB0jdU9lpOuZii-K6ot-wQCPPROumOTGDKWuTu747PSf6jEmgVgu9i6Qit68XCkocTKd48sBb9055QS84mrLy_xJz-da0E7JI8Ij5pc4oDz5qDAmboWsjMsnQTNi6usdamsFOj4DPueOe4G-ydG78qWwBGxah0ic56cr-t4UpEilFth-95iEGNhgcsvZrJm2u836TT3e3mdG7P6dQx-4'
-                },
-                form: {
+              url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
+              method:'post',
+              headers: {
+                'Content-Type': 'application/json',
+                'authorization': 'bearer b06Ci4ElTqnTFLYdKLsHBF7RIROXz1UKSMq2if38Ui3Qh6q7h2bcjr3zVauZW63Q-f98c5L_eu2Jc0uoLlxbcxqi7J5ByK-xuIBu3x2xo8x03CS9Ovw6dCRkWLSEd1WTwOeBo764Y8SdY7ACMr8xT71HtXB3RoVj-KPa_hg9ek3gNsYwSlUwSwapwmmekZKNPu7AwC8ZNlFVESp_bSQNaDYBFQTuqsy3q3nosGn8rQtCqgWSMk3iGKTVMu5hZnQaxd77k7WKRh2BWiEyFqsQSfR-u58mkitunj6JIloxIBGdaEv8cHE3LkH7led91Uvsm5XJdc9n06-b8HPOLVvS2u4soOSIw5P1M9jSOIAPLcNrV9KemwEmX_sSJ_jOTV-3djlasdN1GXDNthPN_hC5vNAUv2o1w7fEsHJ9WZptyUAjWQKF2K89zlTDo8y2N4EFAGw3Gy5uB0jdU9lpOuZii-K6ot-wQCPPROumOTGDKWuTu747PSf6jEmgVgu9i6Qit68XCkocTKd48sBb9055QS84mrLy_xJz-da0E7JI8Ij5pc4oDz5qDAmboWsjMsnQTNi6usdamsFOj4DPueOe4G-ydG78qWwBGxah0ic56cr-t4UpEilFth-95iEGNhgcsvZrJm2u836TT3e3mdG7P6dQx-4'
+              },
+              form: {
 
-                    "InvoiceValue": video[0].with_deliver,
-                    "CustomerName": "Customer01",
-                    "CustomerBlock": "",
-                    "CustomerStreet": "",
-                    "CustomerHouseBuildingNo": "",
-                    "CustomerCivilId": "string",
-                    "CustomerAddress": "string",
-                    "CustomerReference": "string",
-                    "CountryCodeId": "+965",
-                    "CustomerMobile": deviceId,
-                    "CustomerEmail": "tracksuccess@gmail.com",
-                    "DisplayCurrencyId": 1,
-                    "SendInvoiceOption": 1,
-                    "InvoiceItemsCreate": [
-                        {
-                            "ProductId": null,
-                            "ProductName": "Product01",
-                            "Quantity": 1,
-                            "UnitPrice": video[0].with_deliver
-                        }
-                    ],
-                    "CallBackUrl": encodeURI(redirect_url2),
-                    "Language": 1
-                }
+             "InvoiceValue": video[0].with_deliver,
+             "CustomerName": "Customer01",
+             "CustomerBlock": "",
+             "CustomerStreet": "",
+             "CustomerHouseBuildingNo": "",
+             "CustomerCivilId": "string",
+             "CustomerAddress": "string",
+             "CustomerReference": "string",
+             "CountryCodeId": "+965",
+             "CustomerMobile": deviceId,
+             "CustomerEmail": "tracksuccess@gmail.com",
+             "DisplayCurrencyId": 1,
+             "SendInvoiceOption": 1,
+               "InvoiceItemsCreate": [
+             {
+             "ProductId": null,
+             "ProductName": "Product01",
+             "Quantity": 1,
+             "UnitPrice": video[0].with_deliver
+             }
+             ],
+             "CallBackUrl": encodeURI(redirect_url),
+             "Language": 1
+            }
             };
 
-            callback = (error, response, body) =>
-            {
-                if (!error && response.statusCode == 200) {
-                    const info = JSON.parse(body);
-                    res.redirect(info.RedirectUrl)
-                }
-                else {
-                    res.json(error)
-                }
+             callback = (error, response, body) =>{
+              if (!error && response.statusCode == 200) {
+                const info = JSON.parse(body);
+                res.redirect(info.RedirectUrl)
+              }
+              else {
+                res.json(response)
+              }
             }
 
             request(options, callback);
 
 
-            // res.render('buy-first',{
-            //   book:note[0],
-            //   url: new_url
-            // });
+              // res.render('buy-first',{
+              //   book:note[0],
+              //   url: new_url
+              // });
 
 
-        })
-    });
+    })
   }
 
 })
