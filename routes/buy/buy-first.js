@@ -445,7 +445,7 @@ app.get('/buy-first',function(req,res){
                     res.redirect(info.RedirectUrl)
                 }
                 else {
-                    res.json(response)
+                    res.json(error)
                 }
             }
 
