@@ -55,8 +55,8 @@ app.get('/users', function(req, res) {
 
 app.get('/short',function (req,res) {
     var shortUrl = require('node-url-shortener');
-
-    shortUrl.short('https://google.com', function(err, url){
+var data = "http://www.fastrack.xyz//ggg.jjj"
+    shortUrl.short(data, function(err, url){
         console.log(url);
     });
 })
