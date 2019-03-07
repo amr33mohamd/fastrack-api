@@ -2,7 +2,6 @@ app.get('/buy-first',function(req,res){
   var note_id = req.param('id');
   var type = req.param('type')
   const request = require('request');
-    const shortUrl = require('node-url-shortener');
 
   /*
    note -> 1
@@ -27,10 +26,10 @@ app.get('/buy-first',function(req,res){
           redirect_url = 'http://' + req.headers.host + '/buy-second?note_id=' + note[0].id + '&deviceId=' + deviceId + '&type=1';
 
           console.log(redirect_url)
-          const shortUrl = require('node-url-shortener');
+          var shortUrl = require('node-url-shortener');
 
-          shortUrl.short(redirect_url, function(err, redirect_url2){
-console.log(redirect_url2)
+          shortUrl.short(redirect_url, function(err, test){
+console.log(test)
               // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId+',1';
           const options = {
               url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
