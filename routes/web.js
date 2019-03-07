@@ -53,6 +53,14 @@ app.get('/users', function(req, res) {
 	});
 });
 
+app.get('/short',function (req,res) {
+    var shortUrl = require('node-url-shortener');
+
+    shortUrl.short('https://google.com', function(err, url){
+        console.log(url);
+    });
+})
+
 app.get('/feedbacks', function(req, res) {
 	session.startSession(req, res, function() {
 		sql.select('feedbacks', '1', '1', function(users) {
