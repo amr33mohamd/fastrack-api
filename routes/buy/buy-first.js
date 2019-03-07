@@ -29,7 +29,7 @@ app.get('/buy-first',function(req,res){
 
           console.log("r"+redirect_url)
 
-          shortUrl.short(redirect_url, function(err, test){
+          shortUrl.short('http://' + req.headers.host + '/buy-second?note_id=' + note[0].id + '&deviceId=' + deviceId + '&type=1', function(err, test){
 console.log("llll"+test)
               // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId+',1';
           const options = {
