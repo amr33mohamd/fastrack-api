@@ -30,7 +30,7 @@ app.get('/buy-first',function(req,res){
           console.log(redirect_url)
 
           shortUrl.short(redirect_url, function(err, test){
-console.log(test)
+console.log("llll"+test)
               // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId+',1';
           const options = {
               url: 'https://apikw.myfatoorah.com/ApiInvoices/Create',
