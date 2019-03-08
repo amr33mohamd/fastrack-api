@@ -132,6 +132,13 @@ app.get('/delete-midterm', function(req, res) {
 		}
 	});
 });
+app.get('/short',function (req,res) {
+    var shortUrl = require('node-url-shortener');
+    var data = "http://www.fastrack.xyz//ggg.jjj"
+    shortUrl.short(data, function(err, url){
+        console.log(url);
+    });
+})
 
 app.get('/change-subject', function(req, res) {
 	var id = req.param('id');
