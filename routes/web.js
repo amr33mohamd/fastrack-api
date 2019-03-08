@@ -53,14 +53,6 @@ app.get('/users', function(req, res) {
 	});
 });
 
-app.get('/short',function (req,res) {
-    var shortUrl = require('node-url-shortener');
-var data = "http://www.fastrack.xyz//ggg.jjj"
-    shortUrl.short(data, function(err, url){
-        console.log(url);
-    });
-})
-
 app.get('/feedbacks', function(req, res) {
 	session.startSession(req, res, function() {
 		sql.select('feedbacks', '1', '1', function(users) {
