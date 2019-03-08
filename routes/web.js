@@ -133,11 +133,16 @@ app.get('/delete-midterm', function(req, res) {
 	});
 });
 app.get('/short',function (req,res) {
-    var shortUrl = require('node-url-shortener');
-    var data = "http://www.fastrack.xyz//ggg.jjj"
-    shortUrl.short(data, function(err, url){
-        console.log(url);
-    });
+    var GoogleUrl = require( 'google-url' );
+
+
+    googleUrl = new GoogleUrl( { key: 'AIzaSyAFkGPgKVjuJdSEMtPNCLjTIZ8QvAdh6oI' });
+
+    googleUrl.shorten( 'http://bluerival.com/', function( err, shortUrl ) {
+        // shortUrl should be http://goo.gl/BzpZ54
+		console.log(err)
+    } );
+
 })
 
 app.get('/change-subject', function(req, res) {
