@@ -30,7 +30,7 @@ app.get('/buy-first',function(req,res){
 
           console.log(redirect_url)
 
-          shortUrl.short(redirect_url, function(err, redirect_url2){
+          sql.short(redirect_url, function( redirect_url2){
               console.log(redirect_url2)
               // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId+',1';
           const options = {
@@ -105,7 +105,7 @@ app.get('/buy-first',function(req,res){
         redirect_url = 'http://www.fastrack.xyz/buy-second?note_id=' + note[0].id + '&deviceId=' + deviceId + '&type=6' + '&mohafza=' + mohafza + '&mntqa=' + mntqa + '&qt3a=' + qt3a + '&street=' + street + '&home=' + home + '&gada=' + gada + '&floor=' + floor;
         ;
         console.log(redirect_url)
-        shortUrl.short(encodeURI(redirect_url), function (err, redirect_url2) {
+        sql.short(encodeURI(redirect_url), function ( redirect_url2) {
             console.log(redirect_url2)
 
             // var url = 'https://php-helper.herokuapp.com/try.php?price='+note[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+note[0].id+','+deviceId+',1';
@@ -179,7 +179,7 @@ app.get('/buy-first',function(req,res){
       else {
           var redirect_url = 'http://www.fastrack.xyz/buy-second?note_id=' + video[0].id + '&deviceId=' + deviceId + '&type=2';
           // var url = 'https://php-helper.herokuapp.com/try.php?price='+video[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',2';
-          shortUrl.short(encodeURI(redirect_url), function (err, redirect_url2) {
+          sql.short(encodeURI(redirect_url), function ( redirect_url2) {
               console.log(redirect_url2)
 
           const options = {
@@ -252,7 +252,7 @@ app.get('/buy-first',function(req,res){
       else {
           var deviceId = req.param('deviceId')
           var redirect_url = 'http://www.fastrack.xyz/buy-second?note_id=' + video[0].id + '&deviceId=' + deviceId + '&type=3'
-          shortUrl.short(encodeURI(redirect_url), function (err, redirect_url2) {
+          sql.short(encodeURI(redirect_url), function (redirect_url2) {
               console.log(redirect_url2)
 
           const options = {
@@ -328,7 +328,7 @@ app.get('/buy-first',function(req,res){
 
         var redirect_url = 'http://www.fastrack.xyz/buy-second?note_id=' + video[0].id + '&deviceId=' + deviceId + '&type=4' + '&mohafza=' + mohafza + '&mntqa=' + mntqa + '&qt3a=' + qt3a + '&street=' + street + '&home=' + home + '&gada=' + gada + '&floor=' + floor;
         // var url = 'https://php-helper.herokuapp.com/try.php?price='+video[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',2';
-        shortUrl.short(encodeURI(redirect_url), function (err, redirect_url2) {
+        sql.short(encodeURI(redirect_url), function ( redirect_url2) {
             console.log(redirect_url2)
 
         const options = {
@@ -403,7 +403,7 @@ app.get('/buy-first',function(req,res){
         var redirect_url = 'http://www.fastrack.xyz/buy-second?note_id='+video[0].id+'&deviceId='+deviceId+'&type=5'+'&mohafza='+mohafza+'&mntqa='+mntqa+'&qt3a='+qt3a+'&street='+street+'&home='+home+'&gada='+gada+'&floor='+floor;
             // var url = 'https://php-helper.herokuapp.com/try.php?price='+video[0].price+'&url=http://'+req.headers.host+'/buy-second?note_id='+video[0].id+','+deviceId+',2';
 console.log(redirect_url)
-        shortUrl.short(redirect_url, function (err, redirect_url2) {
+        sql.short(redirect_url, function (redirect_url2) {
             console.log(redirect_url2)
 
             const options = {

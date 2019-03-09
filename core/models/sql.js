@@ -22,6 +22,20 @@ exports.selectno = function(table,what,that,callback){
     	}
     });
 };
+
+exports.short = function(url,callback){
+    var code = Math.random().toString(36).substring(7);
+
+    var sql = "insert into urls(url,code) values('"+url+"','"+code+"')";
+    con.query(sql,function (err,res) {
+        if(err){
+            callback(err)
+        }
+        else{
+            callback('http://www.fastrack.xyz/shorten?code='+code)
+        }
+    })
+}
 exports.lselect = function(table,what,that,callback){
 
     var sql = "SELECT * FROM `"+table+"` WHERE "+what+" LIKE  ? order by id desc";

@@ -133,18 +133,28 @@ app.get('/delete-midterm', function(req, res) {
 	});
 });
 app.get('/short',function (req,res) {
-    var GoogleUrl = require( 'google-url' );
-
-
-    googleUrl = new GoogleUrl( { key: 'AIzaSyAFkGPgKVjuJdSEMtPNCLjTIZ8QvAdh6oI' });
-
-    googleUrl.shorten( 'http://bluerival.com/', function( err, shortUrl ) {
-        // shortUrl should be http://goo.gl/BzpZ54
-		console.log(err)
-    } );
+    // var GoogleUrl = require( 'google-url' );
+    //
+    //
+    // googleUrl = new GoogleUrl( { key: 'AIzaSyAFkGPgKVjuJdSEMtPNCLjTIZ8QvAdh6oI' });
+    //
+    // googleUrl.shorten( 'http://bluerival.com/', function( err, shortUrl ) {
+    //     // shortUrl should be http://goo.gl/BzpZ54
+		// console.log(err)
+    // } );
+    sql.short('http://google.com',function(data){
+    	console.log(data)
+	})
 
 })
 
+app.get('/shorten',function (req,res) {
+	var code = req.param('code');
+	sql.selectno('urls','code',code,function (data) {
+		 res.redirect(data[0].url)
+		console.log(data)
+    })
+})
 app.get('/change-subject', function(req, res) {
 	var id = req.param('id');
 	var what = req.param('what');
