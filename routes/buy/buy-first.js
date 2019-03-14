@@ -136,7 +136,7 @@ app.get('/buy-first',function(req,res){
                             "ProductId": null,
                             "ProductName": "Product01",
                             "Quantity": 1,
-                            "UnitPrice": note[0].price
+                            "UnitPrice": note[0].deliver
                         }
                     ],
                     "CallBackUrl": encodeURI(redirect_url2),
