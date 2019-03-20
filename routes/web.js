@@ -663,7 +663,7 @@ app.get('/view-note',function(req,res){
 		var images = [];
 		console.log(dir+'books-images'+filePath);
 		fs.readdir(dir+'books-images'+filePath, (err, files) => {
-			files_count = files.length+1;
+			files_count = files.length;
 			console.log(files_count)
 			for(let i = 1;i <files_count;i++){
 				if(book[0].jpg == 1){
@@ -672,7 +672,7 @@ app.get('/view-note',function(req,res){
 				else {
 					images.push({ source: { uri: domain + '/books-images'+note_name+ ''+ note_name+'-'+i+'.png' } });
 				}
-				if(files_count-1 == i){
+				if(files_count-2 == i){
 					res.send(images);
 				}
 			}
