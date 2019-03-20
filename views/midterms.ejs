@@ -100,6 +100,8 @@ $(document).ready(function(){
                         <th> اسم الكميه</th>
                         <th>مُتفرع من</th>
                         <th>الوصف</th>
+                        <th>التحميلات</th>
+
                         <th>حذف</th>
 
                       </tr>
@@ -125,6 +127,7 @@ $(document).ready(function(){
                             </select>
                         </td>
                         <td><%= midterm['descc']  %> <i id="<%= midterm['id']  %>" class="fa edit fa-pencil-square-o" aria-hidden="true" what="descc"></i></td>
+                        <td><%= midterm['downloads']  %> </td>
 
                           <td><a style="color:red" href="/delete-midterm?id=<%= midterm['id'] %>" onclick="return confirm('هل تريد حذف هذا القسم حقا !');">X</a></td>
 

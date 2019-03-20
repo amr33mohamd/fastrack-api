@@ -35,6 +35,9 @@ app.get('/buy-second',function(req,res){
     })
   }
   else if (type == 4) { // midterm pack
+    con.query("UPDATE midterm SET downloads = downloads + 1 WHERE id = ?",[id],function(err,ress){
+})
+
     sql.select('midterm','id',id,function(book) {
       var mohafza = req.param('mohafza');
       var mntqa = req.param('mntqa');
@@ -43,7 +46,6 @@ app.get('/buy-second',function(req,res){
       var home = req.param('home');
       var gada = req.param('gada');
       var floor = req.param('floor');
-
 //email here ------>
 const fetch = require('node-fetch');
 var message = '-------- مجموعه الميترم----- \n معلومات المجموعه ---> \n الاسم  : '+book[0].name+' \n الوصف :'+book[0].descc
