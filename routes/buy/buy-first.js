@@ -1,6 +1,5 @@
 app.get('/buy-first',function(req,res){
   var note_id = req.param('id');
-  var video_id = req.param('video_id')
   var type = req.param('type')
   const request = require('request');
     var shortUrl = require('node-url-shortener');
@@ -243,7 +242,7 @@ app.get('/buy-first',function(req,res){
     })
   }
   else if(type == 7) {
-    sql.select('videos','id',video_id,function(video){
+    sql.select('videos','id',note_id,function(video){
       const fetch = require('node-fetch');
       var deviceId = req.param('deviceId')
 
