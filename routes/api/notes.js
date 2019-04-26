@@ -221,6 +221,13 @@ app.get('/api/searchnotes',function(req,res){
     })
 });
 
+app.get('/api/videos',function(req,res){
+  var sub_category = req.query.sub_category;
+  con.query('select * from videos where note_id = 0 and sub_category = ?',[sub_category],function(err,videos){
+    res.json({videos});
+  })
+})
+
 app.get('/api/midterms',function(req,res){
   var subject_id = req.query.id;
     con.query('SELECT * FROM midterm where subject_id= ? ORDER BY name ',[subject_id], function(err,data) {

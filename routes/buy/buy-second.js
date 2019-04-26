@@ -19,7 +19,7 @@ app.get('/buy-second',function(req,res){
         })
     })
   }
-  else if (type == 2) {
+  else if (type == 2 || type == 7) {
     sql.select('videos','id',id,function(book) {
         con.query("UPDATE videos SET downloads = downloads + 1 WHERE id = ?",[id],function(err,ress){
           if(err){

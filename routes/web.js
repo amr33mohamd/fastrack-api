@@ -557,9 +557,16 @@ app.get('/add-books', function(req, res) {
 
 app.get('/add-video', function(req, res) {
 	session.startSession(req, res, function() {
+		sql.selectno('universities', '1', '1', function(categories) {
+			sql.select('subjects', '1', '1', function(sub_categories) {
+				sql.select('sectors', '1', '1', function(sectors) {
+
 				sql.select('notes', '1', '1', function(notes) {
-					res.render('add-video', { notes });
+					res.render('add-video', { categories, sub_categories, notes,sectors });
 				});
+			});
+		});
+	});
 				});
 });
 
@@ -742,12 +749,13 @@ app.post('/add_video',function(req,res){
 	var note_id = req.body.note_id;
 	var video = req.files.video;
 	var with_deliver = req.body.withdeliver;
+	var sub_category = req.body.sub_category;
 	var domain = 'http://' + req.get('host');
 	var random_num = Math.random();
 
 	video.mv('videos/' + random_num + 1 +'.mp4', function(err) {
 		con.query(
-			'insert into videos(name,video,note_id,price,bothh,downloads,with_deliver) values(?,?,?,?,?,?,?)',
+			'insert into videos(name,video,note_id,price,bothh,downloads,with_deliver,sub_category) values(?,?,?,?,?,?,?,?)',
 			[
 				name,
 				domain + '/videos/' + random_num + 1 +'.mp4',
@@ -755,7 +763,8 @@ app.post('/add_video',function(req,res){
 				price,
 				bothh,
 				0,
-				with_deliver
+				with_deliver,
+				sub_category
 			],
 			function(err, ress) {
 				res.redirect('/add-video')
@@ -764,6 +773,8 @@ app.post('/add_video',function(req,res){
 		});
 
 })
+
+
 
 app.post('/add_book', function(req, res) {
 	var image = req.files.image;
