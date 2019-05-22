@@ -174,25 +174,34 @@ $("select").change(function (){
                           <td><a style="color:red" href="/delete-video?id=<%= video['id'] %>" onclick="return confirm('هل تريد حذف هذا القسم حقا !');">X</a></td>
 
 
-<script>
 
-$("select").change(function (){
-    var new_parent_cat = $(this).find("option:checked").val();
-    var id = $(this).attr('id');
-
-    $.get('/change-sector',{
-        id,
-        new_parent_cat
-      },function(data){
-        window.location = '/sectors';
-      })
-});
-
-</script>
 
                            </tr>
                      <% }); %>
+                     <script>
 
+                       $(".edit").click(function(){
+                        var id = $(this).attr('id');
+                        var new_name = prompt('تريد تغيره الى ماذا ؟');
+                        var what = $(this).attr('what');
+                        if(new_name != null){
+                          $.get('/edit-video',{
+                              id,
+                              new_name,
+                              what
+                            },function(data){
+                              location.reload();
+                            })
+                            location.reload();
+
+                        }
+                        else {
+                          location.reload();
+
+                        }
+                       })
+
+                     </script>
                     </tbody>
                   </table>
                 </div>

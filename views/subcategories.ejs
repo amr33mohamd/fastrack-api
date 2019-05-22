@@ -119,7 +119,7 @@ $(document).ready(function(){
                                         if(cat['id'] == subcat['sector_id']) {%>
                                     <option value="<%= cat['id'] %>" selected><%= cat['name'] %> ----> <% if(universities[cat['university_id']-1]){ %><%= universities[cat['university_id']-1].name %><% }else {%>not exist university<% }%></option>
                                         <% } else {%>
-                                    <option value="<%= cat['id'] %>"><%= cat['name'] %> ----> <% if(universities[cat['university_id']-1]){ %><%= universities[0].name %><% }else {%>not exist university<% }%> </option>
+                                    <option value="<%= cat['id'] %>"><%= cat['name'] %> ----> <% if(universities[cat['university_id']-1]){ %><%= universities[cat['university_id']-1].name %><% }else {%>not exist university<% }%> </option>
                               <% }}) %>
                             </select>
                         </td>
