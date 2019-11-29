@@ -79,7 +79,7 @@ var table = $('#datatable-buttons').DataTable();
              new_name,
              what
            },function(data){
-             location.reload();
+             console.log(data);
 
            })
        }
@@ -91,7 +91,7 @@ var table = $('#datatable-buttons').DataTable();
              new_name,
              what
            },function(data){
-             location.reload();
+             console.log(data);
 
            })
 
@@ -104,7 +104,7 @@ var table = $('#datatable-buttons').DataTable();
              new_name,
              what
            },function(data){
-             location.reload();
+             console.log(data);
 
            })
 
@@ -117,9 +117,21 @@ var table = $('#datatable-buttons').DataTable();
              new_name,
              what
            },function(data){
-             location.reload();
+             console.log(data);
 
            })
+       }
+     }
+     else if(type == "video"){
+       if(new_name != null){
+       $.get('/edit-video',{
+           id,
+           new_name,
+           what
+         },function(data){
+           // location.reload();
+           console.log(data);
+         })
        }
      }
 
@@ -171,13 +183,17 @@ var table = $('#datatable-buttons').DataTable();
                                  <% universities.forEach(function(university){
                                   %>
 
-  <div class="card">
-    <div class="card-header" id="heading<%= university.id %>">
-      <h5 class="mb-0">
+  <div class="card row">
+    <div style="" class="" id="heading<%= university.id %>">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse<%= university.id %>" aria-expanded="false" aria-controls="collapse<%= university.id %>">
           <h1 style="color:#000;font-weight:bold;"><%= university.name %> <i id="<%= university.id  %>" class="fa edit fa-pencil-square-o" type="university" aria-hidden="true" what="name"></i></h1>
+          <a style="color:red" href="edit-university-images?id=<%= university.id  %>" target="_blank" >تعديل الصوره</a>
+          <a style="color:red" href="delete-university?id=<%= university.id  %>" onclick="return confirm('هل تريد حذف هذا الكتاب حقا !');">X</a>
+
         </button>
-      </h5>
+
+
+
     </div>
     <div id="collapse<%= university.id %>" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
       <div class="card-body">
@@ -194,7 +210,10 @@ var table = $('#datatable-buttons').DataTable();
 <div class="card-header" id="heading<%= sector.id %>">
 <h5 class="mb-0">
 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#sectors<%= sector.id %>" aria-expanded="false" aria-controls="sectors<%= sector.id %>">
-<h3 style="color:white;background-color: #a76767;text-align: center;border-radius: 10px;padding: 10px;"><%= sector.name %><i id="<%= sector.id  %>" class="fa edit fa-pencil-square-o" type="sector" aria-hidden="true" what="name"></i></h3>
+<h3 style="color:white;background-color: #a76767;text-align: center;border-radius: 10px;padding: 10px;"><%= sector.name %>
+  <i id="<%= sector.id  %>" class="fa edit fa-pencil-square-o" type="sector" aria-hidden="true" what="name"></i>
+  <a style="color:red" href="/delete-sector?id=<%= sector.id %>" onclick="return confirm('هل تريد حذف هذا القسم حقا !');">X</a>
+</h3>
 </button>
 </h5>
 </div>
@@ -211,12 +230,88 @@ var table = $('#datatable-buttons').DataTable();
 <div class="card-header" id="heading<%= subject.id %>">
 <h5 class="mb-0">
 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#subjects<%= subject.id %>" aria-expanded="false" aria-controls="subjects<%= subject.id %>">
-<h4 style="background-color: #594f82;text-align: center;border-radius: 10px;padding: 10px;color: white;"><%= subject.name %><i id="<%= subject.id  %>" class="fa edit fa-pencil-square-o" type="subject" aria-hidden="true" what="name"></i></h4>
+<h4 style="background-color: #594f82;text-align: center;border-radius: 10px;padding: 10px;color: white;"><%= subject.name %>
+  <i id="<%= subject.id  %>" class="fa edit fa-pencil-square-o" type="subject" aria-hidden="true" what="name"></i>
+<a style="color:red" href="/delete-subcategory?id=<%= subject.id  %>" onclick="return confirm('هل تريد حذف هذا القسم حقا !');">X</a>
+</h4>
 </button>
 </h5>
 </div>
 <div id="subjects<%= subject.id %>" class="collapse" aria-labelledby="headingTwo" data-parent="#subjects">
 <div class="card-body">
+
+
+
+
+
+  <div class="btn btn-link collapsed" type="button" >
+    <h4 style="background-color: #33b5bb;text-align: center;border-radius: 10px;padding: 10px;color: white;">
+
+    <a href="/add-books?id=<%= subject.id %>" target="_blank">  اضافه ملزمه </a>
+
+    </h4>
+  </button>
+  <button class="btn btn-link collapsed" type="button" data-toggle="collapse"  aria-expanded="false" aria-controls="notes">
+    <h4 style="background-color: #33b5bb;text-align: center;border-radius: 10px;padding: 10px;color: white;">
+
+  <a href="/add-video?sid=<%= subject.id %>" target="_blank"> اضف فيديو </a>
+  </h4>
+  </div>
+
+
+
+
+<!--  videos -->
+
+
+<div class="card row">
+  <div style="" class="" id="heading">
+      <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#video" aria-expanded="false" aria-controls="videos">
+          <h1>Videos </h1>
+      </button>
+
+
+
+  </div>
+
+
+
+  <div id="video" class="collapse show" aria-labelledby="headingTwo" data-parent="#video">
+    <div class="card-body">
+      <% videos.forEach((video)=>{
+        if(video.sub_category == subject.id){
+
+       %>
+
+       <div class="btn btn-link collapsed" type="button"  data-target="" >
+       <h3 style="color:white;background-color: #a76767;text-align: center;border-radius: 10px;padding: 10px;">
+         <p><%= video.name %></p>
+         <i id="<%= video.id  %>" class="fa edit fa-pencil-square-o" type="video" aria-hidden="true" what="name"></i>
+         <p> السعر : <%= video.price %></p>
+         <i id="<%= video.id  %>" class="fa edit fa-pencil-square-o" type="video" aria-hidden="true" what="price"></i>
+
+         <p> التحميلات : <%= video.downloads %></p>
+         <p> <a href="/add-coupon?id=<%= video.id %>" target="_blank">اضافه كوبون </a> </p>
+         <a style="color:red" href="/delete-video?id=<%= video.id %>" onclick="return confirm('هل تريد حذف هذا القسم حقا !');">X</a>
+       </h3>
+
+       </div>
+
+       <%
+     }
+   })
+       %>
+
+
+
+      </div>
+    </div>
+
+    </div>
+
+
+
+
 
 
   <!-- Notes Level -->
@@ -229,13 +324,33 @@ var table = $('#datatable-buttons').DataTable();
 
   <h5 class="mb-0">
   <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#notes<%= note.id %>" aria-expanded="false" aria-controls="notes<%= note.id %>">
-  <h4 style="background-color: #33b5bb;text-align: center;border-radius: 10px;padding: 10px;color: white;"><%= note.name %><i id="<%= note.id  %>" class="fa edit fa-pencil-square-o" type="note" aria-hidden="true" what="name"></i></h5>
+  <h4 style="background-color: #33b5bb;text-align: center;border-radius: 10px;padding: 10px;color: white;">
+      <p><%= note.name %></p>
+    <i id="<%= note.id  %>" class="fa edit fa-pencil-square-o" type="note" aria-hidden="true" what="name"></i>
+    <p> <%= note.descc %></p>
+    <i id="<%= note.id  %>" class="fa edit fa-pencil-square-o" type="note" aria-hidden="true" what="descc"></i>
+    <p>
+    التوصيل : <%= note.deliver %><p/>
+    <i id="<%= note.id  %>" class="fa edit fa-pencil-square-o" type="note" aria-hidden="true" what="deliver"></i>
+    <p> السعر : <%= note.price %></p>
+    <i id="<%= note.id  %>" class="fa edit fa-pencil-square-o" type="note" aria-hidden="true" what="price"></i>
+    <p> التحميلات : <%= note.downloads %></p>
+
+    <p>
+<a style="color:red" href="/delete-book?id=<%= note.id  %>" onclick="return confirm('هل تريد حذف هذا الكتاب حقا !');">X</a>
+</p>
+
+
+  </h5>
   </button>
 </h4>
 
 
 
   <% }}) %>
+
+
+
   <!-- Notes subjects -->
 
 </div>

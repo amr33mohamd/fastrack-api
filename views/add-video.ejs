@@ -164,11 +164,11 @@ $(".edit").click(function(){
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
                          <select id="sub_category" class="form-control col-md-7 col-xs-12" name="note_id">
-                           <option value="0">منفرد</option>
+                           <option  value="0">منفرد</option>
 
                            <%  notes.forEach(function(note){
                               %>
-                           <option value="<%= note['id'] %>"><%= note['name'] %></option>
+                           <option <% if(type == note['id']){ %> selected <% } %> value="<%= note['id'] %>"><%= note['name'] %></option>
                            <% }) %>
                          </select>
                      </div>
@@ -181,7 +181,7 @@ $(".edit").click(function(){
                              <%  sub_categories.forEach(function(subcategories){
                                var a = sectors.find(o => o.id === subcategories['sector_id']);
                                 %>
-                             <option value="<%= subcategories['id'] %>"><%= subcategories['name'] %>--><% if(categories[a['university_id']-1]){ %><%= categories[a['university_id']-1].name %><% }else {%>not exist university<% }%></option>
+                             <option <% if(sid == subcategories['id']){ %> selected <% } %> value="<%= subcategories['id'] %>"><%= subcategories['name'] %>--><% if(categories[a['university_id']-1]){ %><%= categories[a['university_id']-1].name %><% }else {%>not exist university<% }%></option>
                              <% }) %>
                            </select>
                        </div>

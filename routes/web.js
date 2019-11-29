@@ -329,7 +329,7 @@ app.get('/add-sector', function(req, res) {
 app.get('/add-coupon', function(req, res) {
 	session.startSession(req, res, function() {
 			sql.select('videos', '1', '1', function(universities) {
-				res.render('add-coupon', {  universities });
+				res.render('add-coupon', {  universities,sid:req.param('id') });
 			});
 	});
 });
@@ -547,7 +547,7 @@ app.get('/add-books', function(req, res) {
 			sql.select('subjects', '1', '1', function(sub_categories) {
 				sql.select('sectors', '1', '1', function(sectors) {
 				sql.select('notes', '1', '1', function(data) {
-					res.render('add-books', { categories, sub_categories, data,sectors });
+					res.render('add-books', { categories, sub_categories, data,sectors,selectedid:req.param('id') });
 				});
 				});
 			});
@@ -562,7 +562,7 @@ app.get('/add-video', function(req, res) {
 				sql.select('sectors', '1', '1', function(sectors) {
 
 				sql.select('notes', '1', '1', function(notes) {
-					res.render('add-video', { categories, sub_categories, notes,sectors });
+					res.render('add-video', { categories, sub_categories, notes,sectors,type:req.param('type'),sid:req.param('sid') });
 				});
 			});
 		});
@@ -578,7 +578,10 @@ app.get('/tree', function(req, res) {
 			sql.select('subjects', '1', '1', function(subjects) {
 				sql.select('sectors', '1', '1', function(sectors) {
 				sql.select('notes', '1', '1', function(notes) {
-					res.render('tree', { universities, subjects, sectors,notes });
+					sql.select('videos', '1', '1', function(videos) {
+
+					res.render('tree', { universities, subjects, sectors,notes,videos });
+				});
 				});
 				});
 			});
