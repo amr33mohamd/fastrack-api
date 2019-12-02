@@ -86,13 +86,19 @@ app.get('/api/myvideos',function(req,res){
       for(let i in notes){
         con.query('SELECT * FROM videos where id= ?',[notes[i].video_id],function(err,video){
         con.query('SELECT id, name,descc AS `description`,image,price FROM notes where id= ? ',[video[0].note_id], function(errr,data) {
-          mynotes.push({
-            id:video[0].id,
-            name:video[0].name,
-            video:video[0].video,
-            image:data[0].image,
-            description:data[0].description
-          });
+          if(data.length == 0){
+
+          }
+          else {
+            mynotes.push({
+              id:video[0].id,
+              name:video[0].name,
+              video:video[0].video,
+              image:data[0].image,
+              description:data[0].description
+            });
+          }
+
           if(i == notes.length-1){
             res.send(mynotes);
           }
