@@ -266,7 +266,7 @@ var table = $('#datatable-buttons').DataTable();
 
 <div class="card row">
   <div style="" class="" id="heading">
-      <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#video" aria-expanded="false" aria-controls="videos">
+      <button class="btn btn-link collapsed" type="button" >
           <h1>Videos </h1>
       </button>
 
@@ -276,7 +276,7 @@ var table = $('#datatable-buttons').DataTable();
 
 
 
-  <div id="video" class="collapse show" aria-labelledby="headingTwo" data-parent="#video">
+  <div id="video" class="collapse show" >
     <div class="card-body">
       <% videos.forEach((video)=>{
         if(video.sub_category == subject.id){
@@ -315,7 +315,9 @@ var table = $('#datatable-buttons').DataTable();
 
 
   <!-- Notes Level -->
-
+  <button class="btn btn-link collapsed" type="button"  aria-expanded="false" aria-controls="videos">
+      <h1>Notes </h1>
+  </button>
   <div style="margin-left:30px" >
     <% notes.forEach(function(note){
       if(note.subject_id == subject.id){
