@@ -152,8 +152,6 @@ var table = $('#datatable-buttons').DataTable();
                  <div class="icon"><i style="padding-top:20px;"  class="fa fa-book"></i></div>
                  <div class="count"> <%= universities.length %></div>
                  <h3>عدد الجامعات</h3>
-                 <p>
-                  الملازم جميعا</p>
                </div>
              </div>
            </a>
@@ -177,7 +175,13 @@ var table = $('#datatable-buttons').DataTable();
 
 
 
+                               <div class="btn btn-link collapsed" type="button" >
+                                 <h4 style="background-color: #33b5bb;text-align: center;border-radius: 10px;padding: 10px;color: white;">
 
+                                 <a href="/add-university" target="_blank"> اضافه جامعه</a>
+
+                                 </h4>
+                                 </div>
 
                                <div class="accordion" id="accordion">
                                  <% universities.forEach(function(university){
@@ -202,6 +206,15 @@ var table = $('#datatable-buttons').DataTable();
 <!-- Sectors level -->
 
 <div style="margin-left:30px" class="accordion" id="sectors">
+
+  <div style="margin-left:30px" class="accordion" id="subjects">
+    <div class="btn btn-link collapsed" type="button" >
+      <h4 style="background-color: #33b5bb;text-align: center;border-radius: 10px;padding: 10px;color: white;">
+
+      <a href="/add-sector?id=<%= university.id %>" target="_blank"> اضافه قسم </a>
+
+      </h4>
+      </div>
   <% sectors.forEach(function(sector){
     if(sector.university_id == university.id){
    %>
@@ -222,6 +235,13 @@ var table = $('#datatable-buttons').DataTable();
 <!-- subjects Level -->
 
 <div style="margin-left:30px" class="accordion" id="subjects">
+  <div class="btn btn-link collapsed" type="button" >
+    <h4 style="background-color: #33b5bb;text-align: center;border-radius: 10px;padding: 10px;color: white;">
+
+    <a href="/add-subject?id=<%= sector.id %>" target="_blank"> اضافه ماده </a>
+
+    </h4>
+    </div>
   <% subjects.forEach(function(subject){
     if(subject.sector_id == sector.id){
    %>

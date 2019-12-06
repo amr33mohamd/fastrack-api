@@ -261,7 +261,7 @@ app.get('/add-subject', function(req, res) {
 	session.startSession(req, res, function() {
 		sql.select('sectors', '1', '1', function(categories) {
 			sql.selectno('universities', '1', '1', function(universities) {
-				res.render('add-subcategories', { categories, universities });
+				res.render('add-subcategories', { categories, universities,selectedid:req.param('id') });
 			});
 		});
 	});
@@ -322,7 +322,7 @@ app.post('/add_midterm', function(req, res) {
 app.get('/add-sector', function(req, res) {
 	session.startSession(req, res, function() {
 			sql.select('universities', '1', '1', function(universities) {
-				res.render('add-sector', {  universities });
+				res.render('add-sector', {  universities,selectedid:req.param('id') });
 			});
 	});
 });
