@@ -29,7 +29,7 @@
     "node-mailjet": "^3.3.1",
     "node-session": "^1.2.1",
     "node-url-shortener": "^1.0.1",
-    "nodemailer": "^5.1.1",
+    "nodemailer": "^6.4.16",
     "nodemon": "^1.12.1",
     "pdf-image": "^1.0.5",
     "pdf2img": "^0.5.0",
